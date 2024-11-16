@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  /* Light theme specific colors */
+  --background-primary: #ffffff;
+  --background-secondary: #171717;
+
+  --border-primary: #e6e6e6;
+
+  --text-primary: #000000;
+  --text-secondary: rgba(128, 128, 128, 0.7);
+  --text-tertiary: rgba(113, 113, 113, 0.8);
+
+  /* Shared styles for both themes */
+  --red-primary: #f73535;
+  --red-secondary: #e14459;
+}
+
+.dark {
+  /* Dark theme specific colors */
+  --background-primary: #0d0d0d;
+  --background-secondary: #f5f5f5;
+
+  --border-primary: #262626;
+
+  --text-primary: #ffffff;
+  --text-secondary: rgba(128, 128, 128, 0.7);
+  --text-tertiary: rgba(204, 204, 204, 0.8);
+}
