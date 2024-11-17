@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { BsCircleHalf } from "react-icons/bs";
 
 export default function ThemeToggle() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -27,7 +28,11 @@ export default function ThemeToggle() {
 
   return (
     <button onClick={toggleTheme}>
-      {isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+      {isDarkMode ? (
+        <BsCircleHalf className="text-text-primary" size={24} />
+      ) : (
+        <BsCircleHalf className="text-text-primary rotate-180" size={24} />
+      )}
     </button>
   );
 }
