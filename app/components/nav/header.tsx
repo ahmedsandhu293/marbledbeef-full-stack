@@ -3,8 +3,11 @@
 import { useEffect, useState } from "react";
 import { routes } from "@/app/utils/routes";
 import Link from "next/link";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiHeart, FiMenu, FiX } from "react-icons/fi";
 import ThemeToggle from "../common/theme";
+import ComponentButton from "../common/buttons/ButtonComponent";
+import { BsHandbag } from "react-icons/bs";
+
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +20,7 @@ const Navbar: React.FC = () => {
         <nav className="relative flex items-center justify-between px-6 py-4 ">
           <span className="text-lg font-semibold text-text-primary">LOGO</span>
 
-          <div className="hidden md:flex space-x-4 items-center border border-border-primary bg-background-secondary px-4 py-2 rounded-full absolute left-1/2 transform -translate-x-1/2">
+          <div className="hidden lg:flex space-x-4 items-center absolute left-1/2 transform -translate-x-1/2">
             {routes.map((route) => (
               <Link
                 key={route.path}
@@ -29,15 +32,16 @@ const Navbar: React.FC = () => {
             ))}
           </div>
 
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-4">
             <ThemeToggle />
-            <button className="px-4 py-2  bg-background-secondary border border-border-primary text-text-primary rounded-lg  transition-colors">
-              Sign In
-            </button>
+            <FiHeart size={26} />
+            <BsHandbag size={26} />
+
+            <ComponentButton label="Sign In" />
           </div>
 
           <button
-            className="md:hidden text-2xl"
+            className="lg:hidden text-2xl"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle Menu"
           >
@@ -52,7 +56,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden backdrop-blur-lg bg-opacity-10 transition-colors duration-300">
+        <div className="lg:hidden mx-auto container backdrop-blur-lg bg-opacity-10 transition-colors duration-300">
           <div className="flex flex-col items-start space-y-4 p-4">
             {routes.map((route) => (
               <Link

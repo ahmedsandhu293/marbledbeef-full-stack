@@ -1,25 +1,25 @@
 export const routes = [
   {
     path: "/",
-    name: "Home",
+    name: "Nos Viandes",
     icon: "home",
     slug: "home",
   },
   {
     path: "/about",
-    name: "About",
+    name: "Promotions",
     icon: "info",
     slug: "about",
   },
   {
     path: "/blog",
-    name: "Blog",
+    name: "Gift Cards",
     icon: "book",
     slug: "blog",
   },
   {
     path: "/pricing",
-    name: "Pricing",
+    name: "Composer ma Box",
     icon: "dollar",
     slug: "pricing",
   },

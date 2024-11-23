@@ -36,3 +36,13 @@ export type ShopifyProduct = {
   tags: string[];
   title: string;
 };
+
+
+export type GraphQLResponse = {
+  data: {
+    products: {
+      nodes: ShopifyProduct[];
+    };
+  };
+  extensions: ShopifyExtension;
+};

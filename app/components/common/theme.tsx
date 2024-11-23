@@ -12,8 +12,9 @@ export default function ThemeToggle() {
       document.documentElement.classList.toggle("dark", savedTheme === "dark");
     } else {
       const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
+        "(prefers-color-scheme: dark)",
       ).matches;
+
       setIsDarkMode(prefersDark);
       document.documentElement.classList.toggle("dark", prefersDark);
     }
@@ -21,6 +22,7 @@ export default function ThemeToggle() {
 
   const toggleTheme = () => {
     const newTheme = !isDarkMode ? "dark" : "light";
+
     setIsDarkMode(!isDarkMode);
     localStorage.setItem("theme", newTheme);
     document.documentElement.classList.toggle("dark", newTheme === "dark");

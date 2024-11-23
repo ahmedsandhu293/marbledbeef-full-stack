@@ -40,7 +40,7 @@ export default function RootLayout({
         )}
       >
         <Navbar />
-        <main className="container mx-auto  pt-16 px-6 flex-grow">
+        <main className=" pt-16  flex-grow">
           {children}
         </main>
         <Footer />
