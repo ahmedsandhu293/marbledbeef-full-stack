@@ -1,4 +1,4 @@
-import {nextui} from '@nextui-org/theme'
+import { nextui } from '@nextui-org/theme'
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -12,6 +12,21 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-sans)"],
         mono: ["var(--font-mono)"],
+      },
+      colors: {
+        // theme colors
+        'background-primary': 'var(--background-primary)',
+        'background-secondary': 'var(--background-secondary)',
+
+        'border-primary': 'var(--border-primary)',
+
+        'text-primary': 'var(--text-primary)',
+        'text-secondary': 'var(--text-secondary)',
+        'text-tertiary': 'var(--text-tertiary)',
+
+        // normal colors
+        'red-primary': 'var(--red-primary)',
+        'red-secondary': 'var(--red-secondary)',
       },
     },
   },
