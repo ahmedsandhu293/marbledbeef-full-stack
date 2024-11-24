@@ -1,7 +1,6 @@
 "use client";
 
 // Custome Component
-import Cardsompoent from "../common/cards/Cards";
 
 // Types
 import { ProductsType } from "@/types/products";
@@ -90,6 +89,5 @@ const Products = () => {
       </div>
     </div>
   );
-};
 
-export default Products;
+export default Products
