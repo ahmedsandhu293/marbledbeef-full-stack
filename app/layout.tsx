@@ -4,6 +4,8 @@ import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
+import Navbar from "./components/nav/header";
+import Footer from "./components/nav/footer";
 
 export const metadata: Metadata = {
   title: {
@@ -34,12 +36,14 @@ export default function RootLayout({
       <body
         className={clsx(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
+          fontSans.variable
         )}
       >
-        <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+        <Navbar />
+        <main className=" pt-16  flex-grow">
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   );
