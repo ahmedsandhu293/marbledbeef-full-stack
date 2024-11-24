@@ -9,6 +9,10 @@ import { ProductsType } from "@/types/products";
 
 // Constants
 import { dummyData } from "@/app/utils/constants";
+import Carousel from "../common/carousel";
+import CardCompoent from "../common/cards/CardCompoent";
+import HorizentalCarousel from "../common/carousel";
+import CategoriesHeading from "../common/headings/categoriesHeading";
 
 const Products = () => {
 
@@ -26,13 +30,73 @@ const Products = () => {
     };
 
     return (
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
-            <Cardsompoent
-                data={dummyData}
-                onAddToCart={handleAddToCart}
-                onAddToFavorite={handleAddToFavorite}
-                onClick={handleClick}
-            />
+        <div className="w-full space-y-4 md:space-y-8">
+            <div>
+
+                <CategoriesHeading title="Sélection d'excellence" onClick={() => { console.log("Explore all") }} />
+                <HorizentalCarousel autoPlaySpeed={4000} infinite={true}>
+                    {
+                        dummyData.map((item, index) => (
+                            <div
+                                key={index}
+                                style={{ padding: "10px", textAlign: "center" }}
+                            >
+                                <CardCompoent
+                                    data={item}
+                                    onAddToCart={handleAddToCart}
+                                    onAddToFavorite={handleAddToFavorite}
+                                    onClick={handleClick}
+                                />
+                            </div>
+                        ))
+                    }
+
+                </HorizentalCarousel>
+            </div>
+            <div>
+
+                <CategoriesHeading title="Sélection d'excellence" onClick={() => { console.log("Explore all") }} />
+                <HorizentalCarousel autoPlaySpeed={4000} infinite={true}>
+                    {
+                        dummyData.map((item, index) => (
+                            <div
+                                key={index}
+                                style={{ padding: "10px", textAlign: "center" }}
+                            >
+                                <CardCompoent
+                                    data={item}
+                                    onAddToCart={handleAddToCart}
+                                    onAddToFavorite={handleAddToFavorite}
+                                    onClick={handleClick}
+                                />
+                            </div>
+                        ))
+                    }
+
+                </HorizentalCarousel>
+            </div>
+            <div>
+
+                <CategoriesHeading title="Sélection d'excellence" onClick={() => { console.log("Explore all") }} />
+                <HorizentalCarousel autoPlaySpeed={4000} infinite={true}>
+                    {
+                        dummyData.map((item, index) => (
+                            <div
+                                key={index}
+                                style={{ padding: "10px", textAlign: "center" }}
+                            >
+                                <CardCompoent
+                                    data={item}
+                                    onAddToCart={handleAddToCart}
+                                    onAddToFavorite={handleAddToFavorite}
+                                    onClick={handleClick}
+                                />
+                            </div>
+                        ))
+                    }
+
+                </HorizentalCarousel>
+            </div>
         </div>
     );
 };
