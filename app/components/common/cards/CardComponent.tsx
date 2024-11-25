@@ -7,7 +7,7 @@ import ComponentButton from "../buttons/ButtonComponent";
 
 import { CardProps } from "@/types/products";
 
-const CardCompoent: React.FC<CardProps> = ({
+const CardComponent: React.FC<CardProps> = ({
   data,
   onAddToCart,
   onAddToFavorite,
@@ -21,11 +21,12 @@ const CardCompoent: React.FC<CardProps> = ({
         onClick={() => {
           onClick(data);
         }}
+        className="w-full bg-transparent"
       >
         <CardBody className="overflow-visible p-0">
           <Image
             alt={data.title}
-            className="w-full object-contain h-[200px]"
+            className="w-full object-cover h-[200px]"
             radius="lg"
             shadow="sm"
             src={data.img}
@@ -55,9 +56,8 @@ const CardCompoent: React.FC<CardProps> = ({
           </div>
         </CardFooter>
       </Card>
-
     </>
   );
 };
 
-export default CardCompoent;
+export default CardComponent;

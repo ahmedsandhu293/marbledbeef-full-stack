@@ -7,10 +7,9 @@ import { ProductsType } from "@/types/products";
 
 // Constants
 import { dummyData } from "@/app/utils/constants";
-import Carousel from "../common/carousel";
-import CardCompoent from "../common/cards/CardCompoent";
-import HorizentalCarousel from "../common/carousel";
+import HorizontalCarousel from "../common/carousel";
 import CategoriesHeading from "../common/headings/categoriesHeading";
+import CardComponent from "../common/cards/CardComponent";
 
 const Products = () => {
   const handleAddToCart = (item: ProductsType) => {
@@ -27,17 +26,17 @@ const Products = () => {
 
   return (
     <div className="w-full space-y-4 md:space-y-8">
-      <div>
+      <div className="w-full">
         <CategoriesHeading
           title="Sélection d'excellence"
           onClick={() => {
             console.log("Explore all");
           }}
         />
-        <HorizentalCarousel autoPlaySpeed={4000} infinite={true}>
+        <HorizontalCarousel autoPlaySpeed={4000} infinite={true}>
           {dummyData.map((item, index) => (
             <div key={index} style={{ padding: "10px", textAlign: "center" }}>
-              <CardCompoent
+              <CardComponent
                 data={item}
                 onAddToCart={handleAddToCart}
                 onAddToFavorite={handleAddToFavorite}
@@ -45,7 +44,7 @@ const Products = () => {
               />
             </div>
           ))}
-        </HorizentalCarousel>
+        </HorizontalCarousel>
       </div>
       <div>
         <CategoriesHeading
@@ -54,10 +53,10 @@ const Products = () => {
             console.log("Explore all");
           }}
         />
-        <HorizentalCarousel autoPlaySpeed={4000} infinite={true}>
+        <HorizontalCarousel autoPlaySpeed={4000} infinite={true}>
           {dummyData.map((item, index) => (
             <div key={index} style={{ padding: "10px", textAlign: "center" }}>
-              <CardCompoent
+              <CardComponent
                 data={item}
                 onAddToCart={handleAddToCart}
                 onAddToFavorite={handleAddToFavorite}
@@ -65,7 +64,7 @@ const Products = () => {
               />
             </div>
           ))}
-        </HorizentalCarousel>
+        </HorizontalCarousel>
       </div>
       <div>
         <CategoriesHeading
@@ -74,10 +73,10 @@ const Products = () => {
             console.log("Explore all");
           }}
         />
-        <HorizentalCarousel autoPlaySpeed={4000} infinite={true}>
+        <HorizontalCarousel autoPlaySpeed={4000} infinite={true}>
           {dummyData.map((item, index) => (
             <div key={index} style={{ padding: "10px", textAlign: "center" }}>
-              <CardCompoent
+              <CardComponent
                 data={item}
                 onAddToCart={handleAddToCart}
                 onAddToFavorite={handleAddToFavorite}
@@ -85,9 +84,10 @@ const Products = () => {
               />
             </div>
           ))}
-        </HorizentalCarousel>
+        </HorizontalCarousel>
       </div>
     </div>
   );
+};
 
-export default Products
+export default Products;

@@ -4,6 +4,7 @@ import { getProducts } from "./utils/products.helper";
 import Products from "./components/landingPage/products";
 import Hero from "./components/landingPage/hero";
 import InfoCards from "./components/landingPage/infoCards";
+import CategoryCrads from "./components/landingPage/CategoryCrads";
 
 export default async function Home() {
   const json = await getProducts();
@@ -17,6 +18,7 @@ export default async function Home() {
     <>
       <Hero />
       <section className="container mx-auto w-full flex flex-col items-center justify-center px-4 gap-4 py-8 md:py-10">
+        <CategoryCrads />
         <InfoCards />
         <Products />
       </section>

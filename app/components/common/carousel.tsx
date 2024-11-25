@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-interface HorizentalCarouselProps {
+interface HorizontalCarouselProps {
   children: ReactNode;
   autoPlay?: boolean;
   autoPlaySpeed?: number;
@@ -10,7 +10,7 @@ interface HorizentalCarouselProps {
   showDots?: boolean;
 }
 
-const HorizentalCarousel: React.FC<HorizentalCarouselProps> = ({
+const HorizontalCarousel: React.FC<HorizontalCarouselProps> = ({
   children,
   autoPlay = true,
   autoPlaySpeed = 3000,
@@ -55,4 +55,4 @@ const HorizentalCarousel: React.FC<HorizentalCarouselProps> = ({
   );
 };
 
-export default HorizentalCarousel;
+export default HorizontalCarousel;
