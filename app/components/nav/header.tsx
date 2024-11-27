@@ -7,11 +7,14 @@ import { BsHandbag } from "react-icons/bs";
 
 import ThemeToggle from "../common/theme";
 import ComponentButton from "../common/buttons/ButtonComponent";
+import SideDrawer from "../common/drawer/sideDrawer";
+import Cart from "../cart/cart";
 
 import { routes } from "@/app/utils/routes";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(true);
 
   return (
     <header
@@ -74,6 +77,12 @@ const Navbar: React.FC = () => {
           </div>
         </div>
       )}
+      <SideDrawer
+        isOpen={isCartDrawerOpen}
+        onClose={() => setIsCartDrawerOpen(false)}
+      >
+        <Cart onClose={() => setIsCartDrawerOpen(false)} />
+      </SideDrawer>
     </header>
   );
 };

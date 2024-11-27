@@ -9,6 +9,7 @@ export default async function Home() {
   const { data } = json;
   const { products } = data;
   const { nodes: productsData } = products;
+
   /* eslint-disable no-console */
   console.log("🚀 ~ Home ~ json:", productsData);
 
