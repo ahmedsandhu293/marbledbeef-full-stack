@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { routes } from "@/app/utils/routes";
+import { useState } from "react";
 import Link from "next/link";
 import { FiHeart, FiMenu, FiX } from "react-icons/fi";
-import ThemeToggle from "../common/theme";
-import ComponentButton from "../common/buttons/ButtonComponent";
 import { BsHandbag } from "react-icons/bs";
 
+import ThemeToggle from "../common/theme";
+import ComponentButton from "../common/buttons/ButtonComponent";
+
+import { routes } from "@/app/utils/routes";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,8 +25,8 @@ const Navbar: React.FC = () => {
             {routes.map((route) => (
               <Link
                 key={route.path}
-                href={route.path}
                 className="px-3 py-1 rounded-full transition-colors text-text-primary hover:bg-gray-200 dark:hover:bg-gray-700"
+                href={route.path}
               >
                 {route.name}
               </Link>
@@ -41,9 +42,9 @@ const Navbar: React.FC = () => {
           </div>
 
           <button
+            aria-label="Toggle Menu"
             className="lg:hidden text-2xl"
             onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle Menu"
           >
             {isOpen ? (
               <FiX className="text-text-primary" />
@@ -61,8 +62,8 @@ const Navbar: React.FC = () => {
             {routes.map((route) => (
               <Link
                 key={route.path}
-                href={route.path}
                 className=" transition-colors"
+                href={route.path}
               >
                 {route.name}
               </Link>

@@ -2,10 +2,11 @@ import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";
 
-import { siteConfig } from "@/config/site";
-import { fontSans } from "@/config/fonts";
 import Navbar from "./components/nav/header";
 import Footer from "./components/nav/footer";
+
+import { siteConfig } from "@/config/site";
+import { fontSans } from "@/config/fonts";
 
 export const metadata: Metadata = {
   title: {
@@ -36,13 +37,11 @@ export default function RootLayout({
       <body
         className={clsx(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
+          fontSans.variable,
         )}
       >
         <Navbar />
-        <main className=" pt-16  flex-grow">
-          {children}
-        </main>
+        <main className=" pt-16  flex-grow">{children}</main>
         <Footer />
       </body>
     </html>

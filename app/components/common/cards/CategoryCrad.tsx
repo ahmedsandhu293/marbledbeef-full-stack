@@ -17,15 +17,15 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
   return (
     <Card
       isPressable
-      shadow="sm"
       className="w-full  bg-transparent"
+      shadow="sm"
       onClick={onClick}
     >
       <CardBody className="p-0">
         <Image
-          src={image}
           alt={title}
           className="w-full h-full object-cover rounded-lg"
+          src={image}
         />
       </CardBody>
       <div className="p-2 text-center text-white text-lg font-semibold">

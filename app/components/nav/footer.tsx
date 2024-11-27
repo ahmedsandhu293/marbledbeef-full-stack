@@ -16,9 +16,9 @@ export default function Footer() {
             </p>
             <div className="flex mt-4 w-full">
               <input
-                type="email"
-                placeholder="Your email address"
                 className="w-full md:w-auto flex bg-background-secondary border border-border-primary rounded-l-lg p-2 text-text-primary focus:outline-none"
+                placeholder="Your email address"
+                type="email"
               />
               <button className="bg-text-primary text-background-primary rounded-r-lg px-4 py-2">
                 Subscribe
@@ -88,8 +88,8 @@ export default function Footer() {
             Buy This Template • Proudly Built In{" "}
             <Link
               href="https://framer.com"
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               Framer
             </Link>{" "}
@@ -98,15 +98,15 @@ export default function Footer() {
           <div className="flex space-x-4">
             <Link
               href="https://twitter.com"
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               <FaTwitter className="text-text-primary" />
             </Link>
             <Link
               href="https://youtube.com"
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               <FaYoutube className="text-text-primary" />
             </Link>

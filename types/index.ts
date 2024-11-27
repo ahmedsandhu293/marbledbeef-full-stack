@@ -37,7 +37,6 @@ export type ShopifyProduct = {
   title: string;
 };
 
-
 export type GraphQLResponse = {
   data: {
     products: {

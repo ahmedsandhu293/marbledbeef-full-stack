@@ -17,11 +17,11 @@ const CardComponent: React.FC<CardProps> = ({
     <>
       <Card
         isPressable
+        className="w-full bg-transparent"
         shadow="none"
         onClick={() => {
           onClick(data);
         }}
-        className="w-full bg-transparent"
       >
         <CardBody className="overflow-visible p-0">
           <Image

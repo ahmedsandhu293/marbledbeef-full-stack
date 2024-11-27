@@ -39,6 +39,7 @@ const HorizontalCarousel: React.FC<HorizontalCarouselProps> = ({
   return (
     <div>
       <Carousel
+        arrows={false}
         autoPlay={autoPlay}
         autoPlaySpeed={autoPlaySpeed}
         containerClass="carousel-container"
@@ -47,7 +48,6 @@ const HorizontalCarousel: React.FC<HorizontalCarouselProps> = ({
         keyBoardControl={true}
         responsive={responsive}
         showDots={showDots}
-        arrows={false}
       >
         {children}
       </Carousel>
