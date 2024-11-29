@@ -8,13 +8,16 @@ import { BsHandbag } from "react-icons/bs";
 import ThemeToggle from "../common/theme";
 import ComponentButton from "../common/buttons/ButtonComponent";
 import SideDrawer from "../common/drawer/sideDrawer";
-import Cart from "../cart/cart";
-
 import { routes } from "@/app/utils/routes";
+import Cart from "../sideBarComponent/cart";
+import FavoritesCart from "../sideBarComponent/favorites";
+import Cart2 from "../sideBarComponent/cart2";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(true);
+  const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
+  const [isCart2DrawerOpen, setIsCart2DrawerOpen] = useState(false);
+  const [isFavoritesDrawerOpen, setIsFavoritesDrawerOpen] = useState(false);
 
   return (
     <header
@@ -38,8 +41,15 @@ const Navbar: React.FC = () => {
 
           <div className="hidden lg:flex items-center space-x-4">
             <ThemeToggle />
-            <FiHeart size={26} />
-            <BsHandbag size={26} />
+            <button onClick={() => setIsFavoritesDrawerOpen(true)}>
+              <FiHeart size={26} />
+            </button>
+            <button onClick={() => setIsCartDrawerOpen(true)}>
+              <BsHandbag size={26} />
+            </button>
+            <button onClick={() => setIsCart2DrawerOpen(true)}>
+              <BsHandbag size={26} />
+            </button>
 
             <ComponentButton label="Sign In" />
           </div>
@@ -82,6 +92,19 @@ const Navbar: React.FC = () => {
         onClose={() => setIsCartDrawerOpen(false)}
       >
         <Cart onClose={() => setIsCartDrawerOpen(false)} />
+      </SideDrawer>
+
+      <SideDrawer
+        isOpen={isFavoritesDrawerOpen}
+        onClose={() => setIsFavoritesDrawerOpen(false)}
+      >
+        <FavoritesCart onClose={() => setIsFavoritesDrawerOpen(false)} />
+      </SideDrawer>
+      <SideDrawer
+        isOpen={isCart2DrawerOpen}
+        onClose={() => setIsCart2DrawerOpen(false)}
+      >
+        <Cart2 onClose={() => setIsCart2DrawerOpen(false)} />
       </SideDrawer>
     </header>
   );
