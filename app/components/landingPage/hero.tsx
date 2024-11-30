@@ -26,7 +26,7 @@ const Hero = () => {
           </p>
           <div className="relative w-full sm:w-80 md:w-96 mt-10 lg:mt-20">
             <input
-              className="p-3 w-full text-lg rounded-md pl-10 backdrop-blur-lg bg-opacity-10 transition-colors"
+              className="p-3 w-full text-lg rounded-md pl-10 backdrop-blur-lg bg-opacity-10 transition-colors bg-background-primary text-text-primary"
               placeholder="Type something..."
               type="text"
               onChange={(e) => onSearch(e.target.value)}

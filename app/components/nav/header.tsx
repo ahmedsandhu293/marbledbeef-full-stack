@@ -5,7 +5,6 @@ import Link from "next/link";
 import { FiHeart, FiMenu, FiX } from "react-icons/fi";
 import { BsHandbag } from "react-icons/bs";
 
-import ThemeToggle from "../common/theme";
 import ComponentButton from "../common/buttons/ButtonComponent";
 import SideDrawer from "../common/drawer/sideDrawer";
 import { routes } from "@/app/utils/routes";
@@ -21,7 +20,7 @@ const Navbar: React.FC = () => {
 
   return (
     <header
-      className={`fixed w-full top-0 z-50 backdrop-blur-lg bg-opacity-10 transition-colors duration-300 `}
+      className={`fixed w-full top-0 z-50 backdrop-blur-lg bg-opacity-10 transition-colors duration-300 bg-background-primary text-text-primary`}
     >
       <div className="container mx-auto">
         <nav className="relative flex items-center justify-between px-6 py-4 ">
@@ -40,7 +39,6 @@ const Navbar: React.FC = () => {
           </div>
 
           <div className="hidden lg:flex items-center space-x-4">
-            <ThemeToggle />
             <button onClick={() => setIsFavoritesDrawerOpen(true)}>
               <FiHeart size={26} />
             </button>

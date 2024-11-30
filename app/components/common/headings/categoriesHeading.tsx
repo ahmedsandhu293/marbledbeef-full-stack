@@ -10,7 +10,9 @@ const CategoriesHeading = ({
 }) => {
   return (
     <div className="flex gap-2 md:gap-4 justify-start items-center px-2">
-      <h2 className="text-base md:text-xl font-semibold py-4">{title}</h2>
+      <h2 className="text-base md:text-xl font-semibold py-4 text-text-primary">
+        {title}
+      </h2>
       <button
         className="text-text-tertiary flex gap-2 text-base md:text-xl font-semibold "
         onClick={onClick}

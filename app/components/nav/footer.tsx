@@ -3,7 +3,7 @@ import { FaTwitter, FaYoutube } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="text-text-primary py-10 px-6 border-t border-border-primary">
+    <footer className="text-text-primary py-10 px-6 border-t border-border-primary bg-background-primary">
       <div className="container mx-auto">
         <div className="flex flex-col space-y-8 md:flex-row md:space-y-0 md:space-x-8 justify-between items-center md:items-start">
           {/* Left section */}
