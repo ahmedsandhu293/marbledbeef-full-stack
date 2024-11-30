@@ -1,6 +1,21 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";
+import dynamic from "next/dynamic";
+
+// Dynamically import PromoNotification with SSR disabled
+const PromoNotification = dynamic(
+  () => import("./components/common/flotingBars/promoNotification"),
+  {
+    ssr: false,
+  },
+);
+const Chatbot = dynamic(
+  () => import("./components/common/flotingBars/chatBot"),
+  {
+    ssr: false,
+  },
+);
 
 import Navbar from "./components/nav/header";
 import Footer from "./components/nav/footer";
@@ -43,6 +58,9 @@ export default function RootLayout({
         <Navbar />
         <main className=" pt-16  flex-grow">{children}</main>
         <Footer />
+
+        <Chatbot />
+        <PromoNotification />
       </body>
     </html>
   );

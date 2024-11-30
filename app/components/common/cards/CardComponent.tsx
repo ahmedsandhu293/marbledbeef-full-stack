@@ -35,7 +35,7 @@ const CardComponent: React.FC<CardProps> = ({
         </CardBody>
         <CardFooter className="flex flex-col gap-2">
           <div className="flex justify-between w-full">
-            <b className="truncate">{data.title}</b>
+            <b className="truncate text-white">{data.title}</b>
             <p className="text-default-500">{data.price}</p>
           </div>
 

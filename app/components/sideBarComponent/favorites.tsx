@@ -1,6 +1,4 @@
 import React from "react";
-import { LuTimerReset } from "react-icons/lu";
-import { FiHeart, FiShoppingBag } from "react-icons/fi";
 import { RxCross2 } from "react-icons/rx";
 
 const FavoritesCart = ({ onClose }: { onClose: () => void }) => {

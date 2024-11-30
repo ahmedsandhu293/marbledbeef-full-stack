@@ -1,9 +1,9 @@
 import React from "react";
 import { FaRegCircleCheck } from "react-icons/fa6";
-import { FiShoppingBag } from "react-icons/fi";
 import { RxCross2 } from "react-icons/rx";
-import ProgressBar from "../common/progressBar";
 import { MdDeleteOutline } from "react-icons/md";
+
+import ProgressBar from "../common/progressBar";
 
 interface CartProps {
   onClose: () => void;

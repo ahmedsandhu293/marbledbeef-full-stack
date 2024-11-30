@@ -7,10 +7,11 @@ import { BsHandbag } from "react-icons/bs";
 
 import ComponentButton from "../common/buttons/ButtonComponent";
 import SideDrawer from "../common/drawer/sideDrawer";
-import { routes } from "@/app/utils/routes";
 import Cart from "../sideBarComponent/cart";
 import FavoritesCart from "../sideBarComponent/favorites";
 import Cart2 from "../sideBarComponent/cart2";
+
+import { routes } from "@/app/utils/routes";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);

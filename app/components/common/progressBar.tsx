@@ -9,9 +9,9 @@ export default function ProgressBar() {
       {/* Progress Bar */}
       <Progress
         aria-label="Loading..."
-        value={progress}
         className="h-2 bg-gray-300 rounded-full"
         color="danger" // Red color
+        value={progress}
       />
 
       {/* Icon */}
