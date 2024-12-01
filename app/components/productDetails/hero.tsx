@@ -8,7 +8,6 @@ const ProductHero = () => {
         </h1>
       </div>
 
-      {/* First column with vertical images */}
       <div className="col-span-1 md:flex flex-col gap-4 hidden ">
         <img
           alt="pic 1"
