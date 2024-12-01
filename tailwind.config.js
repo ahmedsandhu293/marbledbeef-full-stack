@@ -24,12 +24,13 @@ module.exports = {
         'text-secondary': 'var(--text-secondary)',
         'text-tertiary': 'var(--text-tertiary)',
 
+        "button-primary": "var(--button-primary)",
+
         // normal colors
         'red-primary': 'var(--red-primary)',
         'red-secondary': 'var(--red-secondary)',
       },
     },
   },
-  darkMode: "class",
   plugins: [nextui()],
 }

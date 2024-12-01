@@ -9,11 +9,12 @@ export default async function Home() {
   const { data } = json;
   const { products } = data;
   const { nodes: productsData } = products;
+
   /* eslint-disable no-console */
   console.log("🚀 ~ Home ~ json:", productsData);
 
   return (
-    <>
+    <div className="bg-background-primary">
       <Hero />
       <section className="container mx-auto w-full flex flex-col items-center justify-center px-4 gap-4 py-8 md:py-10">
         <CategoryCrads />
@@ -31,6 +32,6 @@ export default async function Home() {
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 }

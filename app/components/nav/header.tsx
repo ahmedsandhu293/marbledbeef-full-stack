@@ -5,17 +5,23 @@ import Link from "next/link";
 import { FiHeart, FiMenu, FiX } from "react-icons/fi";
 import { BsHandbag } from "react-icons/bs";
 
-import ThemeToggle from "../common/theme";
 import ComponentButton from "../common/buttons/ButtonComponent";
+import SideDrawer from "../common/drawer/sideDrawer";
+import Cart from "../sideBarComponent/cart";
+import FavoritesCart from "../sideBarComponent/favorites";
+import Cart2 from "../sideBarComponent/cart2";
 
 import { routes } from "@/app/utils/routes";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
+  const [isCart2DrawerOpen, setIsCart2DrawerOpen] = useState(false);
+  const [isFavoritesDrawerOpen, setIsFavoritesDrawerOpen] = useState(false);
 
   return (
     <header
-      className={`fixed w-full top-0 z-50 backdrop-blur-lg bg-opacity-10 transition-colors duration-300 `}
+      className={`fixed w-full top-0 z-50 backdrop-blur-lg bg-opacity-10 transition-colors duration-300 bg-background-primary text-text-primary`}
     >
       <div className="container mx-auto">
         <nav className="relative flex items-center justify-between px-6 py-4 ">
@@ -34,9 +40,15 @@ const Navbar: React.FC = () => {
           </div>
 
           <div className="hidden lg:flex items-center space-x-4">
-            <ThemeToggle />
-            <FiHeart size={26} />
-            <BsHandbag size={26} />
+            <button onClick={() => setIsFavoritesDrawerOpen(true)}>
+              <FiHeart size={26} />
+            </button>
+            <button onClick={() => setIsCartDrawerOpen(true)}>
+              <BsHandbag size={26} />
+            </button>
+            <button onClick={() => setIsCart2DrawerOpen(true)}>
+              <BsHandbag size={26} />
+            </button>
 
             <ComponentButton label="Sign In" />
           </div>
@@ -74,6 +86,25 @@ const Navbar: React.FC = () => {
           </div>
         </div>
       )}
+      <SideDrawer
+        isOpen={isCartDrawerOpen}
+        onClose={() => setIsCartDrawerOpen(false)}
+      >
+        <Cart onClose={() => setIsCartDrawerOpen(false)} />
+      </SideDrawer>
+
+      <SideDrawer
+        isOpen={isFavoritesDrawerOpen}
+        onClose={() => setIsFavoritesDrawerOpen(false)}
+      >
+        <FavoritesCart onClose={() => setIsFavoritesDrawerOpen(false)} />
+      </SideDrawer>
+      <SideDrawer
+        isOpen={isCart2DrawerOpen}
+        onClose={() => setIsCart2DrawerOpen(false)}
+      >
+        <Cart2 onClose={() => setIsCart2DrawerOpen(false)} />
+      </SideDrawer>
     </header>
   );
 };
