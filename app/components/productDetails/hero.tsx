@@ -11,22 +11,22 @@ const ProductHero = () => {
       {/* First column with vertical images */}
       <div className="col-span-1 md:flex flex-col gap-4 hidden ">
         <img
-          alt="Image 1"
+          alt="pic 1"
           className="w-full"
           src="https://via.placeholder.com/200"
         />
         <img
-          alt="Image 2"
+          alt="pic 2"
           className="w-full"
           src="https://via.placeholder.com/200"
         />
         <img
-          alt="Image 3"
+          alt="pic 3"
           className="w-full"
           src="https://via.placeholder.com/200"
         />
         <img
-          alt="Image 3"
+          alt="pic 3"
           className="w-full"
           src="https://via.placeholder.com/200"
         />
@@ -35,7 +35,7 @@ const ProductHero = () => {
       {/* Main image column */}
       <div className="md:col-span-5 col-span-12">
         <img
-          alt="Main Image"
+          alt="pic 4"
           className="w-full"
           src="https://via.placeholder.com/800x600"
         />
@@ -43,22 +43,22 @@ const ProductHero = () => {
 
       <div className="col-span-1 flex  gap-4 md:hidden ">
         <img
-          alt="Image 1"
+          alt="pic 5"
           className="w-full"
           src="https://via.placeholder.com/200"
         />
         <img
-          alt="Image 2"
+          alt="pic 6"
           className="w-full"
           src="https://via.placeholder.com/200"
         />
         <img
-          alt="Image 3"
+          alt="pic 7"
           className="w-full"
           src="https://via.placeholder.com/200"
         />
         <img
-          alt="Image 3"
+          alt="pic 8"
           className="w-full"
           src="https://via.placeholder.com/200"
         />
