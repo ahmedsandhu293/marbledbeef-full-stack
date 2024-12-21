@@ -12,16 +12,12 @@ export const getProducts = async (): Promise<GraphQLResponse> => {
     body: JSON.stringify({
       query: gql`
         query ProductsQuery {
-          products(first: 6) {
+          products(first: 250) {
             nodes {
+              id
+              tags
+              title
               description
-              featuredImage {
-                altText
-                height
-                id
-                url
-                width
-              }
               handle
               priceRangeV2 {
                 minVariantPrice {
@@ -29,8 +25,38 @@ export const getProducts = async (): Promise<GraphQLResponse> => {
                   currencyCode
                 }
               }
-              tags
-              title
+              variants(first: 250) {
+                edges {
+                  node {
+                    id
+                    title
+                    price
+                    compareAtPrice
+                    barcode
+                    sku
+                  }
+                }
+              }
+              category {
+                id
+                name
+              }
+              collections(first: 250) {
+                edges {
+                  node {
+                    id
+                    title
+                  }
+                }
+              }
+              images(first: 250) {
+                edges {
+                  node {
+                    id
+                    originalSrc
+                  }
+                }
+              }
             }
           }
         }
