@@ -1,7 +1,6 @@
 import { getProducts } from "./utils/products.helper";
 import Products from "./components/landingPage/products";
 import Hero from "./components/landingPage/hero";
-import InfoCards from "./components/landingPage/infoCards";
 import CategoryCrads from "./components/landingPage/CategoryCrads";
 import Reviews from "./components/landingPage/review";
 
@@ -19,12 +18,10 @@ export default async function Home() {
       <Hero />
       <section className="container mx-auto w-full flex flex-col items-center justify-center px-4 gap-4 py-8 md:py-10">
         <CategoryCrads />
-        {/* <InfoCards /> */}
         <Products />
         <Reviews />
       </section>
       <div className="container mx-auto px-4 grid grid-cols-3 w-[90%]  p-8 lg:p-16 bg-gradient-secondary border border-gold rounded-3xl">
-
         <div className="col-span-3 md:col-span-2  text-white  w-full  flex flex-col justify-center items-center">
           <h3 className="text-xl md:text-3xl font-bold text-center">
             Bénéficiez d{"'"}offres exclusives, accédez à des promotions et bien
@@ -46,7 +43,10 @@ export default async function Home() {
               Subscribe
             </button>
           </div>
-          <p className="text-white pt-2">En vous inscrivant à notre newsletter, vous acceptez nos Conditions dutilisation et notre Politique de confidentialité.</p>
+          <p className="text-white pt-2">
+            En vous inscrivant à notre newsletter, vous acceptez nos Conditions
+            dutilisation et notre Politique de confidentialité.
+          </p>
         </div>
       </div>
     </div>

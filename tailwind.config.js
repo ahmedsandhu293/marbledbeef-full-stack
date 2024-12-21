@@ -12,6 +12,8 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-sans)"],
         mono: ["var(--font-mono)"],
+        urbanist: ["var(--font-urbanist)", "sans-serif"], // Use the CSS variable
+
       },
       colors: {
         // theme colors
@@ -24,12 +26,21 @@ module.exports = {
         'text-secondary': 'var(--text-secondary)',
         'text-tertiary': 'var(--text-tertiary)',
 
+        'text-gold': 'var(--gold-primary)',
+
+        'gold': 'var(--gold-primary)',
+
         "button-primary": "var(--button-primary)",
 
         // normal colors
         'red-primary': 'var(--red-primary)',
         'red-secondary': 'var(--red-secondary)',
       },
+      backgroundImage: {
+        'gradient-primary': 'linear-gradient(90deg, rgba(150,119,49,1) 0%, rgba(191,164,59,1) 100%)',
+        'gradient-secondary': 'linear-gradient(90deg,  rgba(19, 20, 21, 1) 0%, rgba(5, 5, 5, 1) 100%)'
+      },
+
     },
   },
   plugins: [nextui()],

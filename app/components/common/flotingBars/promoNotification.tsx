@@ -41,7 +41,7 @@ const PromoNotification: React.FC = () => {
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="w-full flex justify-end">
               <button
-                className="bg-button-primary border border-border-primary text-white p-3 rounded-md shadow-lg transition-all duration-500 ease-in-out"
+                className="bg-[#073411] border border-border-primary text-white p-3 rounded-md shadow-lg transition-all duration-500 ease-in-out"
                 onClick={() => setIsExpanded(true)}
               >
                 <TbSpeakerphone color="#fff" size={24} />

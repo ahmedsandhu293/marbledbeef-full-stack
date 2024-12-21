@@ -30,7 +30,7 @@ const Products = () => {
 
   return (
     <div className="w-full space-y-4 md:space-y-8">
-      <div className="w-full">
+      <div className="w-full font-urbanist">
         <CategoriesHeading title="Sélection d'excellence" onClick={() => {}} />
         <HorizontalCarousel autoPlaySpeed={4000} infinite={true}>
           {dummyData.map((item, index) => (

@@ -5,6 +5,7 @@ import { Button } from "@nextui-org/button";
 
 interface ButtonComponentProps {
   label: string;
+  icon?: React.ReactNode; // Accept an icon as a prop
   onClick?: () => void;
   loading?: boolean;
   disabled?: boolean;
@@ -13,6 +14,7 @@ interface ButtonComponentProps {
 
 const ComponentButton: React.FC<ButtonComponentProps> = ({
   label,
+  icon,
   onClick,
   loading = false,
   disabled = false,
@@ -20,7 +22,7 @@ const ComponentButton: React.FC<ButtonComponentProps> = ({
 }) => {
   return (
     <Button
-      className={`${className} flex items-center justify-center `}
+      className={`${className} flex items-center justify-center gap-2`} // Add gap for spacing
       disabled={disabled || loading}
       onClick={onClick}
     >
@@ -47,6 +49,7 @@ const ComponentButton: React.FC<ButtonComponentProps> = ({
         </svg>
       )}
       {label}
+      {icon && <span>{icon}</span>}
     </Button>
   );
 };

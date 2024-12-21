@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { FiHeart, FiMenu, FiX } from "react-icons/fi";
 import { BsHandbag } from "react-icons/bs";
+import Image from "next/image";
+import { GoPerson } from "react-icons/go";
 
 import ComponentButton from "../common/buttons/ButtonComponent";
 import SideDrawer from "../common/drawer/sideDrawer";
@@ -33,7 +35,10 @@ const Navbar: React.FC = () => {
           </div>
           <div>
             <h3 className="font-bold text-lg">Free Delivery</h3>
-            <p className="text-sm">Over €49 in France, Monaco,<br /> Belgium, Luxembourg</p>
+            <p className="text-sm">
+              Over €49 in France, Monaco,
+              <br /> Belgium, Luxembourg
+            </p>
           </div>
         </div>
 
@@ -43,7 +48,9 @@ const Navbar: React.FC = () => {
           </div>
           <div>
             <h3 className="font-bold text-lg">Secure Payments</h3>
-            <p className="text-sm">Paypal, Alma, Visa, and Master <br /> with installment plans</p>
+            <p className="text-sm">
+              Paypal, Alma, Visa, and Master <br /> with installment plans
+            </p>
           </div>
         </div>
 
@@ -54,20 +61,27 @@ const Navbar: React.FC = () => {
           </div>
           <div>
             <h3 className="font-bold text-lg">Freshness Guarantee</h3>
-            <p className="text-sm">Enjoy the best hot pies with your <br /> family</p>
+            <p className="text-sm">
+              Enjoy the best hot pies with your <br /> family
+            </p>
           </div>
         </div>
       </div>
 
       <div className="container mx-auto">
         <nav className="relative flex items-center justify-between px-6 py-4 ">
-          <span className="text-lg font-semibold text-text-primary">LOGO</span>
+          <Image
+            alt="logo"
+            height={100}
+            src="/assets/images/logo.png"
+            width={100}
+          />
 
           <div className="hidden lg:flex space-x-4 items-center absolute left-1/2 transform -translate-x-1/2">
             {routes.map((route) => (
               <Link
                 key={route.path}
-                className="px-3 py-1 rounded-full transition-colors text-text-primary hover:bg-gray-200 dark:hover:bg-gray-700"
+                className="px-3 py-1 rounded-full font-urbanist transition-colors text-text-primary hover:bg-gray-200 dark:hover:bg-gray-700"
                 href={route.path}
               >
                 {route.name}
@@ -86,7 +100,11 @@ const Navbar: React.FC = () => {
               <BsHandbag size={26} />
             </button>
 
-            <ComponentButton label="Sign In" className="!bg-gradient-secondary text-white" />
+            <ComponentButton
+              className="!bg-gradient-secondary text-white rounded-xl border border-[#323233]"
+              icon={<GoPerson />}
+              label="Sign In"
+            />
           </div>
 
           <button

@@ -2,6 +2,12 @@ import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";
 import dynamic from "next/dynamic";
+import { Urbanist } from "next/font/google";
+
+const urbanist = Urbanist({
+  subsets: ["latin"], // Specify subsets
+  variable: "--font-urbanist", // Optional: Define a CSS variable
+});
 
 // Dynamically import PromoNotification with SSR disabled
 const PromoNotification = dynamic(
@@ -47,7 +53,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="en">
+    <html suppressHydrationWarning className={urbanist.variable} lang="en">
       <head />
       <body
         className={clsx(

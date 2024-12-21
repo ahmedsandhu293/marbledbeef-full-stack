@@ -35,8 +35,12 @@ const CardComponent: React.FC<CardProps> = ({
         </CardBody>
         <CardFooter className="flex flex-col gap-2">
           <div className="flex justify-between w-full">
-            <b className="truncate text-text-gold">{data.title}</b>
-            <p className="text-default-500 text-text-gold">{data.price}</p>
+            <b className="truncate text-text-gold font-urbanist">
+              {data.title}
+            </b>
+            <p className="text-default-500 text-text-gold font-urbanist">
+              {data.price}
+            </p>
           </div>
 
           <div className="flex justify-between items-center w-full gap-4">
@@ -46,7 +50,7 @@ const CardComponent: React.FC<CardProps> = ({
               onClick={() => onAddToCart(data)}
             />
             <FiHeart
-              className="text-text-gold hover:text-red-primary cursor-pointer"
+              className="text-text-gold cursor-pointer"
               size={28}
               onClick={(e) => {
                 e.stopPropagation();

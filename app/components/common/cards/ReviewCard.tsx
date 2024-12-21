@@ -20,13 +20,15 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
         <div
           className={`w-10 h-10 ${review.profileColor} text-center rounded-full flex items-center justify-center`}
         >
-          <span className="text-lg font-bold text-black">
+          <span className="text-lg font-bold text-black font-urbanist">
             {review.name.charAt(0).toUpperCase()}
           </span>
         </div>
         <div>
-          <h4 className="font-semibold text-base">{review.name}</h4>
-          <p className="text-sm text-gray-400">{review.date}</p>
+          <h4 className="font-semibold text-base font-urbanist">
+            {review.name}
+          </h4>
+          <p className="text-sm text-gray-400 font-urbanist">{review.date}</p>
         </div>
       </div>
 
@@ -37,8 +39,9 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
           .map((_, index) => (
             <span
               key={index}
-              className={`text-lg ${index < review.rating ? "text-yellow-400" : "text-gray-600"
-                }`}
+              className={`text-lg ${
+                index < review.rating ? "text-yellow-400" : "text-gray-600"
+              }`}
             >
               ★
             </span>
@@ -47,8 +50,12 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
 
       {/* Review Text */}
       <div className="flex flex-col gap-10">
-        <p className="text-sm text-gray-300 leading-relaxed">{review.text}</p>
-        <p className="text-sm text-gray-300 leading-relaxed">il y a 1 mois</p>
+        <p className="text-sm text-gray-300 leading-relaxed font-urbanist">
+          {review.text}
+        </p>
+        <p className="text-sm text-gray-300 leading-relaxed font-urbanist">
+          il y a 1 mois
+        </p>
       </div>
     </div>
   );

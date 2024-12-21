@@ -31,6 +31,7 @@ const prebuiltQuestions: string[] = [
   "Pourquoi choisir Marbled Beef ?",
   "Suivre ma commande",
 ];
+
 /* eslint-disable no-console */
 console.log("🚀 ~ prebuiltQuestions:", prebuiltQuestions);
 
@@ -58,9 +59,11 @@ const Chatbot: React.FC = () => {
 
   const handleSendMessage = async (message?: string) => {
     const userMessage = message || input.trim();
+
     if (!userMessage) return;
 
     const newMessages = [...messages, { text: userMessage, isBot: false }];
+
     setMessages(newMessages);
     setInput("");
     setLoading(true);
@@ -80,11 +83,11 @@ const Chatbot: React.FC = () => {
     <div className="fixed right-0 bottom-0 pb-2 sm:pb-5 z-10">
       <div className="relative mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <button
+          className="bg-[#CF2D2D] text-white dark:text-zinc-50 p-3 rounded-md shadow-lg transition-all duration-500 ease-in-out"
           onClick={() => {
             toggleChatbot();
             if (isOpen) setShowPrebuiltQuestions(false);
           }}
-          className="bg-button-primary dark:bg-gray-primary text-white dark:text-zinc-50 p-3 rounded-md shadow-lg transition-all duration-500 ease-in-out"
         >
           {isOpen ? (
             <div className="flex justify-center items-center gap-2">
@@ -107,7 +110,7 @@ const Chatbot: React.FC = () => {
 
             <div className="p-4 chat-content h-80 overflow-y-auto">
               {messages.map((msg, index) => (
-                <div className="space-y-3" key={index}>
+                <div key={index} className="space-y-3">
                   {msg.isBot ? (
                     <div className="bg-button-primary border border-button-primary text-zinc-900 dark:text-zinc-50 p-2 w-2/3 rounded-tl-md rounded-tr-md rounded-br-none rounded-bl-md text-sm mb-3">
                       {msg.text}
@@ -124,7 +127,7 @@ const Chatbot: React.FC = () => {
 
               {loading && (
                 <div className="flex justify-center items-center mt-2">
-                  <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-gray-400"></div>
+                  <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-gray-400" />
                 </div>
               )}
 
@@ -147,25 +150,25 @@ const Chatbot: React.FC = () => {
                 </div>
               )} */}
 
-              <div ref={chatEndRef}></div>
+              <div ref={chatEndRef} />
             </div>
 
             <div className="py-2 px-4 border-t border-border-primary bg-button-primary flex gap-2">
               <input
+                className="w-full p-2 bg-transparent rounded-xl border border-gray-100  text-zinc-50"
+                disabled={loading}
+                placeholder="Type a message..."
                 type="text"
                 value={input}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyPress}
-                placeholder="Type a message..."
-                className="w-full p-2 bg-transparent rounded-xl border border-gray-100  text-zinc-50"
-                disabled={loading}
               />
               <button
-                onClick={() => handleSendMessage()}
                 className={` text-white  ${
                   loading ? "opacity-50 cursor-not-allowed" : ""
                 }`}
                 disabled={loading}
+                onClick={() => handleSendMessage()}
               >
                 <FiSend size={24} />
               </button>
