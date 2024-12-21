@@ -12,6 +12,9 @@ import FavoritesCart from "../sideBarComponent/favorites";
 import Cart2 from "../sideBarComponent/cart2";
 
 import { routes } from "@/app/utils/routes";
+import DeliveryTruck from "@/public/assets/svg/deliveryTruck";
+import Food from "@/public/assets/svg/food";
+import Lock from "@/public/assets/svg/lock";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +26,39 @@ const Navbar: React.FC = () => {
     <header
       className={`fixed w-full top-0 z-50 backdrop-blur-lg bg-opacity-10 transition-colors duration-300 bg-background-primary text-text-primary`}
     >
+      <div className="container mx-auto flex flex-col md:flex-row text-white justify-between p-6 items-center">
+        <div className="flex items-start gap-3 mb-4 md:mb-0 md:mr-6">
+          <div className="text-yellow-500 text-3xl">
+            <DeliveryTruck />
+          </div>
+          <div>
+            <h3 className="font-bold text-lg">Free Delivery</h3>
+            <p className="text-sm">Over €49 in France, Monaco,<br /> Belgium, Luxembourg</p>
+          </div>
+        </div>
+
+        <div className="flex items-start gap-3 mb-4 md:mb-0 md:mr-6">
+          <div className="text-blue-500 text-3xl">
+            <Lock />
+          </div>
+          <div>
+            <h3 className="font-bold text-lg">Secure Payments</h3>
+            <p className="text-sm">Paypal, Alma, Visa, and Master <br /> with installment plans</p>
+          </div>
+        </div>
+
+        {/* Freshness Guarantee */}
+        <div className="flex items-start gap-3">
+          <div className="text-yellow-500 text-3xl">
+            <Food />
+          </div>
+          <div>
+            <h3 className="font-bold text-lg">Freshness Guarantee</h3>
+            <p className="text-sm">Enjoy the best hot pies with your <br /> family</p>
+          </div>
+        </div>
+      </div>
+
       <div className="container mx-auto">
         <nav className="relative flex items-center justify-between px-6 py-4 ">
           <span className="text-lg font-semibold text-text-primary">LOGO</span>
@@ -50,7 +86,7 @@ const Navbar: React.FC = () => {
               <BsHandbag size={26} />
             </button>
 
-            <ComponentButton label="Sign In" />
+            <ComponentButton label="Sign In" className="!bg-gradient-secondary text-white" />
           </div>
 
           <button

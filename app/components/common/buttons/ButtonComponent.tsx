@@ -20,7 +20,7 @@ const ComponentButton: React.FC<ButtonComponentProps> = ({
 }) => {
   return (
     <Button
-      className={`${className} flex items-center justify-center`}
+      className={`${className} flex items-center justify-center `}
       disabled={disabled || loading}
       onClick={onClick}
     >

@@ -19,6 +19,8 @@
   --red-primary: #f04949cf;
   --red-secondary: #e14459;
 
+  --gold-primary: #D4AF37;
+
   ::-webkit-scrollbar {
     width: 0.5rem;
     height: 0.5rem;

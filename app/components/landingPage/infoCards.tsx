@@ -2,7 +2,7 @@ import React from "react";
 
 const InfoCards = () => {
   return (
-    <div className="flex flex-wrap justify-center items-center bg-black py-10 space-y-6 sm:space-y-0 sm:space-x-6 sm:flex-row gap-2">
+    <div className="flex flex-wrap justify-center items-center py-10 space-y-6 sm:space-y-0 sm:space-x-6 sm:flex-row gap-2">
       {/* Card 1 */}
       <div className="p-6 bg-black text-white border border-border-primary rounded-3xl w-full sm:w-[427px] h-60 flex flex-col justify-center items-start">
         <h3 className="text-3xl font-bold">Freshness Guarantee</h3>

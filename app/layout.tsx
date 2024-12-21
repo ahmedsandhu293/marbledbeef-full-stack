@@ -56,7 +56,7 @@ export default function RootLayout({
         )}
       >
         <Navbar />
-        <main className=" pt-16  flex-grow">{children}</main>
+        <main className=" pt-40  flex-grow">{children}</main>
         <Footer />
 
         <Chatbot />
