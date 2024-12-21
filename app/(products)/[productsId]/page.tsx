@@ -9,8 +9,8 @@ const page = () => {
       <div className="container mx-auto px-6">
         <ProductHero />
         <Products />
-        <div className="border-t border-border-primary py-10 flex items-center justify-center">
-          <div className="p-8 lg:p-16  bg-black text-white  rounded-3xl w-full lg:w-[720px]  flex flex-col justify-center items-start">
+        <div className="border-t border-gold py-10 flex items-center justify-center">
+          <div className="p-8 lg:p-16 border border-border-primary  text-white  rounded-3xl w-full lg:w-[720px]  flex flex-col justify-center items-start">
             <h3 className="text-xl md:text-3xl font-bold text-center">
               Bénéficiez d{"'"}offres exclusives, accédez à des promotions et
               bien plus encore !

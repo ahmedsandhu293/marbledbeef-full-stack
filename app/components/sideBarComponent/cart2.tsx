@@ -12,9 +12,9 @@ interface CartProps {
 const Cart2: React.FC<CartProps> = ({ onClose }) => {
   return (
     <div
-      className={`bg-black text-white shadow-lg w-full max-w-full md:w-[400px] z-50 flex flex-col overflow-hidden`}
+      className={`bg-black text-white shadow-lg w-full max-w-full md:w-[400px] z-50 flex flex-col overflow-hidden font-urbanist`}
     >
-      <div className="flex items-center justify-between p-1 md:p-4 border-b border-border-primary">
+      <div className="flex items-center justify-between p-1 md:p-4 border-b border-gold">
         <h2 className="text-lg font-bold">Votre Panier</h2>
         <button
           className="text-white text-xl focus:outline-none"
@@ -33,7 +33,7 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
 
       <ProgressBar />
 
-      <div className="flex items-center justify-center gap-2 p-2 text-[8px] md:text-sm border border-border-primary rounded-2xl mx-4">
+      <div className="flex items-center justify-center gap-2 p-2 text-[8px] md:text-sm border border-gold rounded-2xl mx-4">
         <FaRegCircleCheck />
         <p>Le panier a été mis à jour avec succès</p>
       </div>
@@ -45,7 +45,7 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
         </p>
       </div>
 
-      <div className="border-border-primary border rounded-2xl p-3">
+      <div className="border-gold border rounded-2xl p-3">
         <div className="overflow-y-auto max-h-[240px]  overflow-x-hidden">
           {Array(10) // Change this to dynamic data when available
             .fill(0)
@@ -54,7 +54,7 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
                 key={index}
                 className="flex items-start p-3 rounded-md gap-3 md:flex-row flex-col "
               >
-                <div className="w-20 h-20 bg-cover bg-center rounded-md overflow-hidden border border-border-primary">
+                <div className="w-20 h-20 bg-cover bg-center rounded-md overflow-hidden border border-gold">
                   <img
                     alt="Boeuf de Kobe"
                     className="w-full h-full"
@@ -73,12 +73,12 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
                       <span className="font-bold">+100gm</span>{" "}
                     </p>
                   </div>
-                  <div className="flex justify-start items-start gap-4 border border-border-primary rounded-2xl py-1 px-5 w-auto">
+                  <div className="flex justify-start items-start gap-4 border border-gold rounded-lg py-1 px-5 w-28">
                     <span>-</span>
                     <span>3</span>
                     <span>+</span>
                   </div>
-                  <div className="flex justify-end text-sm">
+                  <div className="flex justify-end text-sm text-gold">
                     <span>€52.99</span>
                   </div>
                 </div>
@@ -87,15 +87,15 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
         </div>
 
         {/* Continue Button */}
-        <div className="p-2 md:p-4 border-t border-gray-500">
+        <div className="p-2 md:p-4 border-t border-gold">
           <div className="flex justify-center items-center py-2 gap-2 ">
             <p className="text-sm ">
               <span className="font-bold">Total partiel:  </span>{" "}
-              <span className="line-through ">€52.99</span>{" "}
+              <span className="line-through text-gold">€52.99</span>{" "}
               <span className="font-bold text-red-primary">€49.89</span>{" "}
             </p>
           </div>
-          <button className="bg-gray-200 text-black text-sm md:text-lg font-bold w-full py-3 rounded-2xl">
+          <button className="!bg-gradient-primary text-black text-sm md:text-lg font-bold w-full py-3 rounded-2xl">
             Continuez Vos Achats
           </button>
         </div>

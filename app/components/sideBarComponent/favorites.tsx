@@ -1,12 +1,14 @@
 import React from "react";
 import { RxCross2 } from "react-icons/rx";
 
+import ComponentButton from "../common/buttons/ButtonComponent";
+
 const FavoritesCart = ({ onClose }: { onClose: () => void }) => {
   return (
     <div
-      className={`bg-black text-white shadow-lg w-full max-w-full md:w-[400px] z-50 flex flex-col overflow-hidden h-[100%]`}
+      className={`bg-black text-white shadow-lg w-full max-w-full md:w-[400px] z-50 flex flex-col overflow-hidden h-[100%] font-urbanist`}
     >
-      <div className="flex items-center justify-between p-1 md:p-4 border-b border-border-primary h-[10%]">
+      <div className="flex items-center justify-between p-1 md:p-4 border-b border-gold h-[10%]">
         <h2 className="text-lg font-bold">Votre Panier</h2>
         <button
           className="text-white text-xl focus:outline-none"
@@ -25,7 +27,7 @@ const FavoritesCart = ({ onClose }: { onClose: () => void }) => {
                 key={index}
                 className="flex items-center justify-center w-full p-3 rounded-md gap-6 md:flex-row flex-col "
               >
-                <div className="w-20 h-20 bg-cover bg-center rounded-md overflow-hidden border border-border-primary">
+                <div className="w-20 h-20 bg-cover bg-center rounded-md overflow-hidden border border-gold">
                   <img
                     alt="Boeuf de Kobe"
                     className="w-full h-full"
@@ -48,16 +50,17 @@ const FavoritesCart = ({ onClose }: { onClose: () => void }) => {
                   </div>
                   <div className="flex justify-start items-start gap-2 ">
                     <select
-                      className="border border-border-primary text-white text-sm px-2 py-1 rounded-lg w-full"
+                      className="border bg-transparent border-gold text-white text-sm px-2 py-1 rounded-lg w-full"
                       defaultValue="100g"
                     >
                       <option value="100g">100 g</option>
                       <option value="200g">200 g</option>
                       <option value="500g">500 g</option>
                     </select>
-                    <button className="bg-red-primary text-white px-2 py-1 text-sm rounded-lg">
-                      Ajouter
-                    </button>
+                    <ComponentButton
+                      className="!bg-gradient-primary !py-2 h-8"
+                      label="Add"
+                    />
                   </div>
                 </div>
               </div>

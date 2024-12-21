@@ -45,7 +45,7 @@ const CardComponent: React.FC<CardProps> = ({
 
           <div className="flex justify-between items-center w-full gap-4">
             <ComponentButton
-              className="!w-full !bg-red-primary !bg-gradient-primary"
+              className="!w-full  !bg-gradient-primary"
               label="Add to cart"
               onClick={() => onAddToCart(data)}
             />

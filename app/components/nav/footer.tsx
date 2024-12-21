@@ -12,8 +12,13 @@ export default function Footer() {
         <div className="grid grid-cols-10 space-y-8 md:flex-row md:space-y-0 md:space-x-8 justify-between items-center md:items-start">
           {/* Left section */}
           <div className="col-span-4 text-left space-y-4 max-w-xs md:max-w-none w-full">
-            <h1 className="text-2xl font-bold">LOGO</h1>
-            <p className="text-text-secondary font-urbanist">
+            <Image
+              alt="logo"
+              height={100}
+              src="/assets/images/logo.png"
+              width={100}
+            />{" "}
+            <p className="text-white font-urbanist">
               Boucherie en ligne agréé pour le bœuf de Kobé et le Wagyu.
               Découvrez aussi notre sélection de viandes maturées, le bœuf de
               Galice, l Angus, Salers, la Normande, ainsi que le porc Ibérique
@@ -23,7 +28,6 @@ export default function Footer() {
               professionnels de la gastronomie à la recherche dune expertise de
               qualité.
             </p>
-
             <Button className="bg-gold text-background-primary rounded-lg px-4 py-2 ">
               Contactez-nous
             </Button>

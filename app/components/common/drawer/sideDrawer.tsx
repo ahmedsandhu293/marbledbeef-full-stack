@@ -29,7 +29,7 @@ const SideDrawer: React.FC<SideDrawerProps> = ({
 
   return (
     <Drawer
-      className="!bg-black md:!w-[408px] m-3 !max-h-[94dvh] overflow-y-auto rounded-md p-3 z-50 transition-transform duration-300 ease-in-out"
+      className="!bg-black md:!w-[408px] m-3 !max-h-[94dvh] overflow-y-auto rounded-md p-3 z-50 transition-transform duration-300 ease-in-out font-urbanist"
       direction={direction}
       open={isOpen}
       onClose={onClose}
