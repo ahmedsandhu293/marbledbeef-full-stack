@@ -8,15 +8,15 @@ import CardComponent from "../components/common/cards/CardComponent";
 
 const page = () => {
   return (
-    <div>
-      <div className="w-full h-[50dvh] flex justify-center items-center flex-col font-urbanist text-white bg-[#1A1A1A] space-y-2 border-b border-gold">
-        <p className="text-4xl font-bold bg-transparent">
+    <div className="mt-44 md:mt-12 lg:mt-0 bg-black">
+      <div className="w-full md:h-[50dvh] px-4 flex justify-center items-center flex-col font-urbanist text-white bg-[#1A1A1A] space-y-2 border-b border-gold">
+        <p className="text-xl md:text-4xl text-center md:text-left font-bold bg-transparent">
           Black Friday: <span className="text-gold">-30 %</span>{" "}
         </p>
-        <p className="text-4xl font-semibold bg-transparent">
+        <p className="text-xl md:text-4xl text-center md:text-left font-semibold bg-transparent">
           Jusqu’au 2 décembre, profitez de -30 % dès 129 € d’achat.
         </p>
-        <p className="text-2xl font-normal bg-transparent">
+        <p className="text-lg md:text-2xl text-center md:text-left font-normal bg-transparent">
           Composez votre Box : 3, 5 ou 10 pièces et régalez-vous avec nos
           viandes d'excellence. Réduction appliquée en caisse 
         </p>
@@ -44,8 +44,8 @@ const page = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 py-10 w-full flex bg-black flex-col-reverse md:flex-row">
-        <div className="w-[60%] grid grid-cols-4">
+      <div className="container mx-auto px-6 py-10 w-full flex bg-black flex-col-reverse lg:flex-row">
+        <div className="w-full lg:w-[60%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
           {dummyData.map((item, index) => (
             <div key={index} style={{ padding: "10px", textAlign: "center" }}>
               <CardComponent
@@ -57,19 +57,19 @@ const page = () => {
             </div>
           ))}
         </div>
-        <div className="w-[40%]">
+        <div className="w-full lg:w-[40%]">
           <div className="max-w-md mx-auto bg-black text-white border border-gold rounded-lg ">
             <h2 className="text-lg font-bold text-center mb-4 border-b border-gold bg-[#131415] py-6">
               <span className="p-6">Contenu de la box</span>
             </h2>
             <div className="flex justify-between items-center gap-3 mb-4 p-6">
-              <div className="w-36 h-32 bg-gray-800 border border-dashed border-gold rounded-md flex items-center justify-center">
+              <div className="w-36 h-32 bg-background-light-gold border border-dashed border-gold rounded-md flex items-center justify-center">
                 Article 1
               </div>
-              <div className="w-36 h-32 bg-gray-800 border border-dashed border-gold rounded-md flex items-center justify-center">
+              <div className="w-36 h-32 bg-background-light-gold border border-dashed border-gold rounded-md flex items-center justify-center">
                 Article 2
               </div>
-              <div className="w-36 h-32 bg-gray-800 border border-dashed border-gold rounded-md flex items-center justify-center">
+              <div className="w-36 h-32 bg-background-light-gold border border-dashed border-gold rounded-md flex items-center justify-center">
                 Article 3
               </div>
             </div>
