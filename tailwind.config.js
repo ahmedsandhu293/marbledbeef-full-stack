@@ -19,6 +19,7 @@ module.exports = {
         // theme colors
         'background-primary': 'var(--background-primary)',
         'background-secondary': 'var(--background-secondary)',
+        'background-light-gold': 'rgba(233, 210, 141, 0.38)',
 
         'border-primary': 'var(--border-primary)',
 
@@ -38,7 +39,8 @@ module.exports = {
       },
       backgroundImage: {
         'gradient-primary': 'linear-gradient(90deg, rgba(150,119,49,1) 0%, rgba(191,164,59,1) 100%)',
-        'gradient-secondary': 'linear-gradient(90deg,  rgba(19, 20, 21, 1) 0%, rgba(5, 5, 5, 1) 100%)'
+        'gradient-secondary': 'linear-gradient(90deg,  rgba(19, 20, 21, 1) 0%, rgba(5, 5, 5, 1) 100%)',
+
       },
 
     },

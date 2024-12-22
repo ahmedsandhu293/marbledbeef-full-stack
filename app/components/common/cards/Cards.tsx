@@ -7,7 +7,7 @@ import ComponentButton from "../buttons/ButtonComponent";
 
 import { CardsProps } from "@/types/products";
 
-const Cardsompoent: React.FC<CardsProps> = ({
+const CardsComponent: React.FC<CardsProps> = ({
   data,
   onAddToCart,
   onAddToFavorite,
@@ -62,4 +62,4 @@ const Cardsompoent: React.FC<CardsProps> = ({
   );
 };
 
-export default Cardsompoent;
+export default CardsComponent;
