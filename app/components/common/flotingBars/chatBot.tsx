@@ -141,8 +141,8 @@ const Chatbot: React.FC = () => {
                     {prebuiltQuestions.map((question, index) => (
                       <button
                         key={index}
-                        onClick={() => handleSendMessage(question)}
                         className="bg-zinc-200 text-black  p-2 w-full rounded-tl-none rounded-tr-md rounded-br-md rounded-bl-md text-sm self-end mb-1"
+                        onClick={() => handleSendMessage(question)}
                       >
                         {question}
                       </button>
