@@ -37,7 +37,7 @@ const PromoNotification: React.FC = () => {
   return (
     <div>
       {!isExpanded ? (
-        <div className="fixed right-32 bottom-0 pb-2 sm:pb-5 z-10">
+        <div className="fixed right-32 bottom-0 pb-2 sm:pb-5 z-50">
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="w-full flex justify-end">
               <button
