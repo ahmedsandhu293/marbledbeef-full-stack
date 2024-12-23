@@ -1,11 +1,12 @@
-import { getProducts } from "./utils/products.helper";
+import { fetchGraphQLData } from "./utils/products.helper";
 import Products from "./components/landingPage/products";
 import Hero from "./components/landingPage/hero";
 import CategoryCrads from "./components/landingPage/CategoryCrads";
 import Reviews from "./components/landingPage/review";
+import { getAllProductsQuery } from "./utils/queries";
 
 export default async function Home() {
-  const json = await getProducts();
+  const json = await fetchGraphQLData(getAllProductsQuery);
   const { data } = json;
   const { products } = data;
   const { nodes: productsData } = products;

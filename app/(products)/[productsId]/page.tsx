@@ -2,12 +2,21 @@ import React from "react";
 
 import ProductHero from "@/app/components/productDetails/hero";
 import Products from "@/app/components/productDetails/products";
+import { fetchGraphQLData } from "@/app/utils/products.helper";
+import { getAllProductsByHandle } from "@/app/utils/queries";
 
-const page = () => {
+const page = async () => {
+  const handle = "faux-filet-wagyu-a5-kagoshima";
+  const variables = { handle };
+
+  const json = await fetchGraphQLData(getAllProductsByHandle, variables);
+  const { data } = json;
+  const { productByHandle: product } = data;
+
   return (
     <div className="bg-background-primary ">
       <div className="container mx-auto px-6">
-        <ProductHero />
+        <ProductHero product={product} />
         <Products />
         <div className="border-t border-gold py-10 flex items-center justify-center">
           <div className="p-8 lg:p-16 border border-border-primary  text-white  rounded-3xl w-full lg:w-[720px]  flex flex-col justify-center items-start">
