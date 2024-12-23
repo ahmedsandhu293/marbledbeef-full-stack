@@ -3,7 +3,6 @@ import { ChatSystemPrompts, RecipeSystemPrompts } from "./SystemPrompts";
 const API_KEY =
   process.env.OPENAI_API_KEY ||
   "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";
-console.log("🚀 ~ API_KEY:", API_KEY);
 
 if (!API_KEY) {
   throw new Error("API key is missing. Please set OPENAI_API_KEY.");

@@ -43,7 +43,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
 
   return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 m-4"
+      className="fixed inset-0 h-screen z-50 flex items-center justify-center bg-black bg-opacity-50 m-4"
       role="dialog"
       aria-modal="true"
       onClick={onClose}

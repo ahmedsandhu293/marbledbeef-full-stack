@@ -1,78 +1,32 @@
-import { gql } from "./gql";
+// fetchGraphQLData.ts
 
 import { GraphQLResponse } from "@/types";
 
-export const getProducts = async (): Promise<GraphQLResponse> => {
-  const res = await fetch(process.env.GRAPHQL_API_URL!, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Shopify-Access-Token": process.env.SHOPIFY_ADMIN_API_ACCESS_TOKEN!,
-    },
-    body: JSON.stringify({
-      query: gql`
-        query ProductsQuery {
-          products(first: 250) {
-            nodes {
-              id
-              tags
-              title
-              description
-              handle
-              priceRangeV2 {
-                minVariantPrice {
-                  amount
-                  currencyCode
-                }
-              }
-              variants(first: 250) {
-                edges {
-                  node {
-                    id
-                    title
-                    price
-                    compareAtPrice
-                    barcode
-                    sku
-                  }
-                }
-              }
-              category {
-                id
-                name
-              }
-              collections(first: 250) {
-                edges {
-                  node {
-                    id
-                    title
-                  }
-                }
-              }
-              images(first: 250) {
-                edges {
-                  node {
-                    id
-                    originalSrc
-                  }
-                }
-              }
-            }
-          }
-        }
-      `,
-    }),
-  });
+export const fetchGraphQLData = async (
+  query: string, // Define the type for query as string
+  variables?: Record<string, any> // Use Record<string, any> for better type safety
+): Promise<GraphQLResponse> => {
+  try {
+    const res = await fetch(process.env.GRAPHQL_API_URL!, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Shopify-Access-Token": process.env.SHOPIFY_ADMIN_API_ACCESS_TOKEN!,
+      },
+      body: JSON.stringify({ query, variables }),
+    });
 
-  if (!res.ok) {
-    const text = await res.text();
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(
+        `Failed to fetch data\nStatus: ${res.status}\nResponse: ${text}`
+      );
+    }
 
-    throw new Error(`
-        Failed to fetch data
-        Status: ${res.status}
-        Response: ${text}
-      `);
+    return res.json();
+  } catch (error) {
+    throw new Error(
+      `Error fetching data: ${error instanceof Error ? error.message : "Unknown error"}`
+    );
   }
-
-  return res.json();
 };

@@ -7,87 +7,74 @@ import SeeMore from "../common/seeMore";
 import ModalWrapper from "../common/modal/ModalWapper";
 
 import RecipeGenerator from "./RecipeGenerator";
-const ProductHero = () => {
-  const longText = `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat, nostrum repudiandae quisquam accusantium, aliquid harum laudantium, omnis reiciendis tenetur placeat saepe quo temporibus eligendi explicabo et facilis debitis odio assumenda?`;
+const ProductHero = ({ product }: any) => {
+  const [image, setImage] = useState(
+    product?.images.edges[0]?.node?.originalSrc
+  );
+  const [images, setImages] = useState(product?.images.edges);
+
   const [isExpanded, setIsExpanded] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const handleExpand = () => {
     setIsExpanded((prev) => !prev);
   };
 
+  const handleThumbnailClick = (src: any) => {
+    setImages(
+      product?.images.edges.filter(
+        (image: any) => image.node.id !== src.node.id
+      )
+    );
+
+    setImage(src.node.originalSrc);
+  };
+
   return (
     <div className="grid grid-cols-12 gap-4 py-10">
       <div className="col-span-12">
         <h1 className="text-xl font-bold text-white py-4">
-          Welcome / Shabu-Shabu Wagyu Ribeye A5
+          Welcome / {product?.handle}
         </h1>
       </div>
-
       <div className="col-span-1 md:flex flex-col gap-4 hidden ">
-        <img
-          alt="pic 2"
-          className="w-full rounded-lg border border-gold"
-          src="https://via.placeholder.com/200"
-        />
-        <img
-          alt="pic 3"
-          className="w-full rounded-lg border border-gold"
-          src="https://via.placeholder.com/200"
-        />
-        <img
-          alt="pic 3"
-          className="w-full rounded-lg border border-gold"
-          src="https://via.placeholder.com/200"
-        />
+        {images?.map((image: any, index: number) => (
+          <img
+            alt={image?.node?.id}
+            key={index}
+            onClick={() => handleThumbnailClick(image)}
+            className="w-full rounded-lg border border-gold"
+            src={image?.node?.originalSrc}
+          />
+        ))}
       </div>
-
       {/* Main image column */}
       <div className="md:col-span-5 col-span-12 rounded-lg border border-gold">
         <img
           alt="pic 4"
-          className="w-full rounded-lg"
-          src="https://via.placeholder.com/800x600"
+          className="w-full rounded-lg object-contain h-80"
+          src={image}
         />
       </div>
-
       <div className="col-span-1 flex  gap-4 md:hidden ">
-        <img
-          alt="pic 5"
-          className="w-full rounded-lg border border-gold"
-          src="https://via.placeholder.com/200"
-        />
-        <img
-          alt="pic 6"
-          className="w-full rounded-lg border border-gold"
-          src="https://via.placeholder.com/200"
-        />
-        <img
-          alt="pic 7"
-          className="w-full rounded-lg border border-gold"
-          src="https://via.placeholder.com/200"
-        />
+        {images?.map((image: any, index: number) => (
+          <img
+            key={index}
+            alt={image?.node?.id}
+            onClick={() => handleThumbnailClick(image)}
+            className="w-full rounded-lg border border-gold"
+            src={image?.node?.originalSrc}
+          />
+        ))}
       </div>
-
+      ;
       <div className="col-span-12 md:col-span-6 text-white">
         <div className="flex flex-col justify-between items-center w-full h-full">
           <div>
-            <h2 className="text-4xl font-semibold">
-              Shabu-Shabu Wagyu Ribeye A5
-            </h2>
-            <p className="mt-4 text-lg font-medium">
-              Origine : Wagyu - Grade A5 - Japon{"'"}Mode de cuisson : Plongez
-              les tranches dans un bouillon dashi ou un bouillon de légumes
-              frémissant. Accompagnez-les de chou chinois, de carottes et de
-              champignons shiitake pour une dégustation raffinée. Mode de
-              cuisson : Plongez les tranches dans un bouillon dashi ou un
-              bouillon de légumes frém. Plongez les tranches dans un bouillon
-              dashi ou un bouillon de légumes frémi.
-            </p>
-
+            <h2 className="text-4xl font-semibold">{product?.title}</h2>
             <SeeMore
-              contentWordsCount={20}
+              contentWordsCount={30}
               isExpanded={isExpanded}
-              text={longText}
+              text={product?.description}
             />
 
             <div className="py-2 flex justify-start items-center gap-4">
@@ -149,14 +136,13 @@ const ProductHero = () => {
           </div>
         </div>
       </div>
-
       <ModalWrapper
         className="bg-black border border-gold rounded-3xl p-6"
         isClose={false}
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
       >
-        <RecipeGenerator />
+        <RecipeGenerator productDescription={product?.description} />
       </ModalWrapper>
     </div>
   );
