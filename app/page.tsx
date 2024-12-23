@@ -11,7 +11,7 @@ export default async function Home() {
   const { nodes: productsData } = products;
 
   /* eslint-disable no-console */
-  console.log("🚀 ~ Home ~ json:", productsData);
+  // console.log("🚀 ~ Home ~ json:", productsData);
 
   return (
     <div className="bg-background-primary">
