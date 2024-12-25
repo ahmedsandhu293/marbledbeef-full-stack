@@ -3,8 +3,8 @@
 import { GraphQLResponse } from "@/types";
 
 export const fetchGraphQLData = async (
-  query: string, // Define the type for query as string
-  variables?: Record<string, any> // Use Record<string, any> for better type safety
+  query: string,
+  variables?: Record<string, any>
 ): Promise<GraphQLResponse> => {
   try {
     const res = await fetch(process.env.GRAPHQL_API_URL!, {

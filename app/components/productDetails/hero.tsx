@@ -7,26 +7,38 @@ import SeeMore from "../common/seeMore";
 import ModalWrapper from "../common/modal/ModalWapper";
 
 import RecipeGenerator from "./RecipeGenerator";
+import QuantitySelector from "../common/quantitySelector";
 const ProductHero = ({ product }: any) => {
-  const [image, setImage] = useState(
-    product?.images.edges[0]?.node?.originalSrc
-  );
-  const [images, setImages] = useState(product?.images.edges);
+  const initialVariant = product?.variants.edges[0]?.node;
+  const initialImage = product?.images.edges[0]?.node?.originalSrc;
+  const allImages = product?.images.edges;
 
+  const [variant, setVariant] = useState(initialVariant);
+  const [image, setImage] = useState(initialImage);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedVariant, setSelectedVariant] = useState(initialVariant?.id);
+  const [quantity, setQuantity] = useState(1);
+
+  const handleVariantChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedVariantId = e.target.value;
+    const selectedVariant = product?.variants.edges.find(
+      (v: any) => v.node.id === selectedVariantId
+    );
+    setVariant(selectedVariant?.node);
+    setSelectedVariant(selectedVariantId);
+  };
+
   const handleExpand = () => {
     setIsExpanded((prev) => !prev);
   };
 
   const handleThumbnailClick = (src: any) => {
-    setImages(
-      product?.images.edges.filter(
-        (image: any) => image.node.id !== src.node.id
-      )
-    );
-
     setImage(src.node.originalSrc);
+  };
+
+  const handleCounterChange = (newValue: number) => {
+    setQuantity(newValue);
   };
 
   return (
@@ -37,7 +49,7 @@ const ProductHero = ({ product }: any) => {
         </h1>
       </div>
       <div className="col-span-1 md:flex flex-col gap-4 hidden ">
-        {images?.map((image: any, index: number) => (
+        {allImages?.map((image: any, index: number) => (
           <img
             alt={image?.node?.id}
             key={index}
@@ -56,7 +68,7 @@ const ProductHero = ({ product }: any) => {
         />
       </div>
       <div className="col-span-1 flex  gap-4 md:hidden ">
-        {images?.map((image: any, index: number) => (
+        {allImages?.map((image: any, index: number) => (
           <img
             key={index}
             alt={image?.node?.id}
@@ -66,7 +78,7 @@ const ProductHero = ({ product }: any) => {
           />
         ))}
       </div>
-      ;
+
       <div className="col-span-12 md:col-span-6 text-white">
         <div className="flex flex-col justify-between items-center w-full h-full">
           <div>
@@ -93,9 +105,9 @@ const ProductHero = ({ product }: any) => {
               <div className="col-span-3">
                 <div className="flex justify-start items-start gap-2 ">
                   <p className="text-sm ">
-                    <span className="font-bold">€49.89</span>{" "}
+                    <span className="font-bold">{variant?.price}</span>{" "}
                     <span className="line-through text-red-primary">
-                      €52.99
+                      {variant?.compareAtPrice}
                     </span>
                   </p>
                 </div>
@@ -108,21 +120,29 @@ const ProductHero = ({ product }: any) => {
               <div className="col-span-6">
                 <select
                   className="border border-gold text-white text-sm px-2 py-1 rounded-lg w-full bg-transparent"
-                  defaultValue="100g"
+                  value={selectedVariant}
+                  onChange={handleVariantChange}
                 >
-                  <option value="100g">100 g</option>
-                  <option value="200g">200 g</option>
-                  <option value="500g">500 g</option>
+                  {product?.variants.edges.map(
+                    (variant: any, index: number) => (
+                      <option
+                        key={variant.node.id}
+                        value={variant.node.id}
+                        className="bg-black"
+                      >
+                        {variant?.node?.title}
+                      </option>
+                    )
+                  )}
                 </select>
               </div>
             </div>
             <div className="grid grid-cols-12 gap-4 w-full">
               <div className="col-span-3">
-                <div className="flex justify-center items-center gap-4 border border-gold rounded-lg py-0.5 px-5 w-auto">
-                  <span>-</span>
-                  <span>3</span>
-                  <span>+</span>
-                </div>
+                <QuantitySelector
+                  initialValue={quantity}
+                  onChange={handleCounterChange}
+                />
               </div>
 
               <div className="col-span-9">

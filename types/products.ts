@@ -1,3 +1,4 @@
+import { Product } from "./index";
 export interface ProductsType {
   title: string;
   price: string | number;
@@ -12,8 +13,9 @@ export interface CardsProps {
 }
 
 export interface CardProps {
-  data: ProductsType;
-  onAddToCart: (item: ProductsType) => void;
-  onAddToFavorite: (item: ProductsType) => void;
-  onClick: (item: ProductsType) => void;
+  data: Product;
+  buttonLabel: string;
+  onAddToCart: (item: Product) => void;
+  onAddToFavorite: (item: Product) => void;
+  onClick: (item: Product) => void;
 }
