@@ -31,7 +31,7 @@ const CardComponent: React.FC<CardProps> = ({
             radius="lg"
             shadow="sm"
             src={
-              data.images.edges[0] ? data.images.edges[0].node.originalSrc : ""
+              data?.images?.edges[0] ? data?.images.edges[0].node.originalSrc : data.img
             }
             width="100%"
           />

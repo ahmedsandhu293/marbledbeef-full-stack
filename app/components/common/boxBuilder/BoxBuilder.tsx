@@ -44,11 +44,6 @@ const BoxBuilder = ({ data }: { data?: Product[] }) => {
         </p>
         <div className="py-8 flex justify-center items-center gap-4 flex-col md:flex-row">
           <ComponentButton
-            label="Ajouter"
-            className="!bg-gradient-primary font-bold px-8"
-            onClick={() => handleGiftCountChange(3)}
-          />
-          <ComponentButton
             label="3 piéces"
             className="!bg-gradient-primary"
             offPerc="30% Off"
