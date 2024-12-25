@@ -12,6 +12,7 @@ const CardComponent: React.FC<CardProps> = ({
   onAddToCart,
   onAddToFavorite,
   onClick,
+  buttonLabel,
 }) => {
   return (
     <>
@@ -29,7 +30,9 @@ const CardComponent: React.FC<CardProps> = ({
             className="w-full object-cover h-[200px] border-2 border-gold"
             radius="lg"
             shadow="sm"
-            src={data.img}
+            src={
+              data.images.edges[0] ? data.images.edges[0].node.originalSrc : ""
+            }
             width="100%"
           />
         </CardBody>
@@ -39,27 +42,26 @@ const CardComponent: React.FC<CardProps> = ({
               {data.title}
             </b>
             <p className="text-default-500 text-text-gold font-urbanist">
-              {data.price}
+              {data.variants?.edges[0].node.price}
             </p>
-          </div>
-
-          <div className="flex justify-between items-center w-full gap-4">
-            <ComponentButton
-              className="!w-full  !bg-gradient-primary"
-              label="Add to cart"
-              onClick={() => onAddToCart(data)}
-            />
-            <FiHeart
-              className="text-text-gold cursor-pointer"
-              size={28}
-              onClick={(e) => {
-                e.stopPropagation();
-                onAddToFavorite(data);
-              }}
-            />
           </div>
         </CardFooter>
       </Card>
+      <div className="flex justify-between items-center w-full gap-4">
+        <ComponentButton
+          className="!w-full  !bg-gradient-primary"
+          label={buttonLabel ? buttonLabel : "Add to cart"}
+          onClick={() => onAddToCart(data)}
+        />
+        <FiHeart
+          className="text-text-gold cursor-pointer"
+          size={28}
+          onClick={(e) => {
+            e.stopPropagation();
+            onAddToFavorite(data);
+          }}
+        />
+      </div>
     </>
   );
 };

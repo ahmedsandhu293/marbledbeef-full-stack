@@ -16,32 +16,57 @@ export type ShopifyExtension = {
   };
 };
 
-export type ShopifyProduct = {
-  description: string;
-  featuredImage: {
-    altText: string;
-    height: number;
-    id: string;
-    url: string;
-    width: number;
+export type GraphQLResponse = {
+  data: {
+    products: {
+      nodes: Product[];
+    };
   };
-  handle: string;
+  extensions: ShopifyExtension;
+};
+
+export interface ProductImage {
+  node: {
+    id: string;
+    altText: string | null;
+    originalSrc: string;
+  };
+}
+
+export interface Variant {
+  node: {
+    id: string;
+    title: string;
+    price: string;
+    sku: string;
+  };
+}
+
+export interface Product {
   id: string;
+  tags: string[];
+  title: string;
+  description: string;
+  handle: string;
   priceRangeV2: {
     minVariantPrice: {
       amount: string;
       currencyCode: string;
     };
   };
-  tags: string[];
-  title: string;
-};
-
-export type GraphQLResponse = {
-  data: {
-    products: {
-      nodes: ShopifyProduct[];
-    };
+  variants: {
+    edges: Variant[];
   };
-  extensions: ShopifyExtension;
-};
+  category: string | null;
+  collections: {
+    edges: {
+      node: {
+        id: string;
+        title: string;
+      };
+    }[];
+  };
+  images: {
+    edges: ProductImage[];
+  };
+}
