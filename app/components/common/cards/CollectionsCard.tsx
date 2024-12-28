@@ -4,15 +4,21 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { FiHeart } from "react-icons/fi";
 
 import ComponentButton from "../buttons/ButtonComponent";
+import { Product } from "@/types";
+import { CollectionProduct } from "@/types/collection";
 
-import { CardProps } from "@/types/products";
-
-const CardComponent: React.FC<CardProps> = ({
+const CollectionCard = ({
   data,
   onAddToCart,
   onAddToFavorite,
   onClick,
   buttonLabel,
+}: {
+  data: CollectionProduct;
+  buttonLabel?: string;
+  onAddToCart: (item: CollectionProduct) => void;
+  onAddToFavorite: (item: CollectionProduct) => void;
+  onClick: (item: CollectionProduct) => void;
 }) => {
   return (
     <>
@@ -26,13 +32,13 @@ const CardComponent: React.FC<CardProps> = ({
       >
         <CardBody className="overflow-visible p-0 ">
           <Image
-            alt={data.title}
+            alt={data.node.title}
             className="w-full object-cover h-[200px] border-2 border-gold"
             radius="lg"
             shadow="sm"
             src={
-              data?.images?.edges[0]
-                ? data?.images.edges[0].node.originalSrc
+              data?.node?.images?.edges[0]
+                ? data?.node?.images.edges[0].node.originalSrc
                 : ""
             }
             width="100%"
@@ -41,10 +47,10 @@ const CardComponent: React.FC<CardProps> = ({
         <CardFooter className="flex flex-col gap-2">
           <div className="flex justify-between w-full">
             <b className="truncate text-text-gold font-urbanist">
-              {data.title}
+              {data?.node.title}
             </b>
             <p className="text-default-500 text-text-gold font-urbanist">
-              {data.variants?.edges[0].node.price}
+              {data?.node.variants?.edges[0].node.price}
             </p>
           </div>
         </CardFooter>
@@ -68,4 +74,4 @@ const CardComponent: React.FC<CardProps> = ({
   );
 };
 
-export default CardComponent;
+export default CollectionCard;

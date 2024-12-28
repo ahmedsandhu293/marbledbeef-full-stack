@@ -5,11 +5,10 @@ import dynamic from "next/dynamic";
 import { Urbanist } from "next/font/google";
 
 const urbanist = Urbanist({
-  subsets: ["latin"], // Specify subsets
-  variable: "--font-urbanist", // Optional: Define a CSS variable
+  subsets: ["latin"],
+  variable: "--font-urbanist",
 });
 
-// Dynamically import PromoNotification with SSR disabled
 const PromoNotification = dynamic(
   () => import("./components/common/flotingBars/promoNotification"),
   {
@@ -28,6 +27,7 @@ import Footer from "./components/nav/footer";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
+import { GlobalContextProvider } from "./context/store";
 
 export const metadata: Metadata = {
   title: {
@@ -61,12 +61,14 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <Navbar />
-        <main className=" pt-60  flex-grow">{children}</main>
-        <Footer />
+        <GlobalContextProvider>
+          <Navbar />
+          <main className=" pt-60  flex-grow">{children}</main>
+          <Footer />
 
-        <Chatbot />
-        <PromoNotification />
+          <Chatbot />
+          <PromoNotification />
+        </GlobalContextProvider>
       </body>
     </html>
   );

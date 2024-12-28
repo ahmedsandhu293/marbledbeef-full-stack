@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { LuTimerReset } from "react-icons/lu";
 import { FiShoppingBag } from "react-icons/fi";
 import { RxCross2 } from "react-icons/rx";
 
 import ComponentButton from "../common/buttons/ButtonComponent";
+import { useGlobalContext } from "@/app/context/store";
 interface CartProps {
   onClose: () => void;
 }

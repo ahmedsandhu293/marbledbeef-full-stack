@@ -43,7 +43,6 @@ const Chatbot: React.FC = () => {
 
   /* eslint-disable no-console */
 
-  console.log(showPrebuiltQuestions);
   const chatEndRef = useRef<HTMLDivElement | null>(null);
 
   const toggleChatbot = () => setIsOpen((prev) => !prev);

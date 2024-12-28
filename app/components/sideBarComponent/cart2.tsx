@@ -1,15 +1,51 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
-import { MdDeleteOutline } from "react-icons/md";
 
 import ProgressBar from "../common/progressBar";
+import { useGlobalContext } from "@/app/context/store";
+import CartProduct from "./cartProduct";
 
 interface CartProps {
   onClose: () => void;
 }
 
 const Cart2: React.FC<CartProps> = ({ onClose }) => {
+  const { cartItem, setCartItem } = useGlobalContext();
+  const [products, setProducts] = useState(cartItem);
+
+  const handleRemoveFromCart = (productId: string) => {
+    const updatedCart = cartItem.filter(
+      (cartProduct) => cartProduct.node.id !== productId
+    );
+    setCartItem(updatedCart);
+    localStorage.setItem("cartItem", JSON.stringify(cartItem));
+  };
+
+  const calculateTotalPrice = () => {
+    const totalPrice = cartItem.reduce((accumulator, cartProduct) => {
+      const selectedVariantId = cartProduct.selectedVariant;
+
+      const selectedVariant = cartProduct.node.variants.edges.find(
+        (variant: any) => variant.node.id === selectedVariantId
+      )?.node;
+
+      const variantPrice = selectedVariant
+        ? parseFloat(selectedVariant.price)
+        : 0;
+
+      return accumulator + variantPrice;
+    }, 0);
+    return totalPrice.toFixed(2);
+  };
+
+  const total = calculateTotalPrice();
+
+  useEffect(() => {
+    setProducts(cartItem);
+  }, [cartItem]);
+
   return (
     <div
       className={`bg-black text-white shadow-lg w-full max-w-full md:w-[400px] z-50 flex flex-col overflow-hidden font-urbanist`}
@@ -47,43 +83,13 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
 
       <div className="border-gold border rounded-2xl p-3">
         <div className="overflow-y-auto max-h-[240px]  overflow-x-hidden">
-          {Array(10) // Change this to dynamic data when available
-            .fill(0)
-            .map((_, index) => (
-              <div
-                key={index}
-                className="flex items-start p-3 rounded-md gap-3 md:flex-row flex-col "
-              >
-                <div className="w-20 h-20 bg-cover bg-center rounded-md overflow-hidden border border-gold">
-                  <img
-                    alt="Boeuf de Kobe"
-                    className="w-full h-full"
-                    src="https://via.placeholder.com/200"
-                  />
-                </div>
-                <div className="flex flex-col gap-1">
-                  <div className="flex justify-between items-start gap-6">
-                    <h4 className="text-sm underline">
-                      Boeuf de Kobe Yakiniku
-                    </h4>
-                    <MdDeleteOutline size={24} />
-                  </div>
-                  <div className="flex justify-start items-start gap-2 ">
-                    <p className="text-sm ">
-                      <span className="font-bold">+100gm</span>{" "}
-                    </p>
-                  </div>
-                  <div className="flex justify-start items-start gap-4 border border-gold rounded-lg py-1 px-5 w-28">
-                    <span>-</span>
-                    <span>3</span>
-                    <span>+</span>
-                  </div>
-                  <div className="flex justify-end text-sm text-gold">
-                    <span>€52.99</span>
-                  </div>
-                </div>
-              </div>
-            ))}
+          {products?.map((product, index) => (
+            <CartProduct
+              key={index}
+              data={product}
+              onDelete={handleRemoveFromCart}
+            />
+          ))}
         </div>
 
         {/* Continue Button */}
@@ -91,8 +97,8 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
           <div className="flex justify-center items-center py-2 gap-2 ">
             <p className="text-sm ">
               <span className="font-bold">Total partiel:  </span>{" "}
-              <span className="line-through text-gold">€52.99</span>{" "}
-              <span className="font-bold text-red-primary">€49.89</span>{" "}
+              {/* <span className="line-through text-gold">€52.99</span>{" "} */}
+              <span className="font-bold text-red-primary">€{total}</span>{" "}
             </p>
           </div>
           <button className="!bg-gradient-primary text-black text-sm md:text-lg font-bold w-full py-3 rounded-2xl">

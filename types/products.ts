@@ -13,7 +13,7 @@ export interface CardsProps {
 }
 
 export interface CardProps {
-  data: Product & ProductsType;
+  data: Product;
   buttonLabel: string;
   onAddToCart: (item: Product) => void;
   onAddToFavorite: (item: Product) => void;

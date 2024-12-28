@@ -17,12 +17,14 @@ import { routes } from "@/app/utils/routes";
 import DeliveryTruck from "@/public/assets/svg/deliveryTruck";
 import Food from "@/public/assets/svg/food";
 import Lock from "@/public/assets/svg/lock";
+import { useGlobalContext } from "@/app/context/store";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
   const [isCart2DrawerOpen, setIsCart2DrawerOpen] = useState(false);
   const [isFavoritesDrawerOpen, setIsFavoritesDrawerOpen] = useState(false);
+  const { cartItem, favorites } = useGlobalContext();
 
   return (
     <header
@@ -91,13 +93,27 @@ const Navbar: React.FC = () => {
 
           <div className="hidden lg:flex items-center space-x-4">
             <button onClick={() => setIsFavoritesDrawerOpen(true)}>
-              <FiHeart size={26} />
+              <span className="relative">
+                <FiHeart size={26} />
+                {favorites.length > 0 && (
+                  <span className="absolute top-0 right-0 w-4 h-4 text-xs transform translate-x-1/2 -translate-y-1/2 bg-red-500 rounded-full">
+                    {favorites.length}
+                  </span>
+                )}
+              </span>
             </button>
-            <button onClick={() => setIsCartDrawerOpen(true)}>
+            {/* <button onClick={() => setIsCartDrawerOpen(true)}>
               <BsHandbag size={26} />
-            </button>
+            </button> */}
             <button onClick={() => setIsCart2DrawerOpen(true)}>
-              <BsHandbag size={26} />
+              <span className="relative">
+                <BsHandbag size={26} />
+                {cartItem.length > 0 && (
+                  <span className="absolute top-0 right-0 w-4 h-4 text-xs transform translate-x-1/2 -translate-y-1/2 bg-red-500 rounded-full">
+                    {cartItem.length}
+                  </span>
+                )}
+              </span>
             </button>
 
             <ComponentButton
