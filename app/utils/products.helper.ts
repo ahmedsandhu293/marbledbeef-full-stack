@@ -1,11 +1,12 @@
 // fetchGraphQLData.ts
 
 import { GraphQLResponse } from "@/types";
+import { CollectionsResponse } from "@/types/collection";
 
-export const fetchGraphQLData = async (
+export const fetchGraphQLData = async <T>(
   query: string,
   variables?: Record<string, any>
-): Promise<GraphQLResponse> => {
+): Promise<T> => {
   try {
     const res = await fetch(process.env.GRAPHQL_API_URL!, {
       method: "POST",

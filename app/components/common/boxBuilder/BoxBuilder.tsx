@@ -11,7 +11,6 @@ const BoxBuilder = ({ data }: { data?: Product[] }) => {
   const [boxItems, setBoxItems] = useState<(Product | null)[]>(
     Array(giftCount).fill(null)
   );
-  console.log("🚀 ~ BoxBuilder ~ boxItems:", boxItems);
 
   const handleAdd = (item: Product) => {
     const emptyIndex = boxItems.findIndex((box) => box === null);

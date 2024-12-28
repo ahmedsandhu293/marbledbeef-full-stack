@@ -4,12 +4,16 @@ import ProductHero from "@/app/components/productDetails/hero";
 import Products from "@/app/components/productDetails/products";
 import { fetchGraphQLData } from "@/app/utils/products.helper";
 import { getAllProductsByHandle } from "@/app/utils/queries";
+import { GraphQLResponse } from "@/types";
 
-const page = async () => {
-  const handle = "faux-filet-wagyu-a5-kagoshima";
+const page = async ({ params }: { params: { productsId: string } }) => {
+  const handle = params?.productsId;
   const variables = { handle };
 
-  const json = await fetchGraphQLData(getAllProductsByHandle, variables);
+  const json = await fetchGraphQLData<GraphQLResponse>(
+    getAllProductsByHandle,
+    variables
+  );
   const { data } = json;
   const { productByHandle: product } = data;
 

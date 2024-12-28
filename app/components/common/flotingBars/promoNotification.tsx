@@ -50,7 +50,7 @@ const PromoNotification: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="fixed inset-x-0 right-14 bottom-0 pb-2 sm:pb-5 z-10">
+        <div className="fixed inset-x-0 md:right-14 bottom-0 pb-2 sm:pb-5 z-50">
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div
               className={`rounded-lg p-2 sm:p-3 shadow-lg bg-zinc-50 dark:bg-gray-primary border border-gray-300 dark:border-gray-700 z-40 transition-all duration-500 ease-in-out ${
@@ -73,7 +73,7 @@ const PromoNotification: React.FC = () => {
                       {promoMessages.map((message, index) => (
                         <div
                           key={index}
-                          className={`transition-all duration-500 ease-in-out text-black ${
+                          className={`transition-all duration-500 ease-in-out text-xs md:text-base text-black ${
                             currentIndex === index ? "visible" : "hidden"
                           }`}
                           style={{ height: "1.8rem" }}
@@ -86,9 +86,15 @@ const PromoNotification: React.FC = () => {
                 </div>
 
                 <div className="order-3 mt-2 w-full flex-shrink-0 sm:order-2 sm:mt-0 sm:w-auto flex justify-center items-center gap-2">
-                  <ComponentButton label="Explorer Nos Produits" />
+                  <ComponentButton
+                    label="Explorer Nos Produits"
+                    className="!text-xs !md:text-sm"
+                  />
 
-                  <ComponentButton label="Box Grillande" />
+                  <ComponentButton
+                    label="Box Grillande"
+                    className="!text-xs !md:text-sm"
+                  />
                 </div>
 
                 <div className="order-2 flex-shrink-0 sm:order-3 sm:ml-2">

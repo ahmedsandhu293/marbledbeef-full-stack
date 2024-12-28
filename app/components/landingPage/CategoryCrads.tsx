@@ -4,22 +4,14 @@ import React from "react";
 
 import CategoryCard from "../common/cards/CategoryCrad";
 import CategoriesHeading from "../common/headings/categoriesHeading";
+import { CollectionsResponse } from "@/types/collection";
 
-const CategoryCrads = () => {
-  const categories = [
-    {
-      title: "Kobe Beef",
-      image: "https://via.placeholder.com/600",
-    },
-    {
-      title: "Wagyu Beef",
-      image: "https://via.placeholder.com/600",
-    },
-    {
-      title: "Wagyu Beef Fillet",
-      image: "https://via.placeholder.com/600",
-    },
-  ];
+const CategoryCards = ({
+  collections,
+}: {
+  collections: CollectionsResponse;
+}) => {
+  const data = collections.data.collections.edges;
 
   const handleCardClick = (title: string) => {
     /* eslint-disable no-console */
@@ -30,12 +22,12 @@ const CategoryCrads = () => {
     <div className="flex items-start flex-col gap-4">
       <CategoriesHeading title="Categories" onClick={() => {}} />
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
-        {categories.map((category, index) => (
+        {data?.map((category: any, index: number) => (
           <CategoryCard
             key={index}
-            image={category.image}
-            title={category.title}
-            onClick={() => handleCardClick(category.title)}
+            image={category.node.image?.originalSrc}
+            title={category.node.title}
+            onClick={() => handleCardClick(category.node.handle)}
           />
         ))}
       </div>
@@ -43,4 +35,4 @@ const CategoryCrads = () => {
   );
 };
 
-export default CategoryCrads;
+export default CategoryCards;

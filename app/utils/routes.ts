@@ -12,8 +12,14 @@ export const routes = [
     slug: "about",
   },
   {
-    path: "/blog",
+    path: "/box-builder",
     name: "Gift Cards",
+    icon: "book",
+    slug: "blog",
+  },
+  {
+    path: "/blogs",
+    name: "Blogs",
     icon: "book",
     slug: "blog",
   },

@@ -1,25 +1,36 @@
 import { fetchGraphQLData } from "./utils/products.helper";
 import Products from "./components/landingPage/products";
 import Hero from "./components/landingPage/hero";
-import CategoryCrads from "./components/landingPage/CategoryCrads";
 import Reviews from "./components/landingPage/review";
-import { getAllProductsQuery } from "./utils/queries";
+import { getFirstThreeCollectionsQuery } from "./utils/queries";
+import CategoryCards from "./components/landingPage/CategoryCrads";
+import { CollectionsResponse } from "@/types/collection";
 
 export default async function Home() {
-  const json = await fetchGraphQLData(getAllProductsQuery);
-  const { data } = json;
-  const { products } = data;
-  const { nodes: productsData } = products;
+  let collectionsData: CollectionsResponse | null = null;
 
-  /* eslint-disable no-console */
-  console.log("🚀 ~ Home ~ json:", productsData);
+  try {
+    collectionsData = await fetchGraphQLData<CollectionsResponse>(
+      getFirstThreeCollectionsQuery
+    );
+  } catch (error) {
+    console.error("Error fetching collections data:", error);
+  }
 
   return (
     <div className="bg-background-primary">
       <Hero />
       <section className="container mx-auto w-full flex flex-col items-center justify-center px-4 gap-4 py-8 md:py-10">
-        <CategoryCrads />
-        <Products />
+        {collectionsData?.data?.collections ? (
+          <>
+            <CategoryCards collections={collectionsData} />
+            <Products collections={collectionsData} />
+          </>
+        ) : (
+          <div className="text-center text-white">
+            <p>Failed to load collections. Please try again later.</p>
+          </div>
+        )}
         <Reviews />
       </section>
       <div className="container mx-auto px-4 grid grid-cols-3 w-[90%]  p-8 lg:p-16 bg-gradient-secondary border border-gold rounded-3xl">

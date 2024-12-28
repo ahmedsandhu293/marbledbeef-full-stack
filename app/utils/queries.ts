@@ -1,5 +1,143 @@
 import { gql } from "./gql";
 
+export const getFirstThreeCollectionsQuery = gql`
+  query CollectionsQuery {
+    collections(first: 3) {
+      edges {
+        node {
+          id
+          title
+          description
+          handle
+          image {
+            id
+            originalSrc
+            altText
+          }
+          products(first: 20) {
+            edges {
+              node {
+                id
+                tags
+                title
+                description
+                handle
+                priceRangeV2 {
+                  minVariantPrice {
+                    amount
+                    currencyCode
+                  }
+                }
+                variants(first: 250) {
+                  edges {
+                    node {
+                      id
+                      title
+                      price
+                      compareAtPrice
+                      barcode
+                      sku
+                    }
+                  }
+                }
+                category {
+                  id
+                  name
+                }
+                collections(first: 250) {
+                  edges {
+                    node {
+                      id
+                      title
+                    }
+                  }
+                }
+                images(first: 250) {
+                  edges {
+                    node {
+                      id
+                      originalSrc
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const getCollectionsByHandleQuery = gql`
+  query CollectionsQuery {
+    collections(first: 3) {
+      edges {
+        node {
+          id
+          title
+          description
+          handle
+          image {
+            id
+            originalSrc
+            altText
+          }
+          products(first: 6) {
+            edges {
+              node {
+                id
+                tags
+                title
+                description
+                handle
+                priceRangeV2 {
+                  minVariantPrice {
+                    amount
+                    currencyCode
+                  }
+                }
+                variants(first: 250) {
+                  edges {
+                    node {
+                      id
+                      title
+                      price
+                      compareAtPrice
+                      barcode
+                      sku
+                    }
+                  }
+                }
+                category {
+                  id
+                  name
+                }
+                collections(first: 250) {
+                  edges {
+                    node {
+                      id
+                      title
+                    }
+                  }
+                }
+                images(first: 250) {
+                  edges {
+                    node {
+                      id
+                      originalSrc
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const getAllProductsQuery = gql`
   query ProductsQuery {
     products(first: 250) {
