@@ -30,7 +30,7 @@ const Hero = () => {
             <div className="relative w-full sm:w-80 md:w-96 mt-10 lg:mt-20">
               <input
                 className="p-3 w-full text-lg rounded-2xl pl-10 backdrop-blur-lg bg-opacity-60 transition- font-urbanist placeholder:text-black bg-white text-black"
-                placeholder="Search"
+                placeholder="Recherche"
                 type="text"
                 onChange={(e) => onSearch(e.target.value)}
               />
@@ -56,10 +56,13 @@ const Hero = () => {
 
           {/* Content Section */}
           <div className="flex flex-col justify-center bg-black text-white p-8 md:w-1/2 rounded-r-xl font-urbanist">
-            <h4 className="text-lg pb-8 font-medium uppercase  ">About Us</h4>
+            <h4 className="text-lg pb-8 font-medium uppercase  ">
+              À propos de nous
+            </h4>
             <h2 className="text-3xl md:text-5xl font-extrabold mb-4">
-              We Provide <br />
-              Best Meat
+              Nous fournissons
+              <br />
+              La meilleure viande{" "}
             </h2>
             <p className=" mb-6">
               Nous fournissons de la viande fraîche et biologique bien façonnée
@@ -70,17 +73,17 @@ const Hero = () => {
                 <span className=" rounded-full p-1">
                   <FaCheck />
                 </span>{" "}
-                Organic Meat
+                Viande biologique
               </li>
               <li className="flex items-center gap-2">
                 <span className=" rounded-full p-1">
                   <FaCheck />
                 </span>{" "}
-                Payment Securisation
+                Sécurisation des paiements
               </li>
             </ul>
             <div>
-              <Button className="bg-gold text-black px-10">View More</Button>
+              <Button className="bg-gold text-black px-10">Voir plus</Button>
             </div>
           </div>
         </div>

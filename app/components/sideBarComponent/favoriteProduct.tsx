@@ -2,8 +2,16 @@ import React, { useEffect, useState } from "react";
 import ComponentButton from "../common/buttons/ButtonComponent";
 import { CollectionProduct } from "@/types/collection";
 import { useGlobalContext } from "@/app/context/store";
+import { MdDeleteOutline } from "react-icons/md";
 
-const FavoriteProduct = ({ data }: { data: any }) => {
+const FavoriteProduct = ({
+  data,
+  onDelete,
+}: {
+  data: any;
+  onDelete: (id: string) => void;
+}) => {
+  console.log("🚀 ~ FavoriteProduct ~ data:", data);
   const [variant, setVariant] = useState();
   const { cartItem, setCartItem } = useGlobalContext();
 
@@ -58,11 +66,16 @@ const FavoriteProduct = ({ data }: { data: any }) => {
       </div>
       <div className="flex flex-col gap-1">
         <div className="flex justify-between items-start gap-1">
-          <h4 className="text-sm underline">{variant?.node?.title}</h4>
+          <h4 className="text-sm underline">{data?.node?.title}</h4>
+          <MdDeleteOutline
+            size={24}
+            onClick={() => onDelete(data.node.id)}
+            className="cursor-pointer"
+          />
         </div>
         <div className="flex justify-start items-start gap-2 ">
           <p className="text-sm ">
-            <span className="font-bold">€{variant?.node?.price}</span>{" "}
+            <span className="font-bold">€ {variant?.node?.price}</span>{" "}
             {/* <span className="line-through text-red-primary">€52.99</span> */}
           </p>
         </div>
@@ -81,7 +94,7 @@ const FavoriteProduct = ({ data }: { data: any }) => {
           </select>
           <ComponentButton
             className="!bg-gradient-primary !py-2 h-8"
-            label="Add"
+            label="Ajouter"
             onClick={() => handleAddtocart(data)}
           />
         </div>

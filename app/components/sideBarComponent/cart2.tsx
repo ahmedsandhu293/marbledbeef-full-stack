@@ -14,6 +14,7 @@ interface CartProps {
 const Cart2: React.FC<CartProps> = ({ onClose }) => {
   const { cartItem, setCartItem } = useGlobalContext();
   const [products, setProducts] = useState(cartItem);
+  const [quantity, setQuantity] = useState(1);
 
   const handleRemoveFromCart = (productId: string) => {
     const updatedCart = cartItem.filter(
@@ -45,6 +46,10 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
   useEffect(() => {
     setProducts(cartItem);
   }, [cartItem]);
+
+  const handleCounterChange = (newValue: number) => {
+    setQuantity(newValue);
+  };
 
   return (
     <div
@@ -88,6 +93,8 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
               key={index}
               data={product}
               onDelete={handleRemoveFromCart}
+              quantity={quantity}
+              onQuantityChange={handleCounterChange}
             />
           ))}
         </div>

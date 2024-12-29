@@ -98,7 +98,7 @@ const BoxBuilder = ({ data }: { data?: Product[] }) => {
                       height={100}
                     />
                   ) : (
-                    <span className="text-gray-500">Empty</span>
+                    <span className="text-gray-500">Vide</span>
                   )}
                 </div>
               ))}

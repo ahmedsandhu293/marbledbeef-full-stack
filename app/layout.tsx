@@ -63,7 +63,7 @@ export default function RootLayout({
       >
         <GlobalContextProvider>
           <Navbar />
-          <main className=" pt-60  flex-grow">{children}</main>
+          <main className="pt-32 md:pt-60  flex-grow">{children}</main>
           <Footer />
 
           <Chatbot />

@@ -11,7 +11,7 @@ export default function Footer() {
       <div className="container mx-auto">
         <div className="grid grid-cols-10 space-y-8 md:flex-row md:space-y-0 md:space-x-8 justify-between items-center md:items-start">
           {/* Left section */}
-          <div className="col-span-4 text-left space-y-4 max-w-xs md:max-w-none w-full">
+          <div className="col-span-10 md:col-span-4 text-left space-y-4 max-w-xs md:max-w-none w-full">
             <Image
               alt="logo"
               height={100}
@@ -34,7 +34,7 @@ export default function Footer() {
           </div>
 
           {/* Center section */}
-          <div className="col-span-2">
+          <div className="col-span-10 md:col-span-2">
             <h3 className="font-bold pb-2">
               MARBLED BEEF VIANDES D’EXCELLENCE
             </h3>
@@ -53,7 +53,7 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-          <div className="col-span-2">
+          <div className="col-span-10 md:col-span-2">
             <h3 className="font-bold pb-2">NOS SERVICES</h3>
             <ul className="space-y-2">
               <li>
@@ -70,7 +70,7 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-          <div className="col-span-2">
+          <div className="col-span-10 md:col-span-2">
             <h3 className="font-bold pb-2">INFOS LÉGALES</h3>
             <ul className="space-y-2">
               <li>

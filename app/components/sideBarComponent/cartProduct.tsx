@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
+import QuantitySelector from "../common/quantitySelector";
 
 const CartProduct = ({
   data,
   onDelete,
+  quantity,
+  onQuantityChange,
 }: {
   data: any;
   onDelete: (id: string) => void;
+  quantity: number;
+  onQuantityChange: (quantity: number) => void;
 }) => {
   const [variant, setVariant] = useState();
 
@@ -40,13 +45,14 @@ const CartProduct = ({
             <span className="font-bold">{variant?.node?.title}</span>{" "}
           </p>
         </div>
-        <div className="flex justify-start items-start gap-4 border border-gold rounded-lg py-1 px-5 w-28">
-          <span>-</span>
-          <span>3</span>
-          <span>+</span>
+        <div className="flex justify-start items-center gap-4 ">
+          <QuantitySelector
+            initialValue={quantity}
+            onChange={onQuantityChange}
+          />
         </div>
         <div className="flex justify-end text-sm text-gold">
-          <span>{variant?.node?.price}</span>
+          <span>€ {variant?.node?.price}</span>
         </div>
       </div>
     </div>

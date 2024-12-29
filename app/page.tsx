@@ -48,11 +48,11 @@ export default async function Home() {
           <div className="flex mt-4 w-full gap-2 flex-col lg:flex-row">
             <input
               className="w-full md:w-auto flex bg-black border border-gold rounded-lg p-2 text-text-primary focus:outline-none"
-              placeholder="Your email address"
+              placeholder="Votre adresse e-mail"
               type="email"
             />
             <button className="bg-gradient-primary text-background-primary rounded-lg px-4 py-2">
-              Subscribe
+              S'abonner
             </button>
           </div>
           <p className="text-white pt-2">
