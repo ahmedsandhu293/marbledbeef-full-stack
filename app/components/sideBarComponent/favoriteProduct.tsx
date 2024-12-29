@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { MdDeleteOutline } from "react-icons/md";
+
 import ComponentButton from "../common/buttons/ButtonComponent";
+
 import { CollectionProduct } from "@/types/collection";
 import { useGlobalContext } from "@/app/context/store";
-import { MdDeleteOutline } from "react-icons/md";
 
 const FavoriteProduct = ({
   data,
@@ -11,22 +13,23 @@ const FavoriteProduct = ({
   data: any;
   onDelete: (id: string) => void;
 }) => {
-  console.log("🚀 ~ FavoriteProduct ~ data:", data);
   const [variant, setVariant] = useState();
   const { cartItem, setCartItem } = useGlobalContext();
 
   useEffect(() => {
     const variant = data.node.variants.edges.find(
-      (v: any) => v.node.id === data.selectedVariant
+      (v: any) => v.node.id === data.selectedVariant,
     );
+
     setVariant(variant);
   }, [data]);
 
   const handleVariantChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedVariantId = e.target.value;
     const selectedVariant = data.node.variants.edges.find(
-      (v: any) => v.node.id === selectedVariantId
+      (v: any) => v.node.id === selectedVariantId,
     );
+
     setVariant(selectedVariant);
   };
 
@@ -35,12 +38,15 @@ const FavoriteProduct = ({
     const firstVariant = item.node.variants.edges[0]?.node?.id;
 
     if (!firstVariant) {
+      /* eslint-disable no-console */
+
       console.error("No variants available for this product.");
+
       return;
     }
 
     const isProductInCart = cartItem.some(
-      (cartProduct) => cartProduct.node.id === productId
+      (cartProduct) => cartProduct.node.id === productId,
     );
 
     if (!isProductInCart) {
@@ -52,9 +58,12 @@ const FavoriteProduct = ({
       setCartItem((prevCart) => [...prevCart, newCartItem]);
       localStorage.setItem("cartItem", JSON.stringify(cartItem));
     } else {
+      /* eslint-disable no-console */
+
       console.log("Product is already in the cart.");
     }
   };
+
   return (
     <div className="flex items-center justify-center w-full p-3 rounded-md gap-6 md:flex-row flex-col ">
       <div className="w-20 h-20 bg-cover bg-center rounded-md overflow-hidden border border-gold">
@@ -68,9 +77,9 @@ const FavoriteProduct = ({
         <div className="flex justify-between items-start gap-1">
           <h4 className="text-sm underline">{data?.node?.title}</h4>
           <MdDeleteOutline
+            className="cursor-pointer"
             size={24}
             onClick={() => onDelete(data.node.id)}
-            className="cursor-pointer"
           />
         </div>
         <div className="flex justify-start items-start gap-2 ">

@@ -15,7 +15,7 @@ interface Message {
 
 export const fetchChatResponse = async (
   messages: Message[] | string,
-  botType: "chatbot" | "recipe"
+  botType: "chatbot" | "recipe",
 ): Promise<string> => {
   try {
     const systemMessage = {
@@ -50,13 +50,18 @@ export const fetchChatResponse = async (
 
     if (!response.ok) {
       const errorDetails = await response.json();
+      /* eslint-disable no-console */
+
       console.error("API error details:", errorDetails);
       throw new Error("Failed to fetch the bot's response");
     }
 
     const data = await response.json();
+
     return data.choices[0].message.content;
   } catch (error) {
+    /* eslint-disable no-console */
+
     console.error("Error communicating with OpenAI:", error);
     throw new Error("Something went wrong. Please try again.");
   }

@@ -1,7 +1,6 @@
 "use client";
 
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
-import { CardProps } from "@/types/products";
 
 const BlogCard = ({ onClick }: { onClick: () => void }) => {
   return (

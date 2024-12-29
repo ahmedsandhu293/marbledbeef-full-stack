@@ -5,10 +5,10 @@ import ComponentButton from "../common/buttons/ButtonComponent";
 import MagicButton from "../common/buttons/MagicButton";
 import SeeMore from "../common/seeMore";
 import ModalWrapper from "../common/modal/ModalWapper";
+import QuantitySelector from "../common/quantitySelector";
 
 import RecipeGenerator from "./RecipeGenerator";
-import QuantitySelector from "../common/quantitySelector";
-import { CollectionProduct } from "@/types/collection";
+
 import { useGlobalContext } from "@/app/context/store";
 const ProductHero = ({ product }: any) => {
   const initialVariant = product?.variants.edges[0]?.node;
@@ -26,8 +26,9 @@ const ProductHero = ({ product }: any) => {
   const handleVariantChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedVariantId = e.target.value;
     const selectedVariant = product?.variants.edges.find(
-      (v: any) => v.node.id === selectedVariantId
+      (v: any) => v.node.id === selectedVariantId,
     );
+
     setVariant(selectedVariant?.node);
     setSelectedVariant(selectedVariantId);
   };
@@ -54,11 +55,11 @@ const ProductHero = ({ product }: any) => {
       <div className="col-span-1 md:flex flex-col gap-4 hidden ">
         {allImages?.map((image: any, index: number) => (
           <img
-            alt={image?.node?.id}
             key={index}
-            onClick={() => handleThumbnailClick(image)}
+            alt={image?.node?.id}
             className="w-full rounded-lg border border-gold"
             src={image?.node?.originalSrc}
+            onClick={() => handleThumbnailClick(image)}
           />
         ))}
       </div>
@@ -75,9 +76,9 @@ const ProductHero = ({ product }: any) => {
           <img
             key={index}
             alt={image?.node?.id}
-            onClick={() => handleThumbnailClick(image)}
             className="w-full rounded-lg border border-gold"
             src={image?.node?.originalSrc}
+            onClick={() => handleThumbnailClick(image)}
           />
         ))}
       </div>
@@ -132,12 +133,12 @@ const ProductHero = ({ product }: any) => {
                     (variant: any, index: number) => (
                       <option
                         key={variant.node.id}
-                        value={variant.node.id}
                         className="bg-black"
+                        value={variant.node.id}
                       >
                         {variant?.node?.title}
                       </option>
-                    )
+                    ),
                   )}
                 </select>
               </div>

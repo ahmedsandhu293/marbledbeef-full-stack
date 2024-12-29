@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 
-import ComponentButton from "../common/buttons/ButtonComponent";
-import { useGlobalContext } from "@/app/context/store";
 import FavoriteProduct from "./favoriteProduct";
+
+import { useGlobalContext } from "@/app/context/store";
 
 const FavoritesCart = ({ onClose }: { onClose: () => void }) => {
   const { favorites, setFavorites } = useGlobalContext();
@@ -11,8 +11,9 @@ const FavoritesCart = ({ onClose }: { onClose: () => void }) => {
 
   const handleRemoveFromCart = (productId: string) => {
     const updatedCart = favorites.filter(
-      (favorites) => favorites.node.id !== productId
+      (favorites) => favorites.node.id !== productId,
     );
+
     setFavorites(updatedCart);
     localStorage.setItem("cartItem", JSON.stringify(favorites));
   };

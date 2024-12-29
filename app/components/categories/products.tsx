@@ -1,11 +1,12 @@
 "use client";
 
 // Constants
-import { useGlobalContext } from "@/app/context/store";
-import { CollectionProduct } from "@/types/collection";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+
 import CollectionCard from "../common/cards/CollectionsCard";
+
+import { CollectionProduct } from "@/types/collection";
+import { useGlobalContext } from "@/app/context/store";
 
 const Products = ({ collection }: { collection: any }) => {
   const products = collection.data.collectionByHandle.products.edges;
@@ -17,12 +18,15 @@ const Products = ({ collection }: { collection: any }) => {
     const firstVariant = item.node.variants.edges[0]?.node?.id;
 
     if (!firstVariant) {
+      /* eslint-disable no-console */
+
       console.error("No variants available for this product.");
+
       return;
     }
 
     const isProductInCart = cartItem.some(
-      (cartProduct) => cartProduct.node.id === productId
+      (cartProduct) => cartProduct.node.id === productId,
     );
 
     if (!isProductInCart) {
@@ -34,6 +38,7 @@ const Products = ({ collection }: { collection: any }) => {
       setCartItem((prevCart) => [...prevCart, newCartItem]);
       localStorage.setItem("cartItem", JSON.stringify(cartItem));
     } else {
+      /* eslint-disable no-console */
       console.log("Product is already in the cart.");
     }
   };
@@ -43,12 +48,15 @@ const Products = ({ collection }: { collection: any }) => {
     const firstVariant = item.node.variants.edges[0]?.node?.id;
 
     if (!firstVariant) {
+      /* eslint-disable no-console */
+
       console.error("No variants available for this product.");
+
       return;
     }
 
     const isProductInCart = favorites.some(
-      (favoritesProduct) => favoritesProduct.node.id === productId
+      (favoritesProduct) => favoritesProduct.node.id === productId,
     );
 
     if (!isProductInCart) {
@@ -60,6 +68,8 @@ const Products = ({ collection }: { collection: any }) => {
       setFavorites((prevCart) => [...prevCart, newFavorites]);
       localStorage.setItem("favorites", JSON.stringify(favorites));
     } else {
+      /* eslint-disable no-console */
+
       console.log("Product is already in the Favorites.");
     }
   };

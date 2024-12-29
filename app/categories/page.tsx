@@ -1,17 +1,21 @@
 import React from "react";
-import { CollectionsResponse } from "@/types/collection";
+
 import { getAllCollectionsQuery } from "../utils/queries";
 import { fetchGraphQLData } from "../utils/products.helper";
 import Category from "../components/categories";
+
+import { CollectionsResponse } from "@/types/collection";
 
 const Page = async () => {
   let collectionsData: CollectionsResponse | null = null;
 
   try {
     collectionsData = await fetchGraphQLData<CollectionsResponse>(
-      getAllCollectionsQuery
+      getAllCollectionsQuery,
     );
   } catch (error) {
+    /* eslint-disable no-console */
+
     console.error("Error fetching collections data:", error);
   }
 

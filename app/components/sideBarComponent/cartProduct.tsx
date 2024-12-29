@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
+
 import QuantitySelector from "../common/quantitySelector";
 
 const CartProduct = ({
@@ -17,8 +18,9 @@ const CartProduct = ({
 
   useEffect(() => {
     const variant = data.node.variants.edges.find(
-      (v: any) => v.node.id === data.selectedVariant
+      (v: any) => v.node.id === data.selectedVariant,
     );
+
     setVariant(variant);
   }, [data]);
 
@@ -35,9 +37,9 @@ const CartProduct = ({
         <div className="flex justify-between items-start gap-6">
           <h4 className="text-sm underline">Boeuf de Kobe Yakiniku</h4>
           <MdDeleteOutline
+            className="cursor-pointer"
             size={24}
             onClick={() => onDelete(data.node.id)}
-            className="cursor-pointer"
           />
         </div>
         <div className="flex justify-start items-start gap-2 ">

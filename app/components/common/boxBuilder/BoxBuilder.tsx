@@ -1,24 +1,30 @@
 "use client";
 
 import React, { useState } from "react";
-import ComponentButton from "../buttons/ButtonComponent";
-import { Product } from "@/types";
-import CardComponent from "../cards/CardComponent";
 import Image from "next/image";
+
+import ComponentButton from "../buttons/ButtonComponent";
+import CardComponent from "../cards/CardComponent";
+
+import { Product } from "@/types";
 
 const BoxBuilder = ({ data }: { data?: Product[] }) => {
   const [giftCount, setGiftCount] = useState(3);
   const [boxItems, setBoxItems] = useState<(Product | null)[]>(
-    Array(giftCount).fill(null)
+    Array(giftCount).fill(null),
   );
 
   const handleAdd = (item: Product) => {
     const emptyIndex = boxItems.findIndex((box) => box === null);
+
     if (emptyIndex !== -1) {
       const updatedBoxes = [...boxItems];
+
       updatedBoxes[emptyIndex] = item;
       setBoxItems(updatedBoxes);
     } else {
+      /* eslint-disable no-console */
+
       console.log("Box is full");
     }
   };
@@ -43,21 +49,21 @@ const BoxBuilder = ({ data }: { data?: Product[] }) => {
         </p>
         <div className="py-8 flex justify-center items-center gap-4 flex-col md:flex-row">
           <ComponentButton
-            label="3 piéces"
             className="!bg-gradient-primary"
+            label="3 piéces"
             offPerc="30% Off"
             onClick={() => handleGiftCountChange(3)}
           />
 
           <ComponentButton
-            label="5 piéces"
             className="!bg-gradient-primary"
+            label="5 piéces"
             offPerc="30% Off"
             onClick={() => handleGiftCountChange(5)}
           />
           <ComponentButton
-            label="10 piéces"
             className="!bg-gradient-primary"
+            label="10 piéces"
             offPerc="30% Off"
             onClick={() => handleGiftCountChange(10)}
           />
@@ -69,8 +75,8 @@ const BoxBuilder = ({ data }: { data?: Product[] }) => {
           {data?.map((item: Product, index) => (
             <div key={index} style={{ padding: "10px", textAlign: "center" }}>
               <CardComponent
-                data={item}
                 buttonLabel="Ajouter"
+                data={item}
                 onAddToCart={handleAdd}
                 onAddToFavorite={() => {}}
                 onClick={() => {}}
@@ -91,11 +97,11 @@ const BoxBuilder = ({ data }: { data?: Product[] }) => {
                 >
                   {item ? (
                     <Image
-                      src={item.images.edges[0].node.originalSrc} // Ensure `Product` has an `image` field
                       alt={item.handle}
                       className="w-full object-cover h-full rounded-md"
-                      width={100}
                       height={100}
+                      src={item.images.edges[0].node.originalSrc} // Ensure `Product` has an `image` field
+                      width={100}
                     />
                   ) : (
                     <span className="text-gray-500">Vide</span>
@@ -111,8 +117,8 @@ const BoxBuilder = ({ data }: { data?: Product[] }) => {
               </p>
             </div>
             <ComponentButton
-              label="Ajouter Au Panier"
               className="!bg-gradient-primary font-bold px-8 mb-8"
+              label="Ajouter Au Panier"
             />
           </div>
         </div>

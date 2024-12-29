@@ -10,6 +10,7 @@ import React, {
 import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import { FiSend } from "react-icons/fi";
+
 import fetchChatResponse from "@/services/chatService";
 
 // Define the shape of messages
@@ -53,15 +54,18 @@ const Chatbot: React.FC = () => {
 
   const handleSendMessage = async (message: string) => {
     const userMessage = message || input.trim();
+
     if (!userMessage) return;
 
     const newMessages = [...messages, { text: userMessage, isBot: false }];
+
     setMessages(newMessages);
     setInput("");
     setLoading(true);
     setShowPrebuiltQuestions(false);
     try {
       const botResponse = await fetchChatResponse(newMessages, "chatbot");
+
       setMessages([...newMessages, { text: botResponse, isBot: true }]);
     } catch (error) {
       setMessages([

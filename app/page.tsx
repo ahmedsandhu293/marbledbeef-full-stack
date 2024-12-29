@@ -4,6 +4,7 @@ import Hero from "./components/landingPage/hero";
 import Reviews from "./components/landingPage/review";
 import { getFirstThreeCollectionsQuery } from "./utils/queries";
 import CategoryCards from "./components/landingPage/CategoryCrads";
+
 import { CollectionsResponse } from "@/types/collection";
 
 export default async function Home() {
@@ -11,7 +12,7 @@ export default async function Home() {
 
   try {
     collectionsData = await fetchGraphQLData<CollectionsResponse>(
-      getFirstThreeCollectionsQuery
+      getFirstThreeCollectionsQuery,
     );
   } catch (error) {
     console.error("Error fetching collections data:", error);

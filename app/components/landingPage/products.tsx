@@ -1,14 +1,15 @@
 "use client";
 
 // Constants
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
 import HorizontalCarousel from "../common/carousel";
 import CategoriesHeading from "../common/headings/categoriesHeading";
-import { ProductsType } from "@/types/products";
 import CollectionCard from "../common/cards/CollectionsCard";
-import { useRouter } from "next/navigation";
+
 import { CollectionProduct, CollectionsResponse } from "@/types/collection";
 import { useGlobalContext } from "@/app/context/store";
-import { useEffect } from "react";
 
 const Products = ({ collections }: { collections: CollectionsResponse }) => {
   const categories = collections.data.collections.edges;
@@ -34,12 +35,15 @@ const Products = ({ collections }: { collections: CollectionsResponse }) => {
     const firstVariant = item.node.variants.edges[0]?.node?.id;
 
     if (!firstVariant) {
+      /* eslint-disable no-console */
+
       console.error("No variants available for this product.");
+
       return;
     }
 
     const isProductInCart = cartItem.some(
-      (cartProduct) => cartProduct.node.id === productId
+      (cartProduct) => cartProduct.node.id === productId,
     );
 
     if (!isProductInCart) {
@@ -51,6 +55,8 @@ const Products = ({ collections }: { collections: CollectionsResponse }) => {
       setCartItem((prevCart) => [...prevCart, newCartItem]);
       localStorage.setItem("cartItem", JSON.stringify(cartItem));
     } else {
+      /* eslint-disable no-console */
+
       console.log("Product is already in the cart.");
     }
   };
@@ -60,12 +66,15 @@ const Products = ({ collections }: { collections: CollectionsResponse }) => {
     const firstVariant = item.node.variants.edges[0]?.node?.id;
 
     if (!firstVariant) {
+      /* eslint-disable no-console */
+
       console.error("No variants available for this product.");
+
       return;
     }
 
     const isProductInCart = favorites.some(
-      (favoritesProduct) => favoritesProduct.node.id === productId
+      (favoritesProduct) => favoritesProduct.node.id === productId,
     );
 
     if (!isProductInCart) {
@@ -77,6 +86,8 @@ const Products = ({ collections }: { collections: CollectionsResponse }) => {
       setFavorites((prevCart) => [...prevCart, newFavorites]);
       localStorage.setItem("favorites", JSON.stringify(favorites));
     } else {
+      /* eslint-disable no-console */
+
       console.log("Product is already in the Favorites.");
     }
   };
@@ -88,12 +99,12 @@ const Products = ({ collections }: { collections: CollectionsResponse }) => {
   return (
     <div className="w-full space-y-4 md:space-y-8">
       {categories.map((category, index) => (
-        <div className="w-full font-urbanist" key={index}>
+        <div key={index} className="w-full font-urbanist">
           <CategoriesHeading
             title={category.node.title}
             onClick={() => push(`/categories/${category.node.handle}`)}
           />
-          <HorizontalCarousel autoPlaySpeed={4000} infinite>
+          <HorizontalCarousel infinite autoPlaySpeed={4000}>
             {category.node.products.edges.map((product, productIndex) => (
               <div key={productIndex} className="p-2 text-center">
                 <CollectionCard

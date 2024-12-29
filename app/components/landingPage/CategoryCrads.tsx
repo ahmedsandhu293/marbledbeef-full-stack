@@ -1,11 +1,12 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 
 import CategoryCard from "../common/cards/CategoryCrad";
 import CategoriesHeading from "../common/headings/categoriesHeading";
+
 import { CollectionsResponse } from "@/types/collection";
-import { useRouter } from "next/navigation";
 
 const CategoryCards = ({
   collections,

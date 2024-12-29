@@ -13,21 +13,21 @@ const PromoNotification = dynamic(
   () => import("./components/common/flotingBars/promoNotification"),
   {
     ssr: false,
-  }
+  },
 );
 const Chatbot = dynamic(
   () => import("./components/common/flotingBars/chatBot"),
   {
     ssr: false,
-  }
+  },
 );
 
 import Navbar from "./components/nav/header";
 import Footer from "./components/nav/footer";
+import { GlobalContextProvider } from "./context/store";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
-import { GlobalContextProvider } from "./context/store";
 
 export const metadata: Metadata = {
   title: {
@@ -58,7 +58,7 @@ export default function RootLayout({
       <body
         className={clsx(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
+          fontSans.variable,
         )}
       >
         <GlobalContextProvider>

@@ -4,7 +4,7 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { FiHeart } from "react-icons/fi";
 
 import ComponentButton from "../buttons/ButtonComponent";
-import { Product } from "@/types";
+
 import { CollectionProduct } from "@/types/collection";
 
 const CollectionCard = ({

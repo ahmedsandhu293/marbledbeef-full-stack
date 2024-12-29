@@ -1,7 +1,9 @@
 "use client";
 
 import React from "react";
+
 import HorizontalCarousel from "../common/carousel";
+
 import Category from "./index";
 
 const HorizentalCarouselCategory = ({
@@ -10,7 +12,7 @@ const HorizentalCarouselCategory = ({
   collectionsData: any;
 }) => {
   return (
-    <HorizontalCarousel autoPlaySpeed={2000} infinite>
+    <HorizontalCarousel infinite autoPlaySpeed={2000}>
       <Category data={collectionsData} />
     </HorizontalCarousel>
   );
