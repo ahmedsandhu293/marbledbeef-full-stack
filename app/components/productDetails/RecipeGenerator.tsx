@@ -1,5 +1,6 @@
-import fetchChatResponse from "@/services/chatService";
 import React, { useEffect, useState } from "react";
+
+import fetchChatResponse from "@/services/chatService";
 
 interface Recipe {
   title: string;
@@ -18,9 +19,11 @@ const RecipeGenerator = ({
     setIsLoading(true);
 
     const inputValue = productDescription;
+
     try {
       const response = await fetchChatResponse(inputValue, "recipe");
       const result = JSON.parse(response);
+
       if (result) {
         setRecipe(result);
         setIsLoading(false);

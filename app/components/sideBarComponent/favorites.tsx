@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 
-import ComponentButton from "../common/buttons/ButtonComponent";
-import { useGlobalContext } from "@/app/context/store";
 import FavoriteProduct from "./favoriteProduct";
 
+import { useGlobalContext } from "@/app/context/store";
+
 const FavoritesCart = ({ onClose }: { onClose: () => void }) => {
-  const { favorites } = useGlobalContext();
+  const { favorites, setFavorites } = useGlobalContext();
   const [products, setProducts] = useState(favorites);
+
+  const handleRemoveFromCart = (productId: string) => {
+    const updatedCart = favorites.filter(
+      (favorites) => favorites.node.id !== productId,
+    );
+
+    setFavorites(updatedCart);
+    localStorage.setItem("cartItem", JSON.stringify(favorites));
+  };
 
   useEffect(() => {
     setProducts(favorites);
@@ -30,7 +39,11 @@ const FavoritesCart = ({ onClose }: { onClose: () => void }) => {
       <div className="p-3 w-full h-[90%]">
         <div className="overflow-y-auto h-full  overflow-x-hidden">
           {products?.map((product, index) => (
-            <FavoriteProduct key={index} data={product} />
+            <FavoriteProduct
+              key={index}
+              data={product}
+              onDelete={handleRemoveFromCart}
+            />
           ))}
         </div>
         {/* <div className="flex w-full h-full items-center justify-center flex-col text-center gap-3">

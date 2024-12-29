@@ -2,33 +2,16 @@
 
 // Constants
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
-import HorizontalCarousel from "../common/carousel";
-import CategoriesHeading from "../common/headings/categoriesHeading";
 import CollectionCard from "../common/cards/CollectionsCard";
 
-import { CollectionProduct, CollectionsResponse } from "@/types/collection";
+import { CollectionProduct } from "@/types/collection";
 import { useGlobalContext } from "@/app/context/store";
 
-const Products = ({ collections }: { collections: CollectionsResponse }) => {
-  const categories = collections.data.collections.edges;
-
+const Products = ({ collection }: { collection: any }) => {
+  const products = collection.data.collectionByHandle.products.edges;
   const { push } = useRouter();
   const { cartItem, setCartItem, favorites, setFavorites } = useGlobalContext();
-
-  useEffect(() => {
-    const storedCartItem = localStorage.getItem("cartItem");
-    const storedFavorites = localStorage.getItem("favorites");
-
-    if (storedFavorites) {
-      setFavorites(JSON.parse(storedFavorites));
-    }
-
-    if (storedCartItem) {
-      setCartItem(JSON.parse(storedCartItem));
-    }
-  }, []);
 
   const handleAddToCart = (item: CollectionProduct) => {
     const productId = item.node.id;
@@ -56,7 +39,6 @@ const Products = ({ collections }: { collections: CollectionsResponse }) => {
       localStorage.setItem("cartItem", JSON.stringify(cartItem));
     } else {
       /* eslint-disable no-console */
-
       console.log("Product is already in the cart.");
     }
   };
@@ -98,26 +80,18 @@ const Products = ({ collections }: { collections: CollectionsResponse }) => {
 
   return (
     <div className="w-full space-y-4 md:space-y-8">
-      {categories.map((category, index) => (
-        <div key={index} className="w-full font-urbanist">
-          <CategoriesHeading
-            title={category.node.title}
-            onClick={() => push(`/categories/${category.node.handle}`)}
-          />
-          <HorizontalCarousel infinite autoPlaySpeed={4000}>
-            {category.node.products.edges.map((product, productIndex) => (
-              <div key={productIndex} className="p-2 text-center">
-                <CollectionCard
-                  data={product}
-                  onAddToCart={handleAddToCart}
-                  onAddToFavorite={handleAddToFavorite}
-                  onClick={handleClick}
-                />
-              </div>
-            ))}
-          </HorizontalCarousel>
-        </div>
-      ))}
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
+        {products.map((product: any, productIndex: number) => (
+          <div key={productIndex} className="p-2 text-center">
+            <CollectionCard
+              data={product}
+              onAddToCart={handleAddToCart}
+              onAddToFavorite={handleAddToFavorite}
+              onClick={handleClick}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

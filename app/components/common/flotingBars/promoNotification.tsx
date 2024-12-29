@@ -87,13 +87,13 @@ const PromoNotification: React.FC = () => {
 
                 <div className="order-3 mt-2 w-full flex-shrink-0 sm:order-2 sm:mt-0 sm:w-auto flex justify-center items-center gap-2">
                   <ComponentButton
-                    label="Explorer Nos Produits"
                     className="!text-xs !md:text-sm"
+                    label="Explorer Nos Produits"
                   />
 
                   <ComponentButton
-                    label="Box Grillande"
                     className="!text-xs !md:text-sm"
+                    label="Box Grillande"
                   />
                 </div>
 

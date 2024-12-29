@@ -69,9 +69,9 @@ export const getFirstThreeCollectionsQuery = gql`
   }
 `;
 
-export const getCollectionsByHandleQuery = gql`
+export const getAllCollectionsQuery = gql`
   query CollectionsQuery {
-    collections(first: 3) {
+    collections(first: 250) {
       edges {
         node {
           id
@@ -83,7 +83,7 @@ export const getCollectionsByHandleQuery = gql`
             originalSrc
             altText
           }
-          products(first: 6) {
+          products(first: 1) {
             edges {
               node {
                 id
@@ -128,6 +128,60 @@ export const getCollectionsByHandleQuery = gql`
                       originalSrc
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const getCollectionByHandleQuery = gql`
+  query GetCollectionByHandle($handle: String!) {
+    collectionByHandle(handle: $handle) {
+      id
+      title
+      description
+      handle
+      image {
+        id
+        originalSrc
+        altText
+      }
+      products(first: 250) {
+        edges {
+          node {
+            id
+            title
+            handle
+            description
+            tags
+            priceRangeV2 {
+              minVariantPrice {
+                amount
+                currencyCode
+              }
+            }
+            variants(first: 250) {
+              edges {
+                node {
+                  id
+                  title
+                  price
+                  compareAtPrice
+                  sku
+                  barcode
+                }
+              }
+            }
+            images(first: 250) {
+              edges {
+                node {
+                  id
+                  originalSrc
+                  altText
                 }
               }
             }

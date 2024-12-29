@@ -17,7 +17,7 @@ const CategoriesHeading = ({
         className="text-text-tertiary flex gap-2 text-base md:text-xl font-semibold font-urbanist"
         onClick={onClick}
       >
-        Explore all <IoIosArrowForward className="mt-0.5" />
+        Explorez tout <IoIosArrowForward className="mt-0.5" />
       </button>
     </div>
   );

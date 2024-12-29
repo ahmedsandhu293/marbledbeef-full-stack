@@ -4,8 +4,10 @@ import { FaRegCircleCheck } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
 
 import ProgressBar from "../common/progressBar";
-import { useGlobalContext } from "@/app/context/store";
+
 import CartProduct from "./cartProduct";
+
+import { useGlobalContext } from "@/app/context/store";
 
 interface CartProps {
   onClose: () => void;
@@ -14,11 +16,13 @@ interface CartProps {
 const Cart2: React.FC<CartProps> = ({ onClose }) => {
   const { cartItem, setCartItem } = useGlobalContext();
   const [products, setProducts] = useState(cartItem);
+  const [quantity, setQuantity] = useState(1);
 
   const handleRemoveFromCart = (productId: string) => {
     const updatedCart = cartItem.filter(
-      (cartProduct) => cartProduct.node.id !== productId
+      (cartProduct) => cartProduct.node.id !== productId,
     );
+
     setCartItem(updatedCart);
     localStorage.setItem("cartItem", JSON.stringify(cartItem));
   };
@@ -28,7 +32,7 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
       const selectedVariantId = cartProduct.selectedVariant;
 
       const selectedVariant = cartProduct.node.variants.edges.find(
-        (variant: any) => variant.node.id === selectedVariantId
+        (variant: any) => variant.node.id === selectedVariantId,
       )?.node;
 
       const variantPrice = selectedVariant
@@ -37,6 +41,7 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
 
       return accumulator + variantPrice;
     }, 0);
+
     return totalPrice.toFixed(2);
   };
 
@@ -45,6 +50,10 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
   useEffect(() => {
     setProducts(cartItem);
   }, [cartItem]);
+
+  const handleCounterChange = (newValue: number) => {
+    setQuantity(newValue);
+  };
 
   return (
     <div
@@ -87,7 +96,9 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
             <CartProduct
               key={index}
               data={product}
+              quantity={quantity}
               onDelete={handleRemoveFromCart}
+              onQuantityChange={handleCounterChange}
             />
           ))}
         </div>

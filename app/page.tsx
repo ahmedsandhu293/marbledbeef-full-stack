@@ -4,6 +4,7 @@ import Hero from "./components/landingPage/hero";
 import Reviews from "./components/landingPage/review";
 import { getFirstThreeCollectionsQuery } from "./utils/queries";
 import CategoryCards from "./components/landingPage/CategoryCrads";
+
 import { CollectionsResponse } from "@/types/collection";
 
 export default async function Home() {
@@ -11,7 +12,7 @@ export default async function Home() {
 
   try {
     collectionsData = await fetchGraphQLData<CollectionsResponse>(
-      getFirstThreeCollectionsQuery
+      getFirstThreeCollectionsQuery,
     );
   } catch (error) {
     console.error("Error fetching collections data:", error);
@@ -48,11 +49,11 @@ export default async function Home() {
           <div className="flex mt-4 w-full gap-2 flex-col lg:flex-row">
             <input
               className="w-full md:w-auto flex bg-black border border-gold rounded-lg p-2 text-text-primary focus:outline-none"
-              placeholder="Your email address"
+              placeholder="Votre adresse e-mail"
               type="email"
             />
             <button className="bg-gradient-primary text-background-primary rounded-lg px-4 py-2">
-              Subscribe
+              S'abonner
             </button>
           </div>
           <p className="text-white pt-2">

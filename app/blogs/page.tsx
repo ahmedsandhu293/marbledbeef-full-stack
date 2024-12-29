@@ -1,6 +1,8 @@
 // TODO make this server side
 "use client";
+
 import React from "react";
+
 import BlogCard from "../components/common/cards/BlogCard";
 import ComponentButton from "../components/common/buttons/ButtonComponent";
 import HorizontalCarousel from "../components/common/carousel";
@@ -10,6 +12,7 @@ import ModalWrapper from "../components/common/modal/ModalWapper";
 
 const Page = () => {
   const [open, setOpen] = React.useState(false);
+
   return (
     <div className="bg-black">
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 bg-black gap-4 p-4">
@@ -22,12 +25,12 @@ const Page = () => {
       <div className="flex flex-col justify-center space-y-3 items-center py-4">
         <ComponentButton
           className="  !bg-gradient-primary"
-          label="FOLLOWING"
+          label="SUIVANTE"
           onClick={() => {}}
         />
 
         <p className="text-gray-400">Page 1 of 2</p>
-        <p className="text-white text-2xl">Browse more</p>
+        <p className="text-white text-2xl">Parcourir plus</p>
       </div>
 
       <HorizontalCarousel autoPlaySpeed={4000} infinite={true}>
@@ -44,10 +47,10 @@ const Page = () => {
       </HorizontalCarousel>
 
       <ModalWrapper
+        className="max-h-[75%] overflow-y-auto"
+        isClose={true}
         isOpen={open}
         onClose={() => setOpen(false)}
-        isClose={true}
-        className="max-h-[75%] overflow-y-auto"
       >
         <BlogModal />
       </ModalWrapper>
@@ -61,9 +64,9 @@ const BlogModal = () => {
       {/* Recipe Image */}
       <div className="w-full max-w-4xl mx-auto">
         <img
-          src="https://via.placeholder.com/800x400" // Replace with the actual image URL
           alt="Côtes de Wagyu"
           className="rounded-lg w-full object-cover"
+          src="https://via.placeholder.com/800x400" // Replace with the actual image URL
         />
       </div>
 

@@ -4,7 +4,7 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { FiHeart } from "react-icons/fi";
 
 import ComponentButton from "../buttons/ButtonComponent";
-import { Product } from "@/types";
+
 import { CollectionProduct } from "@/types/collection";
 
 const CollectionCard = ({
@@ -50,7 +50,7 @@ const CollectionCard = ({
               {data?.node.title}
             </b>
             <p className="text-default-500 text-text-gold font-urbanist">
-              {data?.node.variants?.edges[0].node.price}
+              €{data?.node.variants?.edges[0].node.price}
             </p>
           </div>
         </CardFooter>
@@ -58,7 +58,7 @@ const CollectionCard = ({
       <div className="flex justify-between items-center w-full gap-4">
         <ComponentButton
           className="!w-full  !bg-gradient-primary"
-          label={buttonLabel ? buttonLabel : "Add to cart"}
+          label={buttonLabel ? buttonLabel : "Ajouter au panier"}
           onClick={() => onAddToCart(data)}
         />
         <FiHeart

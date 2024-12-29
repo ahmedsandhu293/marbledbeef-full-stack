@@ -6,14 +6,14 @@ export const routes = [
     slug: "home",
   },
   {
-    path: "/about",
+    path: "/",
     name: "Promotions",
     icon: "info",
     slug: "about",
   },
   {
     path: "/box-builder",
-    name: "Gift Cards",
+    name: "Cartes cadeaux",
     icon: "book",
     slug: "blog",
   },

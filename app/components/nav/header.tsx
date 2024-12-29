@@ -30,41 +30,47 @@ const Navbar: React.FC = () => {
     <header
       className={`fixed w-full top-0 z-50 backdrop-blur-lg bg-opacity-10 transition-colors duration-300 bg-background-primary text-text-primary`}
     >
-      <div className="container mx-auto flex flex-col md:flex-row text-white justify-between p-6 items-center">
-        <div className="flex items-start gap-3 mb-4 md:mb-0 md:mr-6">
-          <div className="text-yellow-500 text-3xl">
+      <div className="container mx-auto flex  text-white justify-between p-2 md:p-6 items-start">
+        <div className="flex md:items-start gap-3 md:mr-6 flex-col md:flex-row justify-center items-center">
+          <div className="text-yellow-500 text-sm">
             <DeliveryTruck />
           </div>
-          <div>
-            <h3 className="font-bold text-lg">Free Delivery</h3>
-            <p className="text-sm">
-              Over €49 in France, Monaco,
-              <br /> Belgium, Luxembourg
+          <div className="">
+            <h3 className="font-bold text-xs md:text-lg text-center md:text-left">
+              Livraison gratuite
+            </h3>
+            <p className="text-xs md:text-sm hidden md:block">
+              Plus de 49 € en France, Monaco, <br /> Belgique, Luxembourg
             </p>
           </div>
         </div>
 
-        <div className="flex items-start gap-3 mb-4 md:mb-0 md:mr-6">
+        <div className="flex md:items-start gap-3 md:mr-6 flex-col md:flex-row justify-center items-center">
           <div className="text-blue-500 text-3xl">
             <Lock />
           </div>
           <div>
-            <h3 className="font-bold text-lg">Secure Payments</h3>
-            <p className="text-sm">
-              Paypal, Alma, Visa, and Master <br /> with installment plans
+            <h3 className="font-bold text-xs md:text-lg text-center md:text-left">
+              Paiements sécurisés
+            </h3>
+            <p className="text-sm  hidden md:block">
+              PayPal, Alma, Visa et Mastercard <br /> avec des plans de
+              versement
             </p>
           </div>
         </div>
 
         {/* Freshness Guarantee */}
-        <div className="flex items-start gap-3">
+        <div className="flex md:items-start gap-3  md:mr-6 flex-col md:flex-row justify-center items-center">
           <div className="text-yellow-500 text-3xl">
             <Food />
           </div>
           <div>
-            <h3 className="font-bold text-lg">Freshness Guarantee</h3>
-            <p className="text-sm">
-              Enjoy the best hot pies with your <br /> family
+            <h3 className="font-bold text-xs md:text-lg text-center md:text-left">
+              Garantie de fraîcheur
+            </h3>
+            <p className="text-sm  hidden md:block">
+              Profitez des meilleures tartes chaudes avec votre <br /> famille
             </p>
           </div>
         </div>
@@ -74,6 +80,7 @@ const Navbar: React.FC = () => {
         <nav className="relative flex items-center justify-between px-6 py-4 ">
           <Image
             alt="logo"
+            className="w-12 h-12 md:w-32 md:h-32"
             height={100}
             src="/assets/images/logo.png"
             width={100}
@@ -92,7 +99,13 @@ const Navbar: React.FC = () => {
           </div>
 
           <div className="hidden lg:flex items-center space-x-4">
-            <button onClick={() => setIsFavoritesDrawerOpen(true)}>
+            <button
+              onClick={() => {
+                if (favorites.length > 0) {
+                  setIsFavoritesDrawerOpen(true);
+                }
+              }}
+            >
               <span className="relative">
                 <FiHeart size={26} />
                 {favorites.length > 0 && (
@@ -105,7 +118,13 @@ const Navbar: React.FC = () => {
             {/* <button onClick={() => setIsCartDrawerOpen(true)}>
               <BsHandbag size={26} />
             </button> */}
-            <button onClick={() => setIsCart2DrawerOpen(true)}>
+            <button
+              onClick={() => {
+                if (cartItem.length > 0) {
+                  setIsCart2DrawerOpen(true);
+                }
+              }}
+            >
               <span className="relative">
                 <BsHandbag size={26} />
                 {cartItem.length > 0 && (
@@ -119,21 +138,52 @@ const Navbar: React.FC = () => {
             <ComponentButton
               className="!bg-gradient-secondary text-white rounded-xl border border-[#323233]"
               icon={<GoPerson />}
-              label="Sign In"
+              label="Se connecter"
             />
           </div>
 
-          <button
-            aria-label="Toggle Menu"
-            className="lg:hidden text-2xl"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? (
-              <FiX className="text-text-primary" />
-            ) : (
-              <FiMenu className="text-text-primary" />
-            )}
-          </button>
+          <div className="lg:hidden text-2xl flex justify-center items-center gap-3">
+            <button
+              onClick={() => {
+                if (favorites.length > 0) {
+                  setIsFavoritesDrawerOpen(true);
+                }
+              }}
+            >
+              <span className="relative">
+                <FiHeart size={26} />
+                {favorites.length > 0 && (
+                  <span className="absolute top-0 right-0 w-4 h-4 text-xs transform translate-x-1/2 -translate-y-1/2 bg-red-500 rounded-full">
+                    {favorites.length}
+                  </span>
+                )}
+              </span>
+            </button>
+
+            <button
+              onClick={() => {
+                if (cartItem.length > 0) {
+                  setIsCart2DrawerOpen(true);
+                }
+              }}
+            >
+              <span className="relative">
+                <BsHandbag size={26} />
+                {cartItem.length > 0 && (
+                  <span className="absolute top-0 right-0 w-4 h-4 text-xs transform translate-x-1/2 -translate-y-1/2 bg-red-500 rounded-full">
+                    {cartItem.length}
+                  </span>
+                )}
+              </span>
+            </button>
+            <button aria-label="Toggle Menu" onClick={() => setIsOpen(!isOpen)}>
+              {isOpen ? (
+                <FiX className="text-text-primary" />
+              ) : (
+                <FiMenu className="text-text-primary" />
+              )}
+            </button>
+          </div>
         </nav>
       </div>
 
@@ -151,7 +201,7 @@ const Navbar: React.FC = () => {
               </Link>
             ))}
             <button className="px-4 py-2 w-full bg-background-secondary border border-border-primary text-text-primary rounded-lg  transition-colors">
-              Sign In
+              Se connecter
             </button>
           </div>
         </div>

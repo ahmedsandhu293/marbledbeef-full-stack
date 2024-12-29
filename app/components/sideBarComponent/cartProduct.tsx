@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
 
+import QuantitySelector from "../common/quantitySelector";
+
 const CartProduct = ({
   data,
   onDelete,
+  quantity,
+  onQuantityChange,
 }: {
   data: any;
   onDelete: (id: string) => void;
+  quantity: number;
+  onQuantityChange: (quantity: number) => void;
 }) => {
   const [variant, setVariant] = useState();
 
   useEffect(() => {
     const variant = data.node.variants.edges.find(
-      (v: any) => v.node.id === data.selectedVariant
+      (v: any) => v.node.id === data.selectedVariant,
     );
+
     setVariant(variant);
   }, [data]);
 
@@ -30,9 +37,9 @@ const CartProduct = ({
         <div className="flex justify-between items-start gap-6">
           <h4 className="text-sm underline">Boeuf de Kobe Yakiniku</h4>
           <MdDeleteOutline
+            className="cursor-pointer"
             size={24}
             onClick={() => onDelete(data.node.id)}
-            className="cursor-pointer"
           />
         </div>
         <div className="flex justify-start items-start gap-2 ">
@@ -40,13 +47,14 @@ const CartProduct = ({
             <span className="font-bold">{variant?.node?.title}</span>{" "}
           </p>
         </div>
-        <div className="flex justify-start items-start gap-4 border border-gold rounded-lg py-1 px-5 w-28">
-          <span>-</span>
-          <span>3</span>
-          <span>+</span>
+        <div className="flex justify-start items-center gap-4 ">
+          <QuantitySelector
+            initialValue={quantity}
+            onChange={onQuantityChange}
+          />
         </div>
         <div className="flex justify-end text-sm text-gold">
-          <span>{variant?.node?.price}</span>
+          <span>€ {variant?.node?.price}</span>
         </div>
       </div>
     </div>

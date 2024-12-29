@@ -5,14 +5,17 @@ import ComponentButton from "../common/buttons/ButtonComponent";
 import MagicButton from "../common/buttons/MagicButton";
 import SeeMore from "../common/seeMore";
 import ModalWrapper from "../common/modal/ModalWapper";
+import QuantitySelector from "../common/quantitySelector";
 
 import RecipeGenerator from "./RecipeGenerator";
-import QuantitySelector from "../common/quantitySelector";
+
+import { useGlobalContext } from "@/app/context/store";
 const ProductHero = ({ product }: any) => {
   const initialVariant = product?.variants.edges[0]?.node;
   const initialImage = product?.images.edges[0]?.node?.originalSrc;
   const allImages = product?.images.edges;
 
+  const { cartItem, setCartItem } = useGlobalContext();
   const [variant, setVariant] = useState(initialVariant);
   const [image, setImage] = useState(initialImage);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -23,8 +26,9 @@ const ProductHero = ({ product }: any) => {
   const handleVariantChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedVariantId = e.target.value;
     const selectedVariant = product?.variants.edges.find(
-      (v: any) => v.node.id === selectedVariantId
+      (v: any) => v.node.id === selectedVariantId,
     );
+
     setVariant(selectedVariant?.node);
     setSelectedVariant(selectedVariantId);
   };
@@ -45,17 +49,17 @@ const ProductHero = ({ product }: any) => {
     <div className="grid grid-cols-12 gap-4 py-10">
       <div className="col-span-12">
         <h1 className="text-xl font-bold text-white py-4">
-          Welcome / {product?.handle}
+          Bienvenue / {product?.handle}
         </h1>
       </div>
       <div className="col-span-1 md:flex flex-col gap-4 hidden ">
         {allImages?.map((image: any, index: number) => (
           <img
-            alt={image?.node?.id}
             key={index}
-            onClick={() => handleThumbnailClick(image)}
+            alt={image?.node?.id}
             className="w-full rounded-lg border border-gold"
             src={image?.node?.originalSrc}
+            onClick={() => handleThumbnailClick(image)}
           />
         ))}
       </div>
@@ -67,14 +71,14 @@ const ProductHero = ({ product }: any) => {
           src={image}
         />
       </div>
-      <div className="col-span-1 flex  gap-4 md:hidden ">
+      <div className="col-span-4 flex  gap-4 md:hidden ">
         {allImages?.map((image: any, index: number) => (
           <img
             key={index}
             alt={image?.node?.id}
-            onClick={() => handleThumbnailClick(image)}
             className="w-full rounded-lg border border-gold"
             src={image?.node?.originalSrc}
+            onClick={() => handleThumbnailClick(image)}
           />
         ))}
       </div>
@@ -82,7 +86,9 @@ const ProductHero = ({ product }: any) => {
       <div className="col-span-12 md:col-span-6 text-white">
         <div className="flex flex-col justify-between items-center w-full h-full">
           <div>
-            <h2 className="text-4xl font-semibold">{product?.title}</h2>
+            <h2 className="text-xl md:text-4xl font-semibold">
+              {product?.title}
+            </h2>
             <SeeMore
               contentWordsCount={30}
               isExpanded={isExpanded}
@@ -92,7 +98,7 @@ const ProductHero = ({ product }: any) => {
             <div className="py-2 flex justify-start items-center gap-4">
               <ComponentButton
                 className="!bg-gradient-primary"
-                label={isExpanded ? "Show less..." : "Show more..."}
+                label={isExpanded ? "Afficher moins..." : "Afficher plus..."}
                 onClick={handleExpand}
               />
 
@@ -102,7 +108,7 @@ const ProductHero = ({ product }: any) => {
 
           <div className="w-full space-y-4">
             <div className="grid grid-cols-12 gap-4 w-full">
-              <div className="col-span-3">
+              <div className="col-span-12 md:col-span-3">
                 <div className="flex justify-start items-start gap-2 ">
                   <p className="text-sm ">
                     <span className="font-bold">{variant?.price}</span>{" "}
@@ -112,9 +118,9 @@ const ProductHero = ({ product }: any) => {
                   </p>
                 </div>
               </div>
-              <div className="col-span-3">
+              <div className="col-span-6 md:col-span-3">
                 <div className="flex justify-center items-center border border-gold text-white text-sm px-2 py-1 rounded-lg">
-                  Weight (kg)
+                  Poids (kg)
                 </div>
               </div>
               <div className="col-span-6">
@@ -127,28 +133,31 @@ const ProductHero = ({ product }: any) => {
                     (variant: any, index: number) => (
                       <option
                         key={variant.node.id}
-                        value={variant.node.id}
                         className="bg-black"
+                        value={variant.node.id}
                       >
                         {variant?.node?.title}
                       </option>
-                    )
+                    ),
                   )}
                 </select>
               </div>
             </div>
             <div className="grid grid-cols-12 gap-4 w-full">
-              <div className="col-span-3">
+              <div className="col-span-12 sm:col-span-3">
                 <QuantitySelector
                   initialValue={quantity}
                   onChange={handleCounterChange}
                 />
               </div>
 
-              <div className="col-span-9">
+              <div className="col-span-12 sm:col-span-9">
                 <div className="flex justify-end items-center gap-4 w-full">
-                  <button className="!bg-gradient-primary text-black bg-zinc-200 text-sm px-2 py-1 rounded-lg w-full">
-                    Add To Cart
+                  <button
+                    className="!bg-gradient-primary text-black bg-zinc-200 text-sm px-2 py-1 rounded-lg w-full"
+                    onClick={() => {}}
+                  >
+                    Ajouter au panier
                   </button>
                 </div>
               </div>

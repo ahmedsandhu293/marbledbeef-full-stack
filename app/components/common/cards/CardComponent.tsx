@@ -33,7 +33,7 @@ const CardComponent: React.FC<CardProps> = ({
             src={
               data?.images?.edges[0]
                 ? data?.images.edges[0].node.originalSrc
-                : ""
+                : data.img
             }
             width="100%"
           />
@@ -43,8 +43,8 @@ const CardComponent: React.FC<CardProps> = ({
             <b className="truncate text-text-gold font-urbanist">
               {data.title}
             </b>
-            <p className="text-default-500 text-text-gold font-urbanist">
-              {data.variants?.edges[0].node.price}
+            <p className="text-default-500 text-text-gold font-urbanist flex">
+              €{data.variants?.edges[0].node.price}
             </p>
           </div>
         </CardFooter>
