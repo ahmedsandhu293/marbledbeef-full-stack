@@ -80,10 +80,10 @@ const Navbar: React.FC = () => {
         <nav className="relative flex items-center justify-between px-6 py-4 ">
           <Image
             alt="logo"
-            className="w-12 h-12 md:w-32 md:h-32"
-            height={100}
+            className="w-12 h-12 md:w-16 md:h-16"
+            height={50}
             src="/assets/images/logo.png"
-            width={100}
+            width={50}
           />
 
           <div className="hidden lg:flex space-x-4 items-center absolute left-1/2 transform -translate-x-1/2">
