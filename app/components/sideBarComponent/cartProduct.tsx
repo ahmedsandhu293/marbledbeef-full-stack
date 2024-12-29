@@ -14,7 +14,7 @@ const CartProduct = ({
   quantity: number;
   onQuantityChange: (quantity: number) => void;
 }) => {
-  const [variant, setVariant] = useState();
+  const [variant, setVariant] = useState<any>();
 
   useEffect(() => {
     const variant = data.node.variants.edges.find(

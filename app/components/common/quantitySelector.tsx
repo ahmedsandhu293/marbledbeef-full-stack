@@ -27,11 +27,11 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({
 
   return (
     <div className="flex justify-center items-center gap-4 border border-gold rounded-lg py-0.5 px-5 w-auto">
-      <span className="cursor-pointer" onClick={handleDecrement}>
+      <span className="cursor-pointer" role="button" onClick={handleDecrement}>
         -
       </span>
       <span>{count}</span>
-      <span className="cursor-pointer" onClick={handleIncrement}>
+      <span className="cursor-pointer" role="button" onClick={handleIncrement}>
         +
       </span>
     </div>

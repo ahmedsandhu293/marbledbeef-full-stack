@@ -45,7 +45,7 @@ const BoxBuilder = ({ data }: { data?: Product[] }) => {
         </p>
         <p className="text-lg md:text-2xl text-center md:text-left font-normal bg-transparent">
           Composez votre Box : 3, 5 ou 10 pièces et régalez-vous avec nos
-          viandes d'excellence. Réduction appliquée en caisse 
+          viandes d&apos;excellence. Réduction appliquée en caisse 
         </p>
         <div className="py-8 flex justify-center items-center gap-4 flex-col md:flex-row">
           <ComponentButton
@@ -97,10 +97,10 @@ const BoxBuilder = ({ data }: { data?: Product[] }) => {
                 >
                   {item ? (
                     <Image
-                      alt={item.handle}
+                      alt={item.title || ''}
                       className="w-full object-cover h-full rounded-md"
                       height={100}
-                      src={item.images.edges[0].node.originalSrc} // Ensure `Product` has an `image` field
+                      src={item?.images?.edges[0].node.originalSrc || ""} // Ensure `Product` has an `image` field
                       width={100}
                     />
                   ) : (

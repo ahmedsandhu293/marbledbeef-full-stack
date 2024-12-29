@@ -21,7 +21,7 @@ const CardComponent: React.FC<CardProps> = ({
         className="w-full bg-transparent"
         shadow="none"
         onClick={() => {
-          onClick(data);
+          onClick && onClick(data);
         }}
       >
         <CardBody className="overflow-visible p-0 ">
@@ -53,14 +53,14 @@ const CardComponent: React.FC<CardProps> = ({
         <ComponentButton
           className="!w-full  !bg-gradient-primary"
           label={buttonLabel ? buttonLabel : "Add to cart"}
-          onClick={() => onAddToCart(data)}
+          onClick={() => onAddToCart && onAddToCart(data)}
         />
         <FiHeart
           className="text-text-gold cursor-pointer"
           size={28}
           onClick={(e) => {
             e.stopPropagation();
-            onAddToFavorite(data);
+            onAddToFavorite && onAddToFavorite(data);
           }}
         />
       </div>

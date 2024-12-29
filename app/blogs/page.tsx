@@ -94,7 +94,7 @@ const BlogModal = () => {
         </h2>
         <ul className="mt-3 list-disc pl-5">
           <li>Côtes de Wagyu (900g - 1.3kg)</li>
-          <li>Huile d'olive – 60ml</li>
+          <li>Huile d&apos;olive – 60ml</li>
           <li>Sel et poivre noir – 1 cuil. à café de chaque</li>
           {/* Add more ingredients */}
         </ul>

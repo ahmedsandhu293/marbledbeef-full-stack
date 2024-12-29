@@ -26,7 +26,7 @@ const ProductHero = ({ product }: any) => {
   const handleVariantChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedVariantId = e.target.value;
     const selectedVariant = product?.variants.edges.find(
-      (v: any) => v.node.id === selectedVariantId,
+      (v: any) => v.node.id === selectedVariantId
     );
 
     setVariant(selectedVariant?.node);
@@ -54,13 +54,13 @@ const ProductHero = ({ product }: any) => {
       </div>
       <div className="col-span-1 md:flex flex-col gap-4 hidden ">
         {allImages?.map((image: any, index: number) => (
-          <img
-            key={index}
-            alt={image?.node?.id}
-            className="w-full rounded-lg border border-gold"
-            src={image?.node?.originalSrc}
-            onClick={() => handleThumbnailClick(image)}
-          />
+          <div key={index} role="button" onClick={() => handleThumbnailClick(image)}>
+            <img
+              alt={image?.node?.id}
+              className="w-full rounded-lg border border-gold"
+              src={image?.node?.originalSrc}
+            />
+          </div>
         ))}
       </div>
       {/* Main image column */}
@@ -73,13 +73,13 @@ const ProductHero = ({ product }: any) => {
       </div>
       <div className="col-span-4 flex  gap-4 md:hidden ">
         {allImages?.map((image: any, index: number) => (
-          <img
-            key={index}
-            alt={image?.node?.id}
-            className="w-full rounded-lg border border-gold"
-            src={image?.node?.originalSrc}
-            onClick={() => handleThumbnailClick(image)}
-          />
+          <div key={index} role="button" onClick={() => handleThumbnailClick(image)}>
+            <img
+              alt={image?.node?.id}
+              className="w-full rounded-lg border border-gold"
+              src={image?.node?.originalSrc}
+            />
+          </div>
         ))}
       </div>
 
@@ -138,7 +138,7 @@ const ProductHero = ({ product }: any) => {
                       >
                         {variant?.node?.title}
                       </option>
-                    ),
+                    )
                   )}
                 </select>
               </div>

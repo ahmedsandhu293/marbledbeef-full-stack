@@ -13,7 +13,7 @@ const FavoriteProduct = ({
   data: any;
   onDelete: (id: string) => void;
 }) => {
-  const [variant, setVariant] = useState();
+  const [variant, setVariant] = useState<any>();
   const { cartItem, setCartItem } = useGlobalContext();
 
   useEffect(() => {

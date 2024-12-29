@@ -43,22 +43,22 @@ export interface Variant {
 }
 
 export interface Product {
-  id: string;
-  tags: string[];
-  title: string;
-  description: string;
-  handle: string;
-  priceRangeV2: {
+  id?: string;
+  tags?: string[];
+  title?: string;
+  description?: string;
+  handle?: string;
+  priceRangeV2?: {
     minVariantPrice: {
       amount: string;
       currencyCode: string;
     };
   };
-  variants: {
+  variants?: {
     edges: Variant[];
   };
-  category: string | null;
-  collections: {
+  category?: string | null;
+  collections?: {
     edges: {
       node: {
         id: string;
@@ -66,7 +66,8 @@ export interface Product {
       };
     }[];
   };
-  images: {
+  images?: {
     edges: ProductImage[];
   };
+  img?: string
 }

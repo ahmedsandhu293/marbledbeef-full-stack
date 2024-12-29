@@ -53,7 +53,7 @@ export default async function Home() {
               type="email"
             />
             <button className="bg-gradient-primary text-background-primary rounded-lg px-4 py-2">
-              S'abonner
+              S&apos;abonner
             </button>
           </div>
           <p className="text-white pt-2">
