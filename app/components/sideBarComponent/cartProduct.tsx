@@ -18,14 +18,14 @@ const CartProduct = ({
 
   useEffect(() => {
     const variant = data.node.variants.edges.find(
-      (v: any) => v.node.id === data.selectedVariant,
+      (v: any) => v.node.id === data.selectedVariant
     );
 
     setVariant(variant);
   }, [data]);
 
   return (
-    <div className="flex items-start p-3 rounded-md gap-3 md:flex-row flex-col ">
+    <div className="flex items-center md:items-start md:p-3 rounded-md gap-3 md:flex-row flex-col ">
       <div className="w-20 h-20 bg-cover bg-center rounded-md overflow-hidden border border-gold">
         <img
           alt="Boeuf de Kobe"
@@ -47,7 +47,7 @@ const CartProduct = ({
             <span className="font-bold">{variant?.node?.title}</span>{" "}
           </p>
         </div>
-        <div className="flex justify-start items-center gap-4 ">
+        <div className="flex justify-center md:items-start items-center gap-4 ">
           <QuantitySelector
             initialValue={quantity}
             onChange={onQuantityChange}

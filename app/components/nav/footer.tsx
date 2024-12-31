@@ -127,7 +127,7 @@ export default function Footer() {
               src="/assets/images/payments-icons.png"
               width={382}
             />
-            <p className="text-white text-lg font-urbanist">
+            <p className="text-white text-lg font-urbanist text-center">
               Paiements sécurisés et protégés à 100%
             </p>
           </div>

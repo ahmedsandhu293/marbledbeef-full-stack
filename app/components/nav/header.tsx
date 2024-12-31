@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
     >
       <div className="container mx-auto flex  text-white justify-between p-2 md:p-6 items-start">
         <div className="flex md:items-start gap-3 md:mr-6 flex-col md:flex-row justify-center items-center">
-          <div className="text-yellow-500 text-sm">
+          <div className="text-yellow-500 text-sm h-10">
             <DeliveryTruck />
           </div>
           <div className="">
@@ -46,7 +46,7 @@ const Navbar: React.FC = () => {
         </div>
 
         <div className="flex md:items-start gap-3 md:mr-6 flex-col md:flex-row justify-center items-center">
-          <div className="text-blue-500 text-3xl">
+          <div className="text-blue-500 text-3xl h-10">
             <Lock />
           </div>
           <div>
@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
 
         {/* Freshness Guarantee */}
         <div className="flex md:items-start gap-3  md:mr-6 flex-col md:flex-row justify-center items-center">
-          <div className="text-yellow-500 text-3xl">
+          <div className="text-yellow-500 text-3xl h-10">
             <Food />
           </div>
           <div>
@@ -80,7 +80,7 @@ const Navbar: React.FC = () => {
         <nav className="relative flex items-center justify-between px-6 py-4 ">
           <Image
             alt="logo"
-            className="w-12 h-12 md:w-16 md:h-16"
+            className="w-24 h-24 md:w-16 md:h-16"
             height={50}
             src="/assets/images/logo.png"
             width={50}

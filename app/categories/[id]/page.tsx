@@ -9,7 +9,7 @@ export default async function Home({ params }: { params: { id: string } }) {
 
   const data = await fetchGraphQLData<any>(
     getCollectionByHandleQuery,
-    variables,
+    variables
   );
 
   return (
@@ -18,7 +18,7 @@ export default async function Home({ params }: { params: { id: string } }) {
 
       {/* <HorizentalCarouselCategory collectionsData={collectionsData} /> */}
 
-      <section className="container mx-auto w-full flex flex-col items-center justify-center px-4 gap-4 py-8 md:py-10">
+      <section className="container mx-auto w-full flex flex-col items-center justify-center md:px-4 gap-4 py-8 md:py-10">
         <Products collection={data} />
       </section>
     </div>

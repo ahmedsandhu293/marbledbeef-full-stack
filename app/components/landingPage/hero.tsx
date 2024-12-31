@@ -49,7 +49,7 @@ const Hero = () => {
               autoPlay
               loop
               muted
-              className="absolute inset-0 w-full h-full object-cover rounded-l-xl"
+              className="absolute inset-0 w-full h-full object-cover md:rounded-l-xl rounded-xl "
               src="/assets/video/beef.mp4"
             />
           </div>
