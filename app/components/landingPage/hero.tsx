@@ -55,7 +55,7 @@ const Hero = () => {
           </div>
 
           {/* Content Section */}
-          <div className="flex flex-col justify-center bg-black text-white p-8 md:w-1/2 rounded-r-xl font-urbanist">
+          <div className="flex flex-col justify-center bg-black text-white p-8 md:w-1/2 rounded-xl md:rounded-r-xl font-urbanist">
             <h4 className="text-lg pb-8 font-medium uppercase  ">
               À propos de nous
             </h4>
