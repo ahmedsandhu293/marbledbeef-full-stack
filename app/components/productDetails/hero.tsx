@@ -54,7 +54,11 @@ const ProductHero = ({ product }: any) => {
       </div>
       <div className="col-span-1 md:flex flex-col gap-4 hidden ">
         {allImages?.map((image: any, index: number) => (
-          <div key={index} role="button" onClick={() => handleThumbnailClick(image)}>
+          <div
+            key={index}
+            role="button"
+            onClick={() => handleThumbnailClick(image)}
+          >
             <img
               alt={image?.node?.id}
               className="w-full rounded-lg border border-gold"
@@ -71,16 +75,23 @@ const ProductHero = ({ product }: any) => {
           src={image}
         />
       </div>
-      <div className="col-span-4 flex  gap-4 md:hidden ">
-        {allImages?.map((image: any, index: number) => (
-          <div key={index} role="button" onClick={() => handleThumbnailClick(image)}>
-            <img
-              alt={image?.node?.id}
-              className="w-full rounded-lg border border-gold"
-              src={image?.node?.originalSrc}
-            />
-          </div>
-        ))}
+      <div className="col-span-12 flex flex-wrap gap-2 md:hidden">
+        <div className="grid grid-cols-3 gap-2 w-full">
+          {allImages?.map((image: any, index: number) => (
+            <div
+              key={index}
+              role="button"
+              className="flex justify-center items-center"
+              onClick={() => handleThumbnailClick(image)}
+            >
+              <img
+                alt={image?.node?.id}
+                className="w-full h-full rounded-lg border border-gold"
+                src={image?.node?.originalSrc}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="col-span-12 md:col-span-6 text-white">

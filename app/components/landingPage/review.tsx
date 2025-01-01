@@ -61,7 +61,7 @@ const Reviews: React.FC = () => {
       <h2 className="text-2xl text-white border-b border-gold pb-16 font-urbanist">
         Affichage de 16 sur 16 produits
       </h2>
-      <div className=" flex items-center justify-center p-4">
+      <div className=" flex items-center justify-center  md:p-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {reviews.map((review, index) => (
             <ReviewCard key={index} review={review} />

@@ -26,7 +26,7 @@ const Products = ({ collection }: { collection: any }) => {
     }
 
     const isProductInCart = cartItem.some(
-      (cartProduct) => cartProduct.node.id === productId,
+      (cartProduct) => cartProduct.node.id === productId
     );
 
     if (!isProductInCart) {
@@ -56,7 +56,7 @@ const Products = ({ collection }: { collection: any }) => {
     }
 
     const isProductInCart = favorites.some(
-      (favoritesProduct) => favoritesProduct.node.id === productId,
+      (favoritesProduct) => favoritesProduct.node.id === productId
     );
 
     if (!isProductInCart) {

@@ -13,13 +13,13 @@ const PromoNotification = dynamic(
   () => import("./components/common/flotingBars/promoNotification"),
   {
     ssr: false,
-  },
+  }
 );
 const Chatbot = dynamic(
   () => import("./components/common/flotingBars/chatBot"),
   {
     ssr: false,
-  },
+  }
 );
 
 import Navbar from "./components/nav/header";
@@ -58,12 +58,12 @@ export default function RootLayout({
       <body
         className={clsx(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
+          fontSans.variable
         )}
       >
         <GlobalContextProvider>
           <Navbar />
-          <main className="pt-40 md:pt-48  flex-grow">{children}</main>
+          <main className="pt-48  flex-grow">{children}</main>
           <Footer />
 
           <Chatbot />
