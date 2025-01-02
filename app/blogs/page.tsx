@@ -24,7 +24,7 @@ const Page = () => {
       </div>
       <div className="flex flex-col justify-center space-y-3 items-center py-4">
         <ComponentButton
-          className="  !bg-gradient-primary"
+          className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300 "
           label="SUIVANTE"
           onClick={() => {}}
         />
@@ -77,7 +77,7 @@ const BlogModal = () => {
         </h1>
         <div className="flex justify-center items-center gap-4 flex-wrap">
           <ComponentButton
-            className="!bg-gradient-primary px-4 py-2 rounded-lg"
+            className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300  px-4 py-2 rounded-lg"
             label="Sauve recette"
             onClick={() => {}}
           />

@@ -41,7 +41,7 @@ const PromoNotification: React.FC = () => {
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="w-full flex justify-end">
               <button
-                className="bg-[#073411] border border-border-primary text-white p-3 rounded-md shadow-lg transition-all duration-500 ease-in-out"
+                className="bg-green-primary border border-border-primary text-white p-3 rounded-md shadow-lg transition-all duration-500 ease-in-out"
                 onClick={() => setIsExpanded(true)}
               >
                 <TbSpeakerphone color="#fff" size={24} />
@@ -53,7 +53,7 @@ const PromoNotification: React.FC = () => {
         <div className="fixed inset-x-0 md:right-14 bottom-0 pb-2 sm:pb-5 z-50">
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div
-              className={`rounded-lg p-2 sm:p-3 shadow-lg bg-zinc-50 dark:bg-gray-primary border border-gray-300 dark:border-gray-700 z-40 transition-all duration-500 ease-in-out ${
+              className={`rounded-lg p-2 sm:p-3 shadow-lg bg-zinc-800 dark:bg-gray-primary border border-zinc-700 z-40 transition-all duration-500 ease-in-out ${
                 isExpanded
                   ? "transform translate-y-0"
                   : "transform -translate-y-full"
@@ -61,19 +61,22 @@ const PromoNotification: React.FC = () => {
             >
               <div className="flex flex-wrap items-center justify-between">
                 <div className="flex w-0 flex-1 items-center">
-                  <span className="flex rounded-lg border border-border-primary p-2">
-                    <TbSpeakerphone className="text-zinc-900 " size={24} />
+                  <span className="flex rounded-lg border border-gradient-gold-200 p-2">
+                    <TbSpeakerphone
+                      className="text-gradient-gold-100 "
+                      size={24}
+                    />
                   </span>
                   <div
                     ref={containerRef}
                     className="ml-3 overflow-hidden relative w-full h-8"
                     style={{ maxHeight: "2rem" }}
                   >
-                    <div className="text-zinc-900 dark:text-white">
+                    <div className="text-gradient-gold-100">
                       {promoMessages.map((message, index) => (
                         <div
                           key={index}
-                          className={`transition-all duration-500 ease-in-out text-xs md:text-base text-black ${
+                          className={`transition-all duration-500 ease-in-out text-xs md:text-base text-gradient-gold-100 ${
                             currentIndex === index ? "visible" : "hidden"
                           }`}
                           style={{ height: "1.8rem" }}
@@ -87,12 +90,12 @@ const PromoNotification: React.FC = () => {
 
                 <div className="order-3 mt-2 w-full flex-shrink-0 sm:order-2 sm:mt-0 sm:w-auto flex justify-center items-center gap-2">
                   <ComponentButton
-                    className="!text-xs !md:text-sm"
+                    className="!text-xs !md:text-sm !bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300"
                     label="Explorer Nos Produits"
                   />
 
                   <ComponentButton
-                    className="!text-xs !md:text-sm"
+                    className="!text-xs !md:text-sm !bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300"
                     label="Box Grillande"
                   />
                 </div>
@@ -103,7 +106,7 @@ const PromoNotification: React.FC = () => {
                     type="button"
                     onClick={() => setIsExpanded(false)}
                   >
-                    <RxCross2 className="text-zinc-900" size={24} />
+                    <RxCross2 className="text-zinc-300" size={24} />
                   </button>
                 </div>
               </div>

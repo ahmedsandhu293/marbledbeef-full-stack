@@ -108,7 +108,7 @@ const ProductHero = ({ product }: any) => {
 
             <div className="py-2 flex justify-start items-center gap-4">
               <ComponentButton
-                className="!bg-gradient-primary"
+                className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300 "
                 label={isExpanded ? "Afficher moins..." : "Afficher plus..."}
                 onClick={handleExpand}
               />
@@ -165,7 +165,7 @@ const ProductHero = ({ product }: any) => {
               <div className="col-span-12 sm:col-span-9">
                 <div className="flex justify-end items-center gap-4 w-full">
                   <button
-                    className="!bg-gradient-primary text-black bg-zinc-200 text-sm px-2 py-1 rounded-lg w-full"
+                    className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300  text-black bg-zinc-200 text-sm px-2 py-1 rounded-lg w-full"
                     onClick={() => {}}
                   >
                     Ajouter au panier

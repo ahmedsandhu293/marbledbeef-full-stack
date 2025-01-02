@@ -20,7 +20,7 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
 
   const handleRemoveFromCart = (productId: string) => {
     const updatedCart = cartItem.filter(
-      (cartProduct) => cartProduct.node.id !== productId,
+      (cartProduct) => cartProduct.node.id !== productId
     );
 
     setCartItem(updatedCart);
@@ -32,7 +32,7 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
       const selectedVariantId = cartProduct.selectedVariant;
 
       const selectedVariant = cartProduct.node.variants.edges.find(
-        (variant: any) => variant.node.id === selectedVariantId,
+        (variant: any) => variant.node.id === selectedVariantId
       )?.node;
 
       const variantPrice = selectedVariant
@@ -112,7 +112,7 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
               <span className="font-bold text-red-primary">€{total}</span>{" "}
             </p>
           </div>
-          <button className="!bg-gradient-primary text-black text-sm md:text-lg font-bold w-full py-3 rounded-2xl">
+          <button className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300  text-black text-sm md:text-lg font-bold w-full py-3 rounded-2xl">
             Continuez Vos Achats
           </button>
         </div>

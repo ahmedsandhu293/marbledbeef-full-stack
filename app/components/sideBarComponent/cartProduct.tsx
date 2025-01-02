@@ -37,7 +37,7 @@ const CartProduct = ({
         <div className="flex justify-between items-start gap-6">
           <h4 className="text-sm underline">Boeuf de Kobe Yakiniku</h4>
           <MdDeleteOutline
-            className="cursor-pointer"
+            className="cursor-pointer text-red-primary"
             size={24}
             onClick={() => onDelete(data.node.id)}
           />

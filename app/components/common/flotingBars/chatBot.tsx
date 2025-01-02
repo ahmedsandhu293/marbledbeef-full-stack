@@ -89,7 +89,7 @@ const Chatbot: React.FC = () => {
     <div className="fixed right-0 bottom-0 pb-2 sm:pb-5 z-50 font-urbanist">
       <div className="relative mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <button
-          className="bg-[#CF2D2D] text-white dark:text-zinc-50 p-3 rounded-md shadow-lg transition-all duration-500 ease-in-out"
+          className="bg-red-primary text-white dark:text-zinc-50 p-3 rounded-md shadow-lg transition-all duration-500 ease-in-out"
           onClick={() => {
             toggleChatbot();
             if (isOpen) setShowPrebuiltQuestions(false);

@@ -18,7 +18,7 @@ const FavoriteProduct = ({
 
   useEffect(() => {
     const variant = data.node.variants.edges.find(
-      (v: any) => v.node.id === data.selectedVariant,
+      (v: any) => v.node.id === data.selectedVariant
     );
 
     setVariant(variant);
@@ -27,7 +27,7 @@ const FavoriteProduct = ({
   const handleVariantChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedVariantId = e.target.value;
     const selectedVariant = data.node.variants.edges.find(
-      (v: any) => v.node.id === selectedVariantId,
+      (v: any) => v.node.id === selectedVariantId
     );
 
     setVariant(selectedVariant);
@@ -46,7 +46,7 @@ const FavoriteProduct = ({
     }
 
     const isProductInCart = cartItem.some(
-      (cartProduct) => cartProduct.node.id === productId,
+      (cartProduct) => cartProduct.node.id === productId
     );
 
     if (!isProductInCart) {
@@ -77,7 +77,7 @@ const FavoriteProduct = ({
         <div className="flex justify-between items-start gap-1">
           <h4 className="text-sm underline">{data?.node?.title}</h4>
           <MdDeleteOutline
-            className="cursor-pointer"
+            className="cursor-pointer text-red-primary"
             size={24}
             onClick={() => onDelete(data.node.id)}
           />
@@ -102,7 +102,7 @@ const FavoriteProduct = ({
             ))}
           </select>
           <ComponentButton
-            className="!bg-gradient-primary !py-2 h-8"
+            className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300  !py-2 h-8"
             label="Ajouter"
             onClick={() => handleAddtocart(data)}
           />

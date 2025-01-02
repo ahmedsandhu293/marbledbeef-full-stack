@@ -98,7 +98,7 @@ const Cart: React.FC<CartProps> = ({ onClose }) => {
                       <option value="500g">500 g</option>
                     </select>
                     <ComponentButton
-                      className="!bg-gradient-primary !py-2 h-8"
+                      className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300  !py-2 h-8"
                       label="Ajouter"
                     />
                   </div>
@@ -109,7 +109,7 @@ const Cart: React.FC<CartProps> = ({ onClose }) => {
 
         {/* Continue Button */}
         <div className="p-2 md:p-4 border-t border-gold">
-          <button className="!bg-gradient-primary  text-black text-sm md:text-lg font-bold w-full py-3 rounded-2xl">
+          <button className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300  text-black text-sm md:text-lg font-bold w-full py-3 rounded-2xl">
             Continuez Vos Achats
           </button>
         </div>

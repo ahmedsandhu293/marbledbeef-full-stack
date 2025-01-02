@@ -51,7 +51,7 @@ const CardComponent: React.FC<CardProps> = ({
       </Card>
       <div className="flex justify-between items-center w-full gap-4">
         <ComponentButton
-          className="!w-full  !bg-gradient-primary"
+          className="!w-full  !bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300 "
           label={buttonLabel ? buttonLabel : "Add to cart"}
           onClick={() => onAddToCart && onAddToCart(data)}
         />

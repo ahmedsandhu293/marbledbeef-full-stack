@@ -34,8 +34,22 @@ module.exports = {
         "button-primary": "var(--button-primary)",
 
         // normal colors
-        'red-primary': 'var(--red-primary)',
+        'red-primary': '#B22222',
         'red-secondary': 'var(--red-secondary)',
+
+        'green-primary': '#41C683',
+
+        "gradient-gold": {
+          100: '#B28A3B',
+          200: '#D4AF37',
+          300: '#F2D14A',
+          400: '#F9E29B',
+
+        },
+
+      },
+      boxShadow: {
+        glow: '0 0 15px rgba(249, 226, 155, 0.7)',
       },
       backgroundImage: {
         'gradient-primary': 'linear-gradient(90deg, rgba(150,119,49,1) 0%, rgba(191,164,59,1) 100%)',

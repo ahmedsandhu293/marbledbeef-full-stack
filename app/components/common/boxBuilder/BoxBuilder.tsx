@@ -11,7 +11,7 @@ import { Product } from "@/types";
 const BoxBuilder = ({ data }: { data?: Product[] }) => {
   const [giftCount, setGiftCount] = useState(3);
   const [boxItems, setBoxItems] = useState<(Product | null)[]>(
-    Array(giftCount).fill(null),
+    Array(giftCount).fill(null)
   );
 
   const handleAdd = (item: Product) => {
@@ -49,20 +49,20 @@ const BoxBuilder = ({ data }: { data?: Product[] }) => {
         </p>
         <div className="py-8 flex justify-center items-center gap-4 flex-col md:flex-row">
           <ComponentButton
-            className="!bg-gradient-primary"
+            className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300 "
             label="3 piéces"
             offPerc="30% Off"
             onClick={() => handleGiftCountChange(3)}
           />
 
           <ComponentButton
-            className="!bg-gradient-primary"
+            className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300 "
             label="5 piéces"
             offPerc="30% Off"
             onClick={() => handleGiftCountChange(5)}
           />
           <ComponentButton
-            className="!bg-gradient-primary"
+            className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300 "
             label="10 piéces"
             offPerc="30% Off"
             onClick={() => handleGiftCountChange(10)}
@@ -97,7 +97,7 @@ const BoxBuilder = ({ data }: { data?: Product[] }) => {
                 >
                   {item ? (
                     <Image
-                      alt={item.title || ''}
+                      alt={item.title || ""}
                       className="w-full object-cover h-full rounded-md"
                       height={100}
                       src={item?.images?.edges[0].node.originalSrc || ""} // Ensure `Product` has an `image` field
@@ -117,7 +117,7 @@ const BoxBuilder = ({ data }: { data?: Product[] }) => {
               </p>
             </div>
             <ComponentButton
-              className="!bg-gradient-primary font-bold px-8 mb-8"
+              className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300  font-bold px-8 mb-8"
               label="Ajouter Au Panier"
             />
           </div>
