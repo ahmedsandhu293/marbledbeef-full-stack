@@ -73,7 +73,7 @@ export default function RootLayout({
             showSpinner={true}
             easing="ease"
             speed={200}
-            shadow="0 0 10px #2299DD,0 0 5px #2299DD"
+            shadow="0 0 10px #B28A3B,0 0 5px #B28A3B"
             template='<div class="bar" role="bar"><div class="peg"></div></div> 
             
             <div class="spinner" role="spinner"><div class="spinner-icon"></div></div>'
