@@ -10,6 +10,7 @@ import CollectionCard from "../common/cards/CollectionsCard";
 
 import { CollectionProduct, CollectionsResponse } from "@/types/collection";
 import { useGlobalContext } from "@/app/context/store";
+import Link from "next/link";
 
 const Products = ({ collections }: { collections: CollectionsResponse }) => {
   const categories = collections.data.collections.edges;
@@ -43,7 +44,7 @@ const Products = ({ collections }: { collections: CollectionsResponse }) => {
     }
 
     const isProductInCart = cartItem.some(
-      (cartProduct) => cartProduct.node.id === productId,
+      (cartProduct) => cartProduct.node.id === productId
     );
 
     if (!isProductInCart) {
@@ -74,7 +75,7 @@ const Products = ({ collections }: { collections: CollectionsResponse }) => {
     }
 
     const isProductInCart = favorites.some(
-      (favoritesProduct) => favoritesProduct.node.id === productId,
+      (favoritesProduct) => favoritesProduct.node.id === productId
     );
 
     if (!isProductInCart) {
@@ -92,27 +93,24 @@ const Products = ({ collections }: { collections: CollectionsResponse }) => {
     }
   };
 
-  const handleClick = (item: { node: { handle: string } }) => {
-    push(`/${item.node.handle}`);
-  };
-
   return (
     <div className="w-full space-y-4 md:space-y-8">
       {categories.map((category, index) => (
         <div key={index} className="w-full font-urbanist">
-          <CategoriesHeading
-            title={category.node.title}
-            onClick={() => push(`/categories/${category.node.handle}`)}
-          />
+          <Link href={`/categories/${category.node.handle}`}>
+            <CategoriesHeading title={category.node.title} onClick={() => {}} />
+          </Link>
           <HorizontalCarousel infinite autoPlaySpeed={4000}>
             {category.node.products.edges.map((product, productIndex) => (
               <div key={productIndex} className="p-2 text-center">
-                <CollectionCard
-                  data={product}
-                  onAddToCart={handleAddToCart}
-                  onAddToFavorite={handleAddToFavorite}
-                  onClick={handleClick}
-                />
+                <Link href={`${product.node.handle}`}>
+                  <CollectionCard
+                    data={product}
+                    onAddToCart={handleAddToCart}
+                    onAddToFavorite={handleAddToFavorite}
+                    onClick={() => {}}
+                  />
+                </Link>
               </div>
             ))}
           </HorizontalCarousel>

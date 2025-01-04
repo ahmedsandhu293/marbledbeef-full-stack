@@ -7,6 +7,7 @@ import { getAllProductsByHandle } from "@/app/utils/queries";
 
 const page = async ({ params }: { params: { productsId: string } }) => {
   const handle = params?.productsId;
+
   const variables = { handle };
 
   const json = await fetchGraphQLData<any>(getAllProductsByHandle, variables);
