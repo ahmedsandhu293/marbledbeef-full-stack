@@ -40,16 +40,16 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/templates">Templates</Link>
+                <Link href="/">Modèles</Link>
               </li>
               <li>
-                <Link href="/backgrounds">Backgrounds</Link>
+                <Link href="/">Arrière-plans</Link>
               </li>
               <li>
-                <Link href="/mockups">Mockups</Link>
+                <Link href="/">Maquettes</Link>
               </li>
               <li>
-                <Link href="/fonts">Fonts</Link>
+                <Link href="/">Polices</Link>
               </li>
             </ul>
           </div>
@@ -57,16 +57,16 @@ export default function Footer() {
             <h3 className="font-bold pb-2">NOS SERVICES</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/signup">Sign Up</Link>
+                <Link href="/">Inscription</Link>
               </li>
               <li>
-                <Link href="/activate-license">Activate License</Link>
+                <Link href="/">Activer la Licence</Link>
               </li>
               <li>
-                <Link href="/signin">Sign In</Link>
+                <Link href="/">Connexion</Link>
               </li>
               <li>
-                <Link href="/reset-password">Reset Password</Link>
+                <Link href="/">Réinitialiser le Mot de Passe</Link>
               </li>
             </ul>
           </div>
@@ -74,16 +74,16 @@ export default function Footer() {
             <h3 className="font-bold pb-2">INFOS LÉGALES</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/faq">FAQ</Link>
+                <Link href="/">FAQ</Link>
               </li>
               <li>
-                <Link href="/contact-us">Contact Us</Link>
+                <Link href="/">Nous Contacter</Link>
               </li>
               <li>
-                <Link href="/license-agreement">License Agreement</Link>
+                <Link href="/">Accord de Licence</Link>
               </li>
               <li>
-                <Link href="/privacy-policy">Privacy Policy</Link>
+                <Link href="/">Politique de Confidentialité</Link>
               </li>
             </ul>
           </div>

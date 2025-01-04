@@ -15,7 +15,6 @@ const CategoryCards = ({
   collections: CollectionsResponse;
 }) => {
   const data = collections.data.collections.edges;
-  const { push } = useRouter();
 
   return (
     <div className="flex items-start flex-col gap-4">

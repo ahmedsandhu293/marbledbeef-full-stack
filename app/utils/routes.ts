@@ -12,7 +12,7 @@ export const routes = [
     slug: "about",
   },
   {
-    path: "/box-builder",
+    path: "/",
     name: "Cartes cadeaux",
     icon: "book",
     slug: "blog",
@@ -24,9 +24,9 @@ export const routes = [
     slug: "blog",
   },
   {
-    path: "/pricing",
+    path: "/box-builder",
     name: "Composer ma Box",
     icon: "dollar",
-    slug: "pricing",
+    slug: "box-builder",
   },
 ];

@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   /* Light theme specific colors */
   --background-primary: #0d0d0d;
@@ -28,7 +27,7 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: transparent;
+    background: black;
   }
 
   ::-webkit-scrollbar-thumb {

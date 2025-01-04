@@ -78,22 +78,36 @@ const Navbar: React.FC = () => {
 
       <div className="container mx-auto">
         <nav className="relative flex items-center justify-between px-6 py-4 ">
-          <Image
-            alt="logo"
-            className="w-24 h-24 md:w-16 md:h-16"
-            height={50}
-            src="/assets/images/logo.png"
-            width={50}
-          />
+          <Link href="/">
+            <Image
+              alt="logo"
+              className="w-24 h-24 md:w-16 md:h-16"
+              height={50}
+              src="/assets/images/logo.png"
+              width={50}
+            />
+          </Link>
 
           <div className="hidden lg:flex space-x-4 items-center absolute left-1/2 transform -translate-x-1/2">
             {routes.map((route) => (
               <Link
                 key={route.path}
-                className="px-3 py-1 rounded-full font-urbanist transition-colors text-text-primary hover:bg-gray-200 dark:hover:bg-gray-700"
+                className="px-3 py-1  font-urbanist transition-colors text-text-primary "
                 href={route.path}
               >
-                {route.name}
+                <span className="relative group inline-block text-zinc-900 dark:text-white">
+                  {/* Text */}
+                  <span className={`relative -z-0 `}> {route.name}</span>
+
+                  {/* Blurred Underline Effect */}
+                  <span
+                    className="absolute left-1/2 -bottom-1 h-[1px] w-0 bg-transparent transition-all duration-500 group-hover:w-full group-hover:left-0"
+                    style={{
+                      background:
+                        "linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), transparent)",
+                    }}
+                  ></span>
+                </span>
               </Link>
             ))}
           </div>
@@ -197,7 +211,19 @@ const Navbar: React.FC = () => {
                 className=" transition-colors"
                 href={route.path}
               >
-                {route.name}
+                <span className="relative group inline-block text-zinc-900 dark:text-white">
+                  {/* Text */}
+                  <span className={`relative -z-0 `}> {route.name}</span>
+
+                  {/* Blurred Underline Effect */}
+                  <span
+                    className="absolute left-1/2 -bottom-1 h-[1px] w-0 bg-transparent transition-all duration-500 group-hover:w-full group-hover:left-0"
+                    style={{
+                      background:
+                        "linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent)",
+                    }}
+                  ></span>
+                </span>
               </Link>
             ))}
             <button className="px-4 py-2 w-full bg-background-secondary border border-border-primary text-text-primary rounded-lg  transition-colors">

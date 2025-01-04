@@ -1,7 +1,5 @@
 "use client";
 
-// Constants
-import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 import HorizontalCarousel from "../common/carousel";
@@ -15,7 +13,6 @@ import Link from "next/link";
 const Products = ({ collections }: { collections: CollectionsResponse }) => {
   const categories = collections.data.collections.edges;
 
-  const { push } = useRouter();
   const { cartItem, setCartItem, favorites, setFavorites } = useGlobalContext();
 
   useEffect(() => {
@@ -103,14 +100,12 @@ const Products = ({ collections }: { collections: CollectionsResponse }) => {
           <HorizontalCarousel infinite autoPlaySpeed={4000}>
             {category.node.products.edges.map((product, productIndex) => (
               <div key={productIndex} className="p-2 text-center">
-                <Link href={`${product.node.handle}`}>
-                  <CollectionCard
-                    data={product}
-                    onAddToCart={handleAddToCart}
-                    onAddToFavorite={handleAddToFavorite}
-                    onClick={() => {}}
-                  />
-                </Link>
+                <CollectionCard
+                  data={product}
+                  onAddToCart={handleAddToCart}
+                  onAddToFavorite={handleAddToFavorite}
+                  onClick={() => {}}
+                />
               </div>
             ))}
           </HorizontalCarousel>

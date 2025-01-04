@@ -10,12 +10,16 @@ import QuantitySelector from "../common/quantitySelector";
 import RecipeGenerator from "./RecipeGenerator";
 
 import { useGlobalContext } from "@/app/context/store";
+import { CollectionProduct } from "@/types/collection";
 const ProductHero = ({ product }: any) => {
   const initialVariant = product?.variants.edges[0]?.node;
-  const initialImage = product?.images.edges[0]?.node?.originalSrc;
+  const initialImage = product?.images.edges[0]
+    ? product?.images.edges[0]?.node?.originalSrc
+    : "./assets/images/no_image.webp";
   const allImages = product?.images.edges;
 
   const { cartItem, setCartItem } = useGlobalContext();
+
   const [variant, setVariant] = useState(initialVariant);
   const [image, setImage] = useState(initialImage);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -43,6 +47,30 @@ const ProductHero = ({ product }: any) => {
 
   const handleCounterChange = (newValue: number) => {
     setQuantity(newValue);
+  };
+
+  const handleAddToCart = (item: CollectionProduct) => {
+    const productId = item.node.id;
+    const firstVariant = item.node.variants.edges[0]?.node?.id;
+    if (!firstVariant) {
+      /* eslint-disable no-console */
+      console.error("No variants available for this product.");
+      return;
+    }
+    const isProductInCart = cartItem.some(
+      (cartProduct) => cartProduct.node.id === productId
+    );
+    if (!isProductInCart) {
+      const newCartItem = {
+        ...item,
+        selectedVariant: firstVariant,
+      };
+      setCartItem((prevCart) => [...prevCart, newCartItem]);
+      localStorage.setItem("cartItem", JSON.stringify(cartItem));
+    } else {
+      /* eslint-disable no-console */
+      console.log("Product is already in the cart.");
+    }
   };
 
   return (
@@ -107,11 +135,13 @@ const ProductHero = ({ product }: any) => {
             />
 
             <div className="py-2 flex justify-start items-center gap-4">
-              <ComponentButton
-                className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300 "
-                label={isExpanded ? "Afficher moins..." : "Afficher plus..."}
-                onClick={handleExpand}
-              />
+              {product?.description && (
+                <ComponentButton
+                  className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300 "
+                  label={isExpanded ? "Afficher moins..." : "Afficher plus..."}
+                  onClick={handleExpand}
+                />
+              )}
 
               <MagicButton onClick={() => setIsOpen(true)} />
             </div>
@@ -121,11 +151,15 @@ const ProductHero = ({ product }: any) => {
             <div className="grid grid-cols-12 gap-4 w-full">
               <div className="col-span-12 md:col-span-3">
                 <div className="flex justify-start items-start gap-2 ">
-                  <p className="text-sm ">
-                    <span className="font-bold">{variant?.price}</span>{" "}
-                    <span className="line-through text-red-primary">
-                      {variant?.compareAtPrice}
-                    </span>
+                  <p className="text-sm flex justify-center items-center gap-2 flex-wrap">
+                    {variant?.compareAtPrice && (
+                      <span className="font-bold line-through text-red-primary flex">
+                        € {variant?.compareAtPrice}
+                      </span>
+                    )}
+                    {variant?.price && (
+                      <span className="  flex">€ {variant?.price}</span>
+                    )}
                   </p>
                 </div>
               </div>
@@ -166,7 +200,7 @@ const ProductHero = ({ product }: any) => {
                 <div className="flex justify-end items-center gap-4 w-full">
                   <button
                     className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300  text-black bg-zinc-200 text-sm px-2 py-1 rounded-lg w-full"
-                    onClick={() => {}}
+                    onClick={() => handleAddToCart({ node: product })}
                   >
                     Ajouter au panier
                   </button>
@@ -182,7 +216,11 @@ const ProductHero = ({ product }: any) => {
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
       >
-        <RecipeGenerator productDescription={product?.description} />
+        <RecipeGenerator
+          productDescription={
+            product?.description ? product?.description : product?.title
+          }
+        />
       </ModalWrapper>
     </div>
   );

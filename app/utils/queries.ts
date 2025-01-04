@@ -279,6 +279,7 @@ export const getAllProductsByHandle = gql`
           node {
             id
             title
+            handle
           }
         }
       }
