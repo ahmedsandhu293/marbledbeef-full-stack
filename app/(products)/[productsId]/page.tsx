@@ -34,7 +34,7 @@ const page = async ({ params }: { params: { productsId: string } }) => {
         <Products collection={products} />
 
         <div className="border-t border-gold py-10 flex items-center justify-center">
-          <div className="p-8 lg:p-16 border border-border-primary  text-white  rounded-3xl w-full lg:w-[720px]  flex flex-col justify-center items-start">
+          <div className="p-8 lg:p-16 border border-border-primary  text-white  rounded-3xl w-full lg:w-[720px]  flex flex-col justify-center items-center">
             <h3 className="text-xl md:text-3xl font-bold text-center">
               Bénéficiez d{"'"}offres exclusives, accédez à des promotions et
               bien plus encore !
