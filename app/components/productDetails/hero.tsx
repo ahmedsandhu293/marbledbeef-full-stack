@@ -11,6 +11,7 @@ import RecipeGenerator from "./RecipeGenerator";
 
 import { useGlobalContext } from "@/app/context/store";
 import { CollectionProduct } from "@/types/collection";
+import Image from "next/image";
 const ProductHero = ({ product }: any) => {
   const initialVariant = product?.variants.edges[0]?.node;
   const initialImage = product?.images.edges[0]
@@ -134,7 +135,7 @@ const ProductHero = ({ product }: any) => {
       >
         <img
           alt="pic 4"
-          className="w-full rounded-lg object-cover h-80"
+          className="w-full rounded-lg object-cover "
           src={image}
         />
       </div>
@@ -248,6 +249,18 @@ const ProductHero = ({ product }: any) => {
                     Ajouter au panier
                   </button>
                 </div>
+              </div>
+              <div className="flex flex-col col-span-12 items-center space-x-4 py-4">
+                <Image
+                  alt="Logo"
+                  height={100}
+                  src="/assets/images/payments-icons.png"
+                  width={382}
+                  className="w-auto h-auto"
+                />
+                <p className="text-white text-lg font-urbanist text-center">
+                  Paiements sécurisés et protégés à 100%
+                </p>
               </div>
             </div>
           </div>
