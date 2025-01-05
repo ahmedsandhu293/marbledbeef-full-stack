@@ -65,7 +65,7 @@ const FavoriteProduct = ({
   };
 
   return (
-    <div className="flex items-center justify-center w-full md:p-3 rounded-md gap-6 md:flex-row flex-col ">
+    <div className="flex items-center justify-center w-full md:p-3 rounded-md gap-6 md:flex-row flex-col py-4">
       <div className="md:w-28 md:h-28 bg-cover bg-center rounded-md overflow-hidden border border-gold">
         <img
           alt="Boeuf de Kobe"

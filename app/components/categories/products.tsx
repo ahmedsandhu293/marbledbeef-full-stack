@@ -68,9 +68,12 @@ const Products = ({ collection }: { collection: any }) => {
       setFavorites((prevCart) => [...prevCart, newFavorites]);
       localStorage.setItem("favorites", JSON.stringify(favorites));
     } else {
-      /* eslint-disable no-console */
+      const updatedCart = favorites.filter(
+        (favorites) => favorites.node.id !== productId
+      );
 
-      console.log("Product is already in the Favorites.");
+      setFavorites(updatedCart);
+      localStorage.setItem("cartItem", JSON.stringify(favorites));
     }
   };
 

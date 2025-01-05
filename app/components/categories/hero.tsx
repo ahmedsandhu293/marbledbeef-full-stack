@@ -11,7 +11,7 @@ const Hero = ({ data }: { data: any }) => {
   return (
     <div className="">
       <div
-        className="relative w-full h-screen bg-cover bg-center "
+        className="relative w-full h-[80vh] bg-cover bg-center "
         style={{ backgroundImage: `url(${data.image.originalSrc})` }}
       >
         <div className="absolute inset-0 bg-black opacity-50" />
