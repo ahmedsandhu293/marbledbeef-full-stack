@@ -65,19 +65,23 @@ const FavoriteProduct = ({
   };
 
   return (
-    <div className="flex items-center justify-center w-full p-3 rounded-md gap-6 md:flex-row flex-col ">
-      <div className="w-20 h-20 bg-cover bg-center rounded-md overflow-hidden border border-gold">
+    <div className="flex items-center justify-center w-full md:p-3 rounded-md gap-6 md:flex-row flex-col ">
+      <div className="md:w-28 md:h-28 bg-cover bg-center rounded-md overflow-hidden border border-gold">
         <img
           alt="Boeuf de Kobe"
           className="w-full h-full"
-          src={data.node.images.edges[0]?.node.originalSrc}
+          src={
+            data.node.images.edges[0]
+              ? data.node.images.edges[0]?.node.originalSrc
+              : "./assets/images/no_image.webp"
+          }
         />
       </div>
       <div className="flex flex-col gap-1">
         <div className="flex justify-between items-start gap-1">
           <h4 className="text-sm underline">{data?.node?.title}</h4>
           <MdDeleteOutline
-            className="cursor-pointer text-red-primary"
+            className="cursor-pointer text-red-primary w-7"
             size={24}
             onClick={() => onDelete(data.node.id)}
           />

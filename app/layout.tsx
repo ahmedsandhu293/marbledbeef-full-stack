@@ -78,7 +78,7 @@ export default function RootLayout({
             showAtBottom={false}
           />
 
-          <main className="pt-48  flex-grow">{children}</main>
+          <main className="pt-36  flex-grow">{children}</main>
           <Footer />
 
           <Chatbot />
