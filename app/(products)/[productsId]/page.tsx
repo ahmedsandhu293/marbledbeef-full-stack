@@ -25,9 +25,12 @@ const page = async ({ params }: { params: { productsId: string } }) => {
   });
 
   return (
-    <div className="bg-background-primary ">
+    <div className="bg-background-primary md:mt-16">
       <div className="container mx-auto px-6">
         <ProductHero product={product} />
+        <h3 className="text-xl md:text-3xl font-bold text-left py-4 text-white">
+          Produits connexes
+        </h3>
         <Products collection={products} />
 
         <div className="border-t border-gold py-10 flex items-center justify-center">
