@@ -14,8 +14,8 @@ const Page = () => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <div className="bg-black">
-      <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 bg-black gap-4 p-4">
+    <div className="bg-black mt-5  md:mt-24 lg:mt-5">
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 pt-16 lg:grid-cols-4 xl:grid-cols-5 bg-black gap-4 p-4">
         {Array.from({ length: 16 }, (_, index) => (
           <div key={index} className="p-2 text-center">
             <BlogCard onClick={() => setOpen(true)} />

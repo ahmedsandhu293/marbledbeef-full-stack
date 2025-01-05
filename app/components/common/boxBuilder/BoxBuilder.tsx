@@ -73,8 +73,8 @@ const BoxBuilder = ({ data }: { data?: Product[] }) => {
   };
 
   return (
-    <div className="mt-44 md:mt-12 lg:mt-0 bg-black">
-      <div className="w-full md:h-[50dvh] px-4 flex justify-center items-center flex-col font-urbanist text-white bg-[#1A1A1A] space-y-2 border-b border-gold">
+    <div className="mt-0 md:mt-20  bg-black ">
+      <div className="w-full md:h-[50dvh] px-4 flex justify-center items-center pt-10 flex-col font-urbanist text-white bg-[#1A1A1A] space-y-2 border-b border-gold">
         <p className="text-xl md:text-4xl text-center md:text-left font-bold bg-transparent">
           Black Friday: <span className="text-gold">-30 %</span>{" "}
         </p>
