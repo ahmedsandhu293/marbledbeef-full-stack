@@ -126,6 +126,7 @@ export default function Footer() {
               height={100}
               src="/assets/images/payments-icons.png"
               width={382}
+              className="w-auto h-12 md:w-auto md:h-20"
             />
             <p className="text-white text-lg font-urbanist text-center">
               Paiements sécurisés et protégés à 100%

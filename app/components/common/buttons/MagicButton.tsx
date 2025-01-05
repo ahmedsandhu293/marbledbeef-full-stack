@@ -3,7 +3,7 @@ import React from "react";
 const MagicButton = ({ onClick }: { onClick: () => void }) => {
   return (
     <button
-      className="flex items-center border border-gold p-2 rounded"
+      className="flex items-center border border-gold p-2 rounded-xl gap-2 text-black font-sm !bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300"
       onClick={onClick}
     >
       <svg
@@ -165,6 +165,7 @@ const MagicButton = ({ onClick }: { onClick: () => void }) => {
           </radialGradient>
         </defs>
       </svg>
+      Trouver une recette
     </button>
   );
 };

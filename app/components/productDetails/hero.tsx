@@ -18,7 +18,7 @@ const ProductHero = ({ product }: any) => {
     : "./assets/images/no_image.webp";
   const allImages = product?.images.edges;
 
-  const { cartItem, setCartItem } = useGlobalContext();
+  const { cartItem, setCartItem, favorites, setFavorites } = useGlobalContext();
 
   const [variant, setVariant] = useState(initialVariant);
   const [image, setImage] = useState(initialImage);
@@ -73,6 +73,37 @@ const ProductHero = ({ product }: any) => {
     }
   };
 
+  const handleAddToFavorite = (item: CollectionProduct) => {
+    const productId = item.node.id;
+    const firstVariant = item.node.variants.edges[0]?.node?.id;
+
+    if (!firstVariant) {
+      /* eslint-disable no-console */
+
+      console.error("No variants available for this product.");
+
+      return;
+    }
+
+    const isProductInCart = favorites.some(
+      (favoritesProduct) => favoritesProduct.node.id === productId
+    );
+
+    if (!isProductInCart) {
+      const newFavorites = {
+        ...item,
+        selectedVariant: firstVariant,
+      };
+
+      setFavorites((prevCart) => [...prevCart, newFavorites]);
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+    } else {
+      /* eslint-disable no-console */
+
+      console.log("Product is already in the Favorites.");
+    }
+  };
+
   return (
     <div className="grid grid-cols-12 gap-4 py-10">
       <div className="col-span-12">
@@ -80,47 +111,53 @@ const ProductHero = ({ product }: any) => {
           Bienvenue / {product?.handle}
         </h1>
       </div>
-      <div className="col-span-1 md:flex flex-col gap-4 hidden ">
-        {allImages?.map((image: any, index: number) => (
-          <div
-            key={index}
-            role="button"
-            onClick={() => handleThumbnailClick(image)}
-          >
-            <img
-              alt={image?.node?.id}
-              className="w-full rounded-lg border border-gold"
-              src={image?.node?.originalSrc}
-            />
-          </div>
-        ))}
-      </div>
-      {/* Main image column */}
-      <div className="md:col-span-5 col-span-12 rounded-lg border border-gold">
-        <img
-          alt="pic 4"
-          className="w-full rounded-lg object-contain h-80"
-          src={image}
-        />
-      </div>
-      <div className="col-span-12 flex flex-wrap gap-2 md:hidden">
-        <div className="grid grid-cols-3 gap-2 w-full">
+      {allImages.length > 1 && (
+        <div className="col-span-1 md:flex flex-col gap-4 hidden ">
           {allImages?.map((image: any, index: number) => (
             <div
               key={index}
               role="button"
-              className="flex justify-center items-center"
               onClick={() => handleThumbnailClick(image)}
             >
               <img
                 alt={image?.node?.id}
-                className="w-full h-full rounded-lg border border-gold"
+                className="w-full rounded-lg border border-gold"
                 src={image?.node?.originalSrc}
               />
             </div>
           ))}
         </div>
+      )}
+      {/* Main image column */}
+      <div
+        className={`${allImages.length <= 1 ? "md:col-span-6" : "md:col-span-5"}  col-span-12 rounded-lg border border-gold`}
+      >
+        <img
+          alt="pic 4"
+          className="w-full rounded-lg object-cover h-80"
+          src={image}
+        />
       </div>
+      {allImages.length > 1 && (
+        <div className="col-span-12 flex flex-wrap gap-2 md:hidden">
+          <div className="grid grid-cols-3 gap-2 w-full">
+            {allImages?.map((image: any, index: number) => (
+              <div
+                key={index}
+                role="button"
+                className="flex justify-center items-center"
+                onClick={() => handleThumbnailClick(image)}
+              >
+                <img
+                  alt={image?.node?.id}
+                  className="w-full h-full rounded-lg border border-gold"
+                  src={image?.node?.originalSrc}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="col-span-12 md:col-span-6 text-white">
         <div className="flex flex-col justify-between items-center w-full h-full">
@@ -134,7 +171,7 @@ const ProductHero = ({ product }: any) => {
               text={product?.description}
             />
 
-            <div className="py-2 flex justify-start items-center gap-4">
+            <div className="py-2 flex justify-start items-start gap-4 flex-wrap">
               {product?.description && (
                 <ComponentButton
                   className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300 "
@@ -197,9 +234,15 @@ const ProductHero = ({ product }: any) => {
               </div>
 
               <div className="col-span-12 sm:col-span-9">
-                <div className="flex justify-end items-center gap-4 w-full">
+                <div className="flex justify-end items-center gap-4 w-full flex-col md:flex-row">
                   <button
-                    className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300  text-black bg-zinc-200 text-sm px-2 py-1 rounded-lg w-full"
+                    className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300  text-black bg-zinc-200 text-sm px-2 py-1.5 rounded-lg w-full"
+                    onClick={() => handleAddToFavorite({ node: product })}
+                  >
+                    ajouter aux favoris
+                  </button>
+                  <button
+                    className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300  text-black bg-zinc-200 text-sm px-2 py-1.5 rounded-lg w-full"
                     onClick={() => handleAddToCart({ node: product })}
                   >
                     Ajouter au panier

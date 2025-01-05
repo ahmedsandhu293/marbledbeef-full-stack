@@ -7,8 +7,12 @@ import ComponentButton from "../buttons/ButtonComponent";
 import CardComponent from "../cards/CardComponent";
 
 import { Product } from "@/types";
+import { CollectionProduct } from "@/types/collection";
+import { useGlobalContext } from "@/app/context/store";
 
 const BoxBuilder = ({ data }: { data?: Product[] }) => {
+  const { favorites, setFavorites } = useGlobalContext();
+
   const [giftCount, setGiftCount] = useState(3);
   const [boxItems, setBoxItems] = useState<(Product | null)[]>(
     Array(giftCount).fill(null)
@@ -32,6 +36,37 @@ const BoxBuilder = ({ data }: { data?: Product[] }) => {
   const handleGiftCountChange = (count: number) => {
     setGiftCount(count);
     setBoxItems(Array(count).fill(null));
+  };
+
+  const handleAddToFavorite = (item: CollectionProduct) => {
+    const productId = item.node.id;
+    const firstVariant = item.node.variants.edges[0]?.node?.id;
+
+    if (!firstVariant) {
+      /* eslint-disable no-console */
+
+      console.error("No variants available for this product.");
+
+      return;
+    }
+
+    const isProductInCart = favorites.some(
+      (favoritesProduct) => favoritesProduct.node.id === productId
+    );
+
+    if (!isProductInCart) {
+      const newFavorites = {
+        ...item,
+        selectedVariant: firstVariant,
+      };
+
+      setFavorites((prevCart) => [...prevCart, newFavorites]);
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+    } else {
+      /* eslint-disable no-console */
+
+      console.log("Product is already in the Favorites.");
+    }
   };
 
   return (
@@ -72,13 +107,13 @@ const BoxBuilder = ({ data }: { data?: Product[] }) => {
 
       <div className="container mx-auto px-6 py-10 w-full flex bg-black flex-col-reverse lg:flex-row">
         <div className="w-full lg:w-[60%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-          {data?.map((item: Product, index) => (
+          {data?.map((item: Product | any, index) => (
             <div key={index} style={{ padding: "10px", textAlign: "center" }}>
               <CardComponent
                 buttonLabel="Ajouter"
                 data={item}
                 onAddToCart={handleAdd}
-                onAddToFavorite={() => {}}
+                onAddToFavorite={() => handleAddToFavorite({ node: item })}
                 onClick={() => {}}
               />
             </div>

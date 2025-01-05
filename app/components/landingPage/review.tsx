@@ -1,6 +1,7 @@
 import React from "react";
 
 import ReviewCard from "../common/cards/ReviewCard";
+import Image from "next/image";
 
 interface Review {
   name: string;
@@ -61,6 +62,47 @@ const Reviews: React.FC = () => {
       <h2 className="text-2xl text-white border-b border-gold pb-16 font-urbanist">
         Affichage de 16 sur 16 produits
       </h2>
+      <div className="bg-gradient-secondary text-white border border-gold rounded-2xl p-4 shadow-md">
+        {/* Profile and Name */}
+        <div className="flex items-start gap-3 mb-3">
+          <div
+            className={`w-10 h-10  text-center rounded-full flex items-center justify-center`}
+          >
+            <Image
+              alt="logo"
+              className="w-full h-full rounded-full"
+              height={50}
+              src="/assets/images/logo.png"
+              width={50}
+            />
+          </div>
+          <div>
+            <h4 className="font-semibold text-base font-urbanist">
+              Marbled Beef
+            </h4>
+            <div className="flex justify-center items-center gap-2">
+              <p className="text-yellow-400 text-sm">4.8</p>
+              <div className="flex gap-1 ">
+                {Array(5)
+                  .fill(0)
+                  .map((_, index) => (
+                    <span
+                      key={index}
+                      className={`text-lg
+                  text-yellow-400
+                `}
+                    >
+                      ★
+                    </span>
+                  ))}
+              </div>
+            </div>
+            <p className="text-sm text-gray-300 leading-relaxed font-urbanist">
+              318 avis
+            </p>
+          </div>
+        </div>
+      </div>
       <div className=" flex items-center justify-center  md:p-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {reviews.map((review, index) => (

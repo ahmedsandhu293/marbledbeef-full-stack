@@ -1,12 +1,13 @@
 "use client";
 
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
-import { FiHeart } from "react-icons/fi";
+import { FaRegHeart, FaHeart } from "react-icons/fa6";
 
 import ComponentButton from "../buttons/ButtonComponent";
 
 import { CollectionProduct } from "@/types/collection";
 import Link from "next/link";
+import { useGlobalContext } from "@/app/context/store";
 
 const CollectionCard = ({
   data,
@@ -21,6 +22,12 @@ const CollectionCard = ({
   onAddToFavorite: (item: CollectionProduct) => void;
   onClick: (item: CollectionProduct) => void;
 }) => {
+  const { favorites } = useGlobalContext();
+
+  const isFavorite = favorites.some(
+    (item) => item?.node?.id === data?.node?.id
+  );
+
   return (
     <>
       <Link href={`/${data?.node?.handle}`}>
@@ -64,14 +71,27 @@ const CollectionCard = ({
           label={buttonLabel ? buttonLabel : "Ajouter au panier"}
           onClick={() => onAddToCart(data)}
         />
-        <FiHeart
-          className="text-text-gold cursor-pointer"
-          size={28}
-          onClick={(e) => {
-            e.stopPropagation();
-            onAddToFavorite(data);
-          }}
-        />
+
+        {isFavorite ? (
+          <FaHeart
+            className=" cursor-pointer"
+            color="#d4af37"
+            size={28}
+            onClick={(e) => {
+              e.stopPropagation();
+              onAddToFavorite(data);
+            }}
+          />
+        ) : (
+          <FaRegHeart
+            className="text-text-gold cursor-pointer"
+            size={28}
+            onClick={(e) => {
+              e.stopPropagation();
+              onAddToFavorite(data);
+            }}
+          />
+        )}
       </div>
     </>
   );

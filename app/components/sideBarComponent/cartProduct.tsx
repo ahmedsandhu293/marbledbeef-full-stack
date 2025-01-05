@@ -25,39 +25,50 @@ const CartProduct = ({
   }, [data]);
 
   return (
-    <div className="flex items-center md:items-start md:p-3 rounded-md gap-3 md:flex-row flex-col ">
-      <div className="w-20 h-20 bg-cover bg-center rounded-md overflow-hidden border border-gold">
-        <img
-          alt="Boeuf de Kobe"
-          className="w-full h-full"
-          src={data.node.images.edges[0]?.node.originalSrc}
-        />
-      </div>
-      <div className="flex flex-col gap-1">
-        <div className="flex justify-between items-start gap-6">
-          <h4 className="text-sm underline">Boeuf de Kobe Yakiniku</h4>
-          <MdDeleteOutline
-            className="cursor-pointer text-red-primary"
-            size={24}
-            onClick={() => onDelete(data.node.id)}
+    <>
+      <div className="flex items-center md:items-start md:p-3 rounded-md gap-3 md:flex-row flex-col py-4">
+        <div
+          className="md:w-28 md:h-28
+       bg-cover bg-center rounded-md overflow-hidden border border-gold"
+        >
+          <img
+            alt="Boeuf de Kobe"
+            className="w-full h-full"
+            src={
+              data.node.images.edges[0]
+                ? data.node.images.edges[0]?.node.originalSrc
+                : "./assets/images/no_image.webp"
+            }
           />
         </div>
-        <div className="flex justify-start items-start gap-2 ">
-          <p className="text-sm ">
-            <span className="font-bold">{variant?.node?.title}</span>{" "}
-          </p>
-        </div>
-        <div className="flex justify-center md:items-start items-center gap-4 ">
-          <QuantitySelector
-            initialValue={quantity}
-            onChange={onQuantityChange}
-          />
-        </div>
-        <div className="flex justify-end text-sm text-gold">
-          <span>€ {variant?.node?.price}</span>
+        <div className="flex flex-col gap-2">
+          <div className="flex justify-between items-start gap-6">
+            <h4 className="text-sm underline">Boeuf de Kobe Yakiniku</h4>
+            <MdDeleteOutline
+              className="cursor-pointer text-red-primary"
+              size={24}
+              onClick={() => onDelete(data.node.id)}
+            />
+          </div>
+          <div className="flex justify-start items-start gap-2 ">
+            <p className="text-sm ">
+              <span className="font-bold">{variant?.node?.title}</span>{" "}
+            </p>
+          </div>
+          <div className="flex justify-center md:items-start items-start gap-4 ">
+            <QuantitySelector
+              initialValue={quantity}
+              onChange={onQuantityChange}
+            />
+          </div>
         </div>
       </div>
-    </div>
+      <div className="pb-3 px-1 md:px-3 flex justify-between text-sm text-gold flex-wrap">
+        <span className="text-[#85c788]">économisez 5% sur ce produit</span>
+
+        <span>€ {variant?.node?.price}</span>
+      </div>
+    </>
   );
 };
 

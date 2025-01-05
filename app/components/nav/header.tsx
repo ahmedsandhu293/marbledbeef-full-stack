@@ -81,7 +81,7 @@ const Navbar: React.FC = () => {
           <Link href="/">
             <Image
               alt="logo"
-              className="w-24 h-24 md:w-16 md:h-16"
+              className="w-auto h-12 md:w-auto md:h-20"
               height={50}
               src="/assets/images/logo.png"
               width={50}

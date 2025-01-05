@@ -9,7 +9,7 @@ export default function ProgressBar() {
       {/* Progress Bar */}
       <Progress
         aria-label="Loading..."
-        className="h-2 bg-gold rounded-full"
+        className="h-2 bg-red-200 rounded-full"
         color="danger" // Red color
         value={progress}
       />
@@ -17,7 +17,7 @@ export default function ProgressBar() {
       {/* Icon */}
       {progress > 1 && (
         <div
-          className="absolute top-2 h-6 w-6 bg-gold flex items-center justify-center rounded-full shadow-md"
+          className="absolute top-2 h-6 w-6 bg-red-100 flex items-center justify-center rounded-full shadow-md"
           style={{ left: `calc(${progress}% - 20px)` }}
         >
           <FaGift className="text-red-primary" />
