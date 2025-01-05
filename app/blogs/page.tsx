@@ -75,16 +75,6 @@ const BlogModal = () => {
         <h1 className="text-2xl md:text-3xl font-bold text-center md:text-left">
           Côtes de Wagyu Braisées de Luxe
         </h1>
-        <div className="flex justify-center items-center gap-4 flex-wrap">
-          <ComponentButton
-            className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300  px-4 py-2 rounded-lg"
-            label="Sauve recette"
-            onClick={() => {}}
-          />
-          <button className="bg-transparent text-white px-4 py-2 rounded-xl border border-white hover:bg-white hover:text-black transition">
-            Nouvelle recette
-          </button>
-        </div>
       </div>
 
       {/* Ingredients */}
