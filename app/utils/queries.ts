@@ -294,3 +294,21 @@ export const getAllProductsByHandle = gql`
     }
   }
 `;
+
+// Auth Queries
+export const SignUpQuery = `
+  mutation customerCreate($input: CustomerCreateInput!) {
+    customerCreate(input: $input) {
+      customer {
+        id
+        email
+        firstName
+        lastName
+      }
+      customerUserErrors {
+        field
+        message
+      }
+    }
+  }
+`;
