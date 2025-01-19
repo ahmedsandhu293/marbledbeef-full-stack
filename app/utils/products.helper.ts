@@ -2,7 +2,7 @@
 
 export const fetchGraphQLData = async <T>(
   query: string,
-  variables?: Record<string, any>,
+  variables?: Record<string, any>
 ): Promise<T> => {
   try {
     const res = await fetch(process.env.GRAPHQL_API_URL!, {
@@ -18,14 +18,14 @@ export const fetchGraphQLData = async <T>(
       const text = await res.text();
 
       throw new Error(
-        `Failed to fetch data\nStatus: ${res.status}\nResponse: ${text}`,
+        `Failed to fetch data\nStatus: ${res.status}\nResponse: ${text}`
       );
     }
 
     return res.json();
   } catch (error) {
     throw new Error(
-      `Error fetching data: ${error instanceof Error ? error.message : "Unknown error"}`,
+      `Error fetching data: ${error instanceof Error ? error.message : "Unknown error"}`
     );
   }
 };

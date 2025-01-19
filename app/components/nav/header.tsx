@@ -18,7 +18,7 @@ import DeliveryTruck from "@/public/assets/svg/deliveryTruck";
 import Food from "@/public/assets/svg/food";
 import Lock from "@/public/assets/svg/lock";
 import { useGlobalContext } from "@/app/context/store";
-import Authform from "../landingPage/loginform";
+import AuthForm from "../landingPage/authForm";
 import ModalWrapper from "../common/modal/ModalWapper";
 
 const Navbar: React.FC = () => {
@@ -261,9 +261,10 @@ const Navbar: React.FC = () => {
       <ModalWrapper
         isOpen={isOpenform}
         onClose={() => setIsOpenform(false)}
-        isClose={false}
+        isClose={true}
+        className="!bg-black !px-8 !py-6"
       >
-        <Authform />
+        <AuthForm />
       </ModalWrapper>
     </header>
   );
