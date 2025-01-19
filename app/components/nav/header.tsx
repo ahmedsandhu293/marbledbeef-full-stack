@@ -18,9 +18,12 @@ import DeliveryTruck from "@/public/assets/svg/deliveryTruck";
 import Food from "@/public/assets/svg/food";
 import Lock from "@/public/assets/svg/lock";
 import { useGlobalContext } from "@/app/context/store";
+import Authform from "../landingPage/loginform";
+import ModalWrapper from "../common/modal/ModalWapper";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenform, setIsOpenform] = useState(false);
   const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
   const [isCart2DrawerOpen, setIsCart2DrawerOpen] = useState(false);
   const [isFavoritesDrawerOpen, setIsFavoritesDrawerOpen] = useState(false);
@@ -152,6 +155,7 @@ const Navbar: React.FC = () => {
             <ComponentButton
               className="!bg-gradient-secondary text-white rounded-xl border border-[#323233]"
               icon={<GoPerson />}
+              onClick={() => setIsOpenform(true)}
               label="Se connecter"
             />
           </div>
@@ -226,7 +230,10 @@ const Navbar: React.FC = () => {
                 </span>
               </Link>
             ))}
-            <button className="px-4 py-2 w-full bg-background-secondary border border-border-primary text-text-primary rounded-lg  transition-colors">
+            <button
+              onClick={() => setIsOpenform(true)}
+              className="px-4 py-2 w-full bg-background-secondary border border-border-primary text-text-primary rounded-lg  transition-colors"
+            >
               Se connecter
             </button>
           </div>
@@ -251,6 +258,13 @@ const Navbar: React.FC = () => {
       >
         <Cart2 onClose={() => setIsCart2DrawerOpen(false)} />
       </SideDrawer>
+      <ModalWrapper
+        isOpen={isOpenform}
+        onClose={() => setIsOpenform(false)}
+        isClose={false}
+      >
+        <Authform />
+      </ModalWrapper>
     </header>
   );
 };
