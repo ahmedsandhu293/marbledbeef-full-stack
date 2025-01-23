@@ -1,193 +1,150 @@
 "use client";
 import React, { useState } from "react";
 
+const InputField: React.FC<{
+  id: string;
+  label: string;
+  type: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}> = ({ id, label, type, value, onChange }) => (
+  <div className="mb-4">
+    <label htmlFor={id} className="block text-sm font-medium text-white">
+      {label}
+    </label>
+    <input
+      type={type}
+      id={id}
+      value={value}
+      onChange={onChange}
+      className="p-2 w-full text-lg rounded-2xl pl-10 mt-3 backdrop-blur-lg bg-opacity-60 transition-all duration-300 font-urbanist placeholder:text-black bg-white text-black"
+      placeholder={`Enter your ${label.toLowerCase()}`}
+      required
+    />
+  </div>
+);
+
 const AuthForm: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [isSignUpOpen, setIsSignUpOpen] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log({ email, password, firstName, lastName });
+    setLoading(true);
+    setErrorMessage("");
 
-    if (!isSignUpOpen) {
-      try {
-        const response = await fetch("/api", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password, firstName, lastName }),
-        });
+    try {
+      const url = isSignUpOpen ? "/api/auth/register" : "/api/auth/login";
+      const body = isSignUpOpen
+        ? { email, password, firstName, lastName }
+        : { email, password };
 
-        const data = await response.json();
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
 
-        if (response.ok) {
-          return { success: true, customer: data.customer };
-        } else {
-          return { success: false, error: data.error };
-        }
-      } catch (error) {
-        return { success: false, error: "Unexpected error occurred" };
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Unexpected error occurred");
       }
+
+      // Handle success (e.g., redirect or show success message)
+    } catch (error: any) {
+      setErrorMessage(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <>
-      {!isSignUpOpen && (
-        <form onSubmit={handleSubmit} className="">
-          <div className="mb-2">
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-white"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="p-2 w-full text-lg rounded-2xl pl-10 backdrop-blur-lg bg-opacity-60 transition- font-urbanist placeholder:text-black bg-white text-black"
-              placeholder="Enter your email"
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-white"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="p-2 w-full text-lg rounded-2xl pl-10 backdrop-blur-lg bg-opacity-60 transition- font-urbanist placeholder:text-black bg-white text-black"
-              placeholder="Enter your password"
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full p-3 rounded-2xl !bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300"
-          >
-            Login
-          </button>
-
-          <p className="mt-4 text-center text-white">
-            Don't have an account?{" "}
-            <button
-              type="button"
-              onClick={() => setIsSignUpOpen(true)}
-              className="text-gradient-gold-200 hover:underline"
-            >
-              Sign up
-            </button>
-          </p>
-        </form>
-      )}
-
-      {isSignUpOpen && (
-        <form onSubmit={handleSubmit} className="">
-          <div className="mb-2">
-            <label
-              htmlFor="firstName"
-              className="block text-sm font-medium text-white"
-            >
-              First Name
-            </label>
-            <input
-              type="text"
+    <div className="max-w-md mx-auto p-6  rounded-lg shadow-lg">
+      <form onSubmit={handleSubmit}>
+        {isSignUpOpen && (
+          <>
+            <InputField
               id="firstName"
+              label="First Name"
+              type="text"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              className="p-2 w-full text-lg rounded-2xl pl-10 backdrop-blur-lg bg-opacity-60 transition- font-urbanist placeholder:text-black bg-white text-black"
-              placeholder="Enter your first name"
-              required
             />
-          </div>
-
-          <div className="mb-2">
-            <label
-              htmlFor="lastName"
-              className="block text-sm font-medium text-white"
-            >
-              Last Name
-            </label>
-            <input
-              type="text"
+            <InputField
               id="lastName"
+              label="Last Name"
+              type="text"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              className="p-2 w-full text-lg rounded-2xl pl-10 backdrop-blur-lg bg-opacity-60 transition- font-urbanist placeholder:text-black bg-white text-black"
-              placeholder="Enter your last name"
-              required
             />
-          </div>
+          </>
+        )}
+        <InputField
+          id="email"
+          label="Email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <InputField
+          id="password"
+          label="Password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-          <div className="mb-2">
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-white"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="p-2 w-full text-lg rounded-2xl pl-10 backdrop-blur-lg bg-opacity-60 transition- font-urbanist placeholder:text-black bg-white text-black"
-              placeholder="Enter your email"
-              required
-            />
-          </div>
+        {errorMessage && (
+          <p className="text-red-500 text-sm mb-4">{errorMessage}</p>
+        )}
 
-          <div className="mb-4">
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-white"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="p-2 w-full text-lg rounded-2xl pl-10 backdrop-blur-lg bg-opacity-60 transition- font-urbanist placeholder:text-black bg-white text-black"
-              placeholder="Enter your password"
-              required
-            />
-          </div>
+        <button
+          type="submit"
+          disabled={loading}
+          className={`w-full p-3 rounded-2xl ${
+            loading
+              ? "bg-gray-400"
+              : "bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300"
+          } shadow-sm hover:shadow-glow transition-all duration-300`}
+        >
+          {loading ? "Loading..." : isSignUpOpen ? "Sign Up" : "Login"}
+        </button>
 
-          <button
-            type="submit"
-            className="w-full p-3 rounded-2xl !bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300"
-          >
-            Sign up
-          </button>
-
-          <p className="mt-4 text-center text-white">
-            Already have an account?{" "}
-            <button
-              type="button"
-              onClick={() => setIsSignUpOpen(false)}
-              className="text-gradient-gold-200 hover:underline"
-            >
-              Log in
-            </button>
-          </p>
-        </form>
-      )}
-    </>
+        <p className="mt-4 text-center text-white">
+          {isSignUpOpen ? (
+            <>
+              Already have an account?{" "}
+              <button
+                type="button"
+                onClick={() => setIsSignUpOpen(false)}
+                className="text-gradient-gold-200 hover:underline"
+              >
+                Log in
+              </button>
+            </>
+          ) : (
+            <>
+              Don't have an account?{" "}
+              <button
+                type="button"
+                onClick={() => setIsSignUpOpen(true)}
+                className="text-gradient-gold-200 hover:underline"
+              >
+                Sign up
+              </button>
+            </>
+          )}
+        </p>
+      </form>
+    </div>
   );
 };
 
