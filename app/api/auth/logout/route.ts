@@ -12,8 +12,8 @@ export async function POST(req: Request) {
     }
 
     const storefrontApiUrl =
-      "https://marbredbeeffr.myshopify.com/api/2025-01/graphql.json";
-    const storefrontAccessToken = "17e4a868a5e8bf2abb094eca5ea0f29f";
+    "https://marbredbeeffr.myshopify.com/api/2025-01/graphql.json";
+  const storefrontAccessToken = "17e4a868a5e8bf2abb094eca5ea0f29f";
 
     const graphqlQuery = {
       query: `

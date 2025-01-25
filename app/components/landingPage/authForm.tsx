@@ -24,7 +24,13 @@ const InputField: React.FC<{
   </div>
 );
 
-const AuthForm: React.FC = () => {
+const AuthForm = ({
+  onClose,
+  onToken,
+}: {
+  onClose: () => void;
+  onToken: () => void;
+}) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [firstName, setFirstName] = useState<string>("");
@@ -53,12 +59,17 @@ const AuthForm: React.FC = () => {
       });
 
       const data = await response.json();
+      if (isSignUpOpen) {
+        setIsSignUpOpen(false);
+      } else {
+        localStorage.setItem("auth-token", data?.token?.accessToken);
+        onClose();
+        onToken();
+      }
 
       if (!response.ok) {
         throw new Error(data.error || "Unexpected error occurred");
       }
-
-      // Handle success (e.g., redirect or show success message)
     } catch (error: any) {
       setErrorMessage(error);
     } finally {

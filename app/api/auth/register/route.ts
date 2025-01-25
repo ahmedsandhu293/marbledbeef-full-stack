@@ -45,7 +45,6 @@ export async function POST(req: Request) {
     });
 
     const data = await response.json();
-    console.log("🚀 ~ POST ~ data:", data);
 
     if (data.data.customerCreate.userErrors.length > 0) {
       return NextResponse.json(
@@ -54,16 +53,11 @@ export async function POST(req: Request) {
       );
     }
 
-    console.log(
-      "🚀 ~ POST ~ data.data.customerCreate.customer:",
-      data.data.customerCreate.customer
-    );
     return NextResponse.json(
       { success: true, customer: data.data.customerCreate.customer },
       { status: 201 }
     );
   } catch (error) {
-    console.error("Error creating customer:", error);
     return NextResponse.json(
       { success: false, error: error as Error },
       { status: 500 }
