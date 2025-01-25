@@ -30,6 +30,7 @@ export async function POST(req: Request) {
             phone
             createdAt
             defaultAddress {
+              id
               firstName
               lastName
               address1

@@ -1,3 +1,86 @@
+// import { NextResponse } from "next/server";
+
+// export async function POST(req: Request) {
+//   try {
+//     const { customerAccessToken, firstName, lastName, phone, address } =
+//       await req.json();
+//     console.log(
+//       "🚀 ~ POST ~ { customerAccessToken, firstName, lastName, phone, address }:",
+//       { customerAccessToken, firstName, lastName, phone, address }
+//     );
+
+//     if (!customerAccessToken) {
+//       return NextResponse.json(
+//         { success: false, error: "Customer access token is required" },
+//         { status: 400 }
+//       );
+//     }
+
+//     const storefrontApiUrl =
+//       "https://marbredbeeffr.myshopify.com/api/2025-01/graphql.json";
+//     const storefrontAccessToken = "17e4a868a5e8bf2abb094eca5ea0f29f";
+
+//     if (!storefrontApiUrl) {
+//       throw new Error("Storefront API URL is not defined");
+//     }
+
+//     const graphqlMutation = {
+//       query: `
+//         mutation customerUpdate($customerAccessToken: String!, $customer: CustomerUpdateInput!) {
+//           customerUpdate(customerAccessToken: $customerAccessToken, customer: $customer) {
+//             customer {
+//               id
+//               firstName
+//               lastName
+//               phone
+//             }
+//             userErrors {
+//               field
+//               message
+//             }
+//           }
+//         }
+//       `,
+//       variables: {
+//         customerAccessToken,
+//         customer: {
+//           firstName,
+//           lastName,
+//           phone,
+//         },
+//       },
+//     };
+
+//     const response = await fetch(storefrontApiUrl, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         "X-Shopify-Storefront-Access-Token": storefrontAccessToken,
+//       },
+//       body: JSON.stringify(graphqlMutation),
+//     });
+//     console.log("🚀 ~ POST ~ response:", response);
+
+//     const data = await response.json();
+//     console.log("🚀 ~ POST ~ data:", data);
+
+//     if (data.errors || data.data.customerUpdate.userErrors.length > 0) {
+//       return NextResponse.json(
+//         { success: false, errors: data.data.customerUpdate.userErrors },
+//         { status: 400 }
+//       );
+//     }
+
+//     return NextResponse.json({
+//       success: true,
+//       customer: data.data.customerUpdate.customer,
+//     });
+//   } catch (error) {
+//     console.error("Error updating customer details:", error);
+//     return NextResponse.json({ success: false, error: error }, { status: 500 });
+//   }
+// }
+
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -16,20 +99,20 @@ export async function POST(req: Request) {
       "https://marbredbeeffr.myshopify.com/api/2025-01/graphql.json";
     const storefrontAccessToken = "17e4a868a5e8bf2abb094eca5ea0f29f";
 
-    if (!storefrontApiUrl) {
-      throw new Error("Storefront API URL is not defined");
-    }
-
-    const graphqlMutation = {
+    const addressMutation = {
       query: `
-        mutation customerUpdate($customerAccessToken: String!, $customer: CustomerUpdateInput!) {
-          customerUpdate(customerAccessToken: $customerAccessToken, customer: $customer) {
-            customer {
+        mutation customerAddressCreate($customerAccessToken: String!, $address: MailingAddressInput!) {
+          customerAddressCreate(customerAccessToken: $customerAccessToken, address: $address) {
+            customerAddress {
               id
-              firstName
-              lastName
+              address1
+              address2
+              city
+              province
+              country
+              zip
             }
-            userErrors {
+            customerUserErrors {
               field
               message
             }
@@ -38,9 +121,13 @@ export async function POST(req: Request) {
       `,
       variables: {
         customerAccessToken,
-        customer: {
-          firstName,
-          lastName,
+        address: {
+          address1: address.address1,
+          address2: address.address2 || "",
+          city: address.city,
+          province: address.province || "",
+          country: address.country,
+          zip: address.zip,
         },
       },
     };
@@ -51,24 +138,30 @@ export async function POST(req: Request) {
         "Content-Type": "application/json",
         "X-Shopify-Storefront-Access-Token": storefrontAccessToken,
       },
-      body: JSON.stringify(graphqlMutation),
+      body: JSON.stringify(addressMutation),
     });
 
     const data = await response.json();
 
-    if (data.errors || data.data.customerUpdate.userErrors.length > 0) {
+    if (
+      data.errors ||
+      data.data.customerAddressCreate.customerUserErrors.length > 0
+    ) {
       return NextResponse.json(
-        { success: false, errors: data.data.customerUpdate.userErrors },
+        {
+          success: false,
+          errors: data.data.customerAddressCreate.customerUserErrors,
+        },
         { status: 400 }
       );
     }
 
     return NextResponse.json({
       success: true,
-      customer: data.data.customerUpdate.customer,
+      address: data.data.customerAddressCreate.customerAddress,
     });
   } catch (error) {
-    console.error("Error updating customer details:", error);
+    console.error("Error adding customer address:", error);
     return NextResponse.json({ success: false, error: error }, { status: 500 });
   }
 }
