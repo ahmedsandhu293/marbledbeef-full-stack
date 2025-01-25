@@ -20,6 +20,7 @@ import Lock from "@/public/assets/svg/lock";
 import { useGlobalContext } from "@/app/context/store";
 import AuthForm from "../landingPage/authForm";
 import ModalWrapper from "../common/modal/ModalWapper";
+import { useRouter } from "next/navigation";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,6 +29,7 @@ const Navbar: React.FC = () => {
   const [isCart2DrawerOpen, setIsCart2DrawerOpen] = useState(false);
   const [isFavoritesDrawerOpen, setIsFavoritesDrawerOpen] = useState(false);
   const { cartItem, favorites } = useGlobalContext();
+  const router = useRouter();
 
   return (
     <header
@@ -158,6 +160,9 @@ const Navbar: React.FC = () => {
               onClick={() => setIsOpenform(true)}
               label="Se connecter"
             />
+            <button onClick={()=> router.push("/dashboard") }>
+            <GoPerson />
+            </button>
           </div>
 
           <div className="lg:hidden text-2xl flex justify-center items-center gap-3">
