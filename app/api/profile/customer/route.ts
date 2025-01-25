@@ -31,17 +31,12 @@ export async function POST(req: Request) {
             createdAt
             defaultAddress {
               id
-              firstName
-              lastName
               address1
+              address2
               city
               province
               country
               zip
-              phone
-            }
-            metafield(namespace: "custom", key: "profile_image") {
-              value
             }
           }
         }
