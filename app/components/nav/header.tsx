@@ -20,8 +20,10 @@ import Lock from "@/public/assets/svg/lock";
 import { useGlobalContext } from "@/app/context/store";
 import AuthForm from "../landingPage/authForm";
 import ModalWrapper from "../common/modal/ModalWapper";
+import { useRouter } from "next/navigation";
 
 const Navbar: React.FC = () => {
+  const { push } = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenForm, setIsOpenForm] = useState(false);
   const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
@@ -66,7 +68,7 @@ const Navbar: React.FC = () => {
       if (data.success) {
         localStorage.removeItem("auth-token");
         getToken();
-      } 
+      }
     } catch (error) {
       console.error("Error during logout:", error);
     }
@@ -225,7 +227,10 @@ const Navbar: React.FC = () => {
                       <ul className="py-2 text-gray-800">
                         <li
                           className="px-4 py-2 hover:bg-zinc-900 cursor-pointer text-white"
-                          onClick={() => {}}
+                          onClick={() => {
+                            setMenuOpen(!menuOpen);
+                            push(`/user-profile`);
+                          }}
                         >
                           Go to Profile
                         </li>
