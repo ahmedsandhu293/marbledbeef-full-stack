@@ -57,7 +57,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
       >
         {isClose && (
           <button
-            className="absolute top-2 right-2 text-gray-500 hover:text-black"
+            className="absolute top-2 right-2 text-gray-500 "
             onClick={onClose}
             aria-label="Close modal"
           >
