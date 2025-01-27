@@ -59,19 +59,22 @@ const AuthForm = ({
       });
 
       const data = await response.json();
-      if (isSignUpOpen) {
-        setIsSignUpOpen(false);
-      } else {
+
+      if (!response.ok) {
+        throw new Error(data.error || "Unexpected error occurred");
+      }
+
+      if (!isSignUpOpen) {
         localStorage.setItem("auth-token", data?.token?.accessToken);
         onClose();
         onToken();
       }
 
-      if (!response.ok) {
-        throw new Error(data.error || "Unexpected error occurred");
+      if (isSignUpOpen) {
+        setIsSignUpOpen(false);
       }
     } catch (error: any) {
-      setErrorMessage(error);
+      setErrorMessage(error.message);
     } finally {
       setLoading(false);
     }
