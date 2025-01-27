@@ -143,7 +143,7 @@ const AuthForm = ({
             </>
           ) : (
             <>
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <button
                 type="button"
                 onClick={() => setIsSignUpOpen(true)}
