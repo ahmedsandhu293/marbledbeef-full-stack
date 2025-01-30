@@ -24,7 +24,13 @@ const InputField: React.FC<{
   </div>
 );
 
-const AuthForm: React.FC = () => {
+const AuthForm = ({
+  onClose,
+  onToken,
+}: {
+  onClose: () => void;
+  onToken: () => void;
+}) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [firstName, setFirstName] = useState<string>("");
@@ -58,9 +64,17 @@ const AuthForm: React.FC = () => {
         throw new Error(data.error || "Unexpected error occurred");
       }
 
-      // Handle success (e.g., redirect or show success message)
+      if (!isSignUpOpen) {
+        localStorage.setItem("auth-token", data?.token?.accessToken);
+        onClose();
+        onToken();
+      }
+
+      if (isSignUpOpen) {
+        setIsSignUpOpen(false);
+      }
     } catch (error: any) {
-      setErrorMessage(error);
+      setErrorMessage(error.message);
     } finally {
       setLoading(false);
     }
@@ -132,7 +146,7 @@ const AuthForm: React.FC = () => {
             </>
           ) : (
             <>
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <button
                 type="button"
                 onClick={() => setIsSignUpOpen(true)}

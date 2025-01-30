@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { FiHeart, FiMenu, FiX } from "react-icons/fi";
 import { BsHandbag } from "react-icons/bs";
@@ -23,13 +23,74 @@ import ModalWrapper from "../common/modal/ModalWapper";
 import { useRouter } from "next/navigation";
 
 const Navbar: React.FC = () => {
+  const { push } = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpenform, setIsOpenform] = useState(false);
+  const [isOpenForm, setIsOpenForm] = useState(false);
   const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
   const [isCart2DrawerOpen, setIsCart2DrawerOpen] = useState(false);
   const [isFavoritesDrawerOpen, setIsFavoritesDrawerOpen] = useState(false);
   const { cartItem, favorites } = useGlobalContext();
-  const router = useRouter();
+  const [isToken, setIsToken] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  const getToken = () => {
+    const token = localStorage.getItem("auth-token");
+    if (token) {
+      setIsToken(true);
+    } else {
+      setIsToken(false);
+    }
+  };
+
+  useEffect(() => {
+    getToken();
+  }, []);
+
+  const handleLogout = async () => {
+    const customerAccessToken = localStorage.getItem("auth-token");
+
+    if (!customerAccessToken) {
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/auth/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ customerAccessToken }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        localStorage.removeItem("auth-token");
+        getToken();
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+
+    if (menuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuOpen]);
 
   return (
     <header
@@ -101,10 +162,8 @@ const Navbar: React.FC = () => {
                 href={route.path}
               >
                 <span className="relative group inline-block text-zinc-900 dark:text-white">
-                  {/* Text */}
                   <span className={`relative -z-0 `}> {route.name}</span>
 
-                  {/* Blurred Underline Effect */}
                   <span
                     className="absolute left-1/2 -bottom-1 h-[1px] w-0 bg-transparent transition-all duration-500 group-hover:w-full group-hover:left-0"
                     style={{
@@ -154,15 +213,46 @@ const Navbar: React.FC = () => {
               </span>
             </button>
 
-            <ComponentButton
-              className="!bg-gradient-secondary text-white rounded-xl border border-[#323233]"
-              icon={<GoPerson />}
-              onClick={() => setIsOpenform(true)}
-              label="Se connecter"
-            />
-            <button onClick={()=> router.push("/dashboard") }>
-            <GoPerson />
-            </button>
+            <div className="relative" ref={menuRef}>
+              {isToken ? (
+                <>
+                  <ComponentButton
+                    className="!bg-gradient-secondary text-white rounded-xl border border-[#323233]"
+                    icon={<GoPerson />}
+                    onClick={() => setMenuOpen(!menuOpen)}
+                    label="Profile"
+                  />
+                  {menuOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-zinc-800 border border-border-primary rounded-xl shadow-lg">
+                      <ul className="py-2 text-gray-800">
+                        <li
+                          className="px-4 py-2 hover:bg-zinc-900 cursor-pointer text-white"
+                          onClick={() => {
+                            setMenuOpen(!menuOpen);
+                            push(`/dashboard`);
+                          }}
+                        >
+                          Go to Profile
+                        </li>
+                        <li
+                          className="px-4 py-2 hover:bg-zinc-900 cursor-pointer text-red-primary"
+                          onClick={handleLogout}
+                        >
+                          Logout
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <ComponentButton
+                  className="!bg-gradient-secondary text-white rounded-xl border border-[#323233]"
+                  icon={<GoPerson />}
+                  onClick={() => setIsOpenForm(true)}
+                  label="Se connecter"
+                />
+              )}
+            </div>
           </div>
 
           <div className="lg:hidden text-2xl flex justify-center items-center gap-3">
@@ -236,7 +326,7 @@ const Navbar: React.FC = () => {
               </Link>
             ))}
             <button
-              onClick={() => setIsOpenform(true)}
+              onClick={() => setIsOpenForm(true)}
               className="px-4 py-2 w-full bg-background-secondary border border-border-primary text-text-primary rounded-lg  transition-colors"
             >
               Se connecter
@@ -264,12 +354,12 @@ const Navbar: React.FC = () => {
         <Cart2 onClose={() => setIsCart2DrawerOpen(false)} />
       </SideDrawer>
       <ModalWrapper
-        isOpen={isOpenform}
-        onClose={() => setIsOpenform(false)}
+        isOpen={isOpenForm}
+        onClose={() => setIsOpenForm(false)}
         isClose={true}
         className="!bg-black !px-8 !py-6"
       >
-        <AuthForm />
+        <AuthForm onClose={() => setIsOpenForm(false)} onToken={getToken} />
       </ModalWrapper>
     </header>
   );
