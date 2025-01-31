@@ -16,7 +16,6 @@ interface CartProps {
 const Cart2: React.FC<CartProps> = ({ onClose }) => {
   const { cartItem, setCartItem } = useGlobalContext();
   const [products, setProducts] = useState(cartItem);
-  const [quantity, setQuantity] = useState(1);
 
   const handleRemoveFromCart = (productId: string) => {
     const updatedCart = cartItem.filter(
@@ -31,6 +30,8 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
     const totalPrice = cartItem.reduce((accumulator, cartProduct) => {
       const selectedVariantId = cartProduct.selectedVariant;
 
+      console.log("🚀 ~ totalPrice ~ cartProduct:", cartProduct?.quantity);
+
       const selectedVariant = cartProduct.node.variants.edges.find(
         (variant: any) => variant.node.id === selectedVariantId
       )?.node;
@@ -39,7 +40,9 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
         ? parseFloat(selectedVariant.price)
         : 0;
 
-      return accumulator + variantPrice;
+      const quantity = cartProduct.quantity ?? 1;
+
+      return accumulator + variantPrice * quantity;
     }, 0);
 
     return totalPrice.toFixed(2);
@@ -47,13 +50,36 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
 
   const total = calculateTotalPrice();
 
+  const handleCheckout = async () => {
+    try {
+      const customerAccessToken = localStorage.getItem("auth-token");
+
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customerAccessToken,
+          lineItems: cartItem,
+        }),
+      });
+
+      const data = await response.json();
+      if (!data.success) {
+        console.error("Error:", data.error);
+        return;
+      }
+
+      window.location.href = data.checkoutUrl;
+    } catch (error) {
+      console.error("Request failed:", error);
+    }
+  };
+
   useEffect(() => {
     setProducts(cartItem);
   }, [cartItem]);
-
-  const handleCounterChange = (newValue: number) => {
-    setQuantity(newValue);
-  };
 
   return (
     <div
@@ -96,9 +122,7 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
             <CartProduct
               key={index}
               data={product}
-              quantity={quantity}
               onDelete={handleRemoveFromCart}
-              onQuantityChange={handleCounterChange}
             />
           ))}
         </div>
@@ -112,7 +136,10 @@ const Cart2: React.FC<CartProps> = ({ onClose }) => {
               <span className="font-bold text-red-primary">€{total}</span>{" "}
             </p>
           </div>
-          <button className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300  text-black text-sm md:text-lg font-bold w-full py-3 rounded-2xl">
+          <button
+            onClick={handleCheckout}
+            className="!bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 shadow-sm hover:shadow-glow transition-all duration-300  text-black text-sm md:text-lg font-bold w-full py-3 rounded-2xl"
+          >
             Continuez Vos Achats
           </button>
         </div>

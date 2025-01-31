@@ -53,6 +53,7 @@ const FavoriteProduct = ({
       const newCartItem = {
         ...item,
         selectedVariant: firstVariant,
+        quantity: 1,
       };
 
       setCartItem((prevCart) => [...prevCart, newCartItem]);

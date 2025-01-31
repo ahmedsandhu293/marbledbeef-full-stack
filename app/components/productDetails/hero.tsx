@@ -65,6 +65,7 @@ const ProductHero = ({ product }: any) => {
       const newCartItem = {
         ...item,
         selectedVariant: firstVariant,
+        quantity: 1,
       };
       setCartItem((prevCart) => [...prevCart, newCartItem]);
       localStorage.setItem("cartItem", JSON.stringify(cartItem));
