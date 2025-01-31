@@ -229,7 +229,7 @@ const Navbar: React.FC = () => {
                           className="px-4 py-2 hover:bg-zinc-900 cursor-pointer text-white"
                           onClick={() => {
                             setMenuOpen(!menuOpen);
-                            push(`/user-profile`);
+                            push(`/dashboard`);
                           }}
                         >
                           Go to Profile
