@@ -4,6 +4,7 @@ import clsx from "clsx";
 import dynamic from "next/dynamic";
 import { Urbanist } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
+import { Toaster } from "react-hot-toast";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -62,8 +63,10 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
+        <Toaster />
         <GlobalContextProvider>
           <Navbar />
+
           <NextTopLoader
             color="#B28A3B"
             initialPosition={0.08}

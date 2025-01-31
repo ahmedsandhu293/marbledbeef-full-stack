@@ -28,7 +28,7 @@ const SideBar: React.FC = () => {
       )}
 
       <aside
-        className={`fixed z-50 md:z-0 md:relative w-64 bg-background-primary p-4 pt-24 h-screen transform transition-transform duration-300 ease-in-out ${
+        className={`fixed z-50 md:z-0 md:relative w-64 bg-background-primary border-r border-border-primary p-4 pt-24 h-screen transform transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0 md:w-1/4 lg:w-1/5 xl:w-1/6`}
       >

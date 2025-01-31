@@ -7,7 +7,7 @@ export default function DashLayoutLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="flex h-screen">
+    <main className="flex h-screen bg-background-primary">
       <SideBar />
       <div className="flex-grow">{children}</div>
     </main>

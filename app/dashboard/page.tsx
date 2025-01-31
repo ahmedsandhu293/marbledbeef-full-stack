@@ -6,7 +6,7 @@ interface Profile {
   firstName: string;
   lastName: string;
   email: string;
-  address: string;
+  phone: string;
 }
 
 const DashboardPage = () => {
@@ -43,9 +43,7 @@ const DashboardPage = () => {
           firstName: customer.firstName,
           lastName: customer.lastName,
           email: customer.email,
-          address: customer.defaultAddress
-            ? `${customer.defaultAddress.address1}, ${customer.defaultAddress.city}, ${customer.defaultAddress.country}`
-            : "",
+          phone: customer.phone || "+92321...",
         });
       } else {
         setError(data.error || "Failed to fetch customer data");
@@ -94,98 +92,132 @@ const DashboardPage = () => {
     }
   };
 
-  if (isLoading) return <div className="text-white">Loading...</div>;
-  if (error) return <div className="text-red-500">{error}</div>;
-
   return (
     <div className="bg-background-primary">
-      <div className="p-4 py-9 border rounded shadow lg:mt-20">
+      <div className="p-4 py-9 rounded shadow lg:mt-20">
         <h2 className="text-xl font-semibold mb-4 text-white">Edit Profile</h2>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {/* First Name */}
-          <div>
-            <label htmlFor="firstName" className="block font-medium text-white">
-              First Name
-            </label>
-            <input
-              id="firstName"
-              type="text"
-              {...register("firstName", { required: "First name is required" })}
-              className="p-2 w-full text-lg rounded-2xl backdrop-blur-lg bg-opacity-60 transition-all duration-300 font-urbanist placeholder:text-black bg-white text-black"
-            />
-            {errors.firstName && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.firstName.message}
-              </p>
-            )}
-          </div>
 
-          {/* Last Name */}
-          <div>
-            <label htmlFor="lastName" className="block font-medium text-white">
-              Last Name
-            </label>
-            <input
-              id="lastName"
-              type="text"
-              {...register("lastName", { required: "Last name is required" })}
-              className="p-2 w-full text-lg rounded-2xl backdrop-blur-lg bg-opacity-60 transition-all duration-300 font-urbanist placeholder:text-black bg-white text-black"
-            />
-            {errors.lastName && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.lastName.message}
-              </p>
-            )}
+        {isLoading ? (
+          // Skeleton Loader
+          <div className=" grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="h-10 bg-gray-600 rounded animate-pulse"></div>
+            <div className="h-10 bg-gray-600 rounded animate-pulse"></div>
+            <div className="h-10 bg-gray-600 rounded animate-pulse"></div>
+            <div className="h-10 bg-gray-600 rounded animate-pulse"></div>
+            <div className="h-10 w-32 bg-gray-600 rounded animate-pulse"></div>
           </div>
+        ) : error ? (
+          <div className="text-red-500">{error}</div>
+        ) : (
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* First Name */}
+              <div>
+                <label
+                  htmlFor="firstName"
+                  className="block font-medium text-white"
+                >
+                  First Name
+                </label>
+                <input
+                  id="firstName"
+                  type="text"
+                  {...register("firstName", {
+                    required: "First name is required",
+                  })}
+                  className="p-2 w-full text-lg rounded-2xl backdrop-blur-lg bg-opacity-60 transition-all duration-300 font-urbanist placeholder:text-black bg-white text-black"
+                />
+                {errors.firstName && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.firstName.message}
+                  </p>
+                )}
+              </div>
 
-          {/* Email */}
-          <div>
-            <label htmlFor="email" className="block font-medium text-white">
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Invalid email address",
-                },
-              })}
-              readOnly
-              className="p-2 w-full text-lg rounded-2xl backdrop-blur-lg bg-opacity-60 transition-all duration-300 font-urbanist placeholder:text-black bg-white text-black"
-            />
-            {errors.email && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.email.message}
-              </p>
-            )}
-          </div>
+              {/* Last Name */}
+              <div>
+                <label
+                  htmlFor="lastName"
+                  className="block font-medium text-white"
+                >
+                  Last Name
+                </label>
+                <input
+                  id="lastName"
+                  type="text"
+                  {...register("lastName", {
+                    required: "Last name is required",
+                  })}
+                  className="p-2 w-full text-lg rounded-2xl backdrop-blur-lg bg-opacity-60 transition-all duration-300 font-urbanist placeholder:text-black bg-white text-black"
+                />
+                {errors.lastName && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.lastName.message}
+                  </p>
+                )}
+              </div>
 
-          {/* Address */}
-          <div>
-            <label htmlFor="address" className="block font-medium text-white">
-              Address
-            </label>
-            <textarea
-              id="address"
-              {...register("address")}
-              className="p-2 w-full text-lg rounded-2xl backdrop-blur-lg bg-opacity-60 transition-all duration-300 font-urbanist placeholder:text-black bg-white text-black"
-            />
-          </div>
+              {/* Email */}
+              <div>
+                <label htmlFor="email" className="block font-medium text-white">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "Invalid email address",
+                    },
+                  })}
+                  readOnly
+                  className="p-2 w-full text-lg rounded-2xl backdrop-blur-lg bg-opacity-60 transition-all duration-300 font-urbanist placeholder:text-black bg-white text-black"
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className={`px-6 py-2 rounded-xl bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 ${
-              isSubmitting ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-          >
-            {isSubmitting ? "Updating..." : "Update"}
-          </button>
-        </form>
+              {/* Phone */}
+              <div>
+                <label htmlFor="phone" className="block font-medium text-white">
+                  Phone
+                </label>
+                <input
+                  id="phone"
+                  type="text"
+                  {...register("phone", {
+                    required: "Phone number is required",
+                    pattern: {
+                      value: /^\+923[0-9]{9}$/,
+                      message: "Invalid phone number format (e.g. +92321...)",
+                    },
+                  })}
+                  className="p-2 w-full text-lg rounded-2xl backdrop-blur-lg bg-opacity-60 transition-all duration-300 font-urbanist placeholder:text-black bg-white text-black"
+                />
+                {errors.phone && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.phone.message}
+                  </p>
+                )}
+              </div>
+            </div>
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className={`px-6 py-2 rounded-xl bg-gradient-to-r from-gradient-gold-100 via-gradient-gold-200 to-gradient-gold-300 ${
+                isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+            >
+              {isSubmitting ? "Updating..." : "Update"}
+            </button>
+          </form>
+        )}
       </div>
     </div>
   );
