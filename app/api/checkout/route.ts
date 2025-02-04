@@ -1,15 +1,9 @@
 import { NextResponse } from "next/server";
-import Client from "shopify-buy";
-
-const client = Client.buildClient({
-  domain: "marbledbeeffr.myshopify.com",
-  storefrontAccessToken: "17e4a868a5e8bf2abb094eca5ea0f29f",
-  apiVersion: "2025-01",
-});
 
 export async function POST(req: Request) {
   try {
-    const { customerAccessToken, lineItems } = await req.json();
+    const { lineItems } = await req.json();
+    // console.log("🚀 ~ POST ~ variables:", lineItems);
 
     if (!lineItems || lineItems.length === 0) {
       return NextResponse.json(
@@ -18,23 +12,62 @@ export async function POST(req: Request) {
       );
     }
 
-    // 🛒 Create a new checkout
-    const checkout = await client.checkout.create();
-    console.log("Created Checkout:", checkout);
+    const storefrontApiUrl =
+      "https://marbredbeeffr.myshopify.com/api/2025-01/graphql.json";
+    const storefrontAccessToken = "17e4a868a5e8bf2abb094eca5ea0f29f";
 
-    // 🛍️ Add items to checkout
-    const updatedCheckout = await client.checkout.addLineItems(
-      checkout.id,
-      lineItems
+    // Use `cartCreate` instead of `checkoutCreate`
+    const query = `
+      mutation CreateCart($lineItems: [CartLineInput!]!) {
+        cartCreate(input: { lines: $lineItems }) {
+          cart {
+            id
+            checkoutUrl
+          }
+          userErrors {
+            field
+            message
+          }
+        }
+      }
+    `;
+
+    const variables = {
+      lineItems: lineItems.map((item: any) => ({
+        merchandiseId: item.selectedVariant,
+        quantity: item.quantity || 1,
+      })),
+    };
+
+    const fetchOptions = {
+      method: "POST",
+      headers: {
+        "X-Shopify-Storefront-Access-Token": storefrontAccessToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ query, variables }),
+    };
+
+    const response = await fetch(storefrontApiUrl, fetchOptions);
+    const data = await response.json();
+    console.log("🚀 ~ POST ~ data:", data);
+
+    if (data.errors || data.data?.cartCreate?.userErrors.length > 0) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: data.errors || data.data.cartCreate.userErrors,
+        },
+        { status: 400 }
+      );
+    }
+
+    return NextResponse.json(
+      { success: true, checkoutUrl: data.data.cartCreate.cart.checkoutUrl },
+      { status: 200 }
     );
-    console.log("Updated Checkout:", updatedCheckout);
-
-    return NextResponse.json({
-      success: true,
-      checkoutUrl: updatedCheckout.webUrl, // Redirect user to checkout
-    });
   } catch (error: any) {
-    console.error("Error creating checkout:", error);
+    console.error("Error creating cart:", error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 500 }
