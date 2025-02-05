@@ -2,8 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { lineItems } = await req.json();
-    // console.log("🚀 ~ POST ~ variables:", lineItems);
+    const { lineItems, customerAccessToken } = await req.json();
 
     if (!lineItems || lineItems.length === 0) {
       return NextResponse.json(
@@ -16,10 +15,13 @@ export async function POST(req: Request) {
       "https://marbredbeeffr.myshopify.com/api/2025-01/graphql.json";
     const storefrontAccessToken = "17e4a868a5e8bf2abb094eca5ea0f29f";
 
-    // Use `cartCreate` instead of `checkoutCreate`
+    // Dynamic checkout behavior (with or without customer access token)
     const query = `
-      mutation CreateCart($lineItems: [CartLineInput!]!) {
-        cartCreate(input: { lines: $lineItems }) {
+      mutation CreateCart($lineItems: [CartLineInput!]!${customerAccessToken ? ", $customerAccessToken: String!" : ""}) {
+        cartCreate(input: { 
+          lines: $lineItems
+          ${customerAccessToken ? "buyerIdentity: { customerAccessToken: $customerAccessToken }" : ""}
+        }) {
           cart {
             id
             checkoutUrl
@@ -32,12 +34,16 @@ export async function POST(req: Request) {
       }
     `;
 
-    const variables = {
+    const variables: any = {
       lineItems: lineItems.map((item: any) => ({
         merchandiseId: item.selectedVariant,
         quantity: item.quantity || 1,
       })),
     };
+
+    if (customerAccessToken) {
+      variables.customerAccessToken = customerAccessToken; // Attach token only if user is logged in
+    }
 
     const fetchOptions = {
       method: "POST",
@@ -50,7 +56,6 @@ export async function POST(req: Request) {
 
     const response = await fetch(storefrontApiUrl, fetchOptions);
     const data = await response.json();
-    console.log("🚀 ~ POST ~ data:", data);
 
     if (data.errors || data.data?.cartCreate?.userErrors.length > 0) {
       return NextResponse.json(
