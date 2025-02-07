@@ -2,19 +2,30 @@ import React, { useEffect, useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
 
 import QuantitySelector from "../common/quantitySelector";
+import { useGlobalContext } from "@/app/context/store";
 
 const CartProduct = ({
   data,
   onDelete,
-  quantity,
-  onQuantityChange,
 }: {
   data: any;
   onDelete: (id: string) => void;
-  quantity: number;
-  onQuantityChange: (quantity: number) => void;
 }) => {
+  const { cartItem, setCartItem } = useGlobalContext();
   const [variant, setVariant] = useState<any>();
+  const [quantity, setQuantity] = useState(data?.quantity || 1);
+
+  const handleCounterChange = (newValue: number) => {
+    setQuantity(newValue);
+    const updatedCart = cartItem.map((item) => {
+      if (item.node.id === data.node.id) {
+        return { ...item, quantity: newValue };
+      }
+      return item;
+    });
+    setCartItem(updatedCart);
+    localStorage.setItem("cartItem", JSON.stringify(cartItem));
+  };
 
   useEffect(() => {
     const variant = data.node.variants.edges.find(
@@ -58,7 +69,7 @@ const CartProduct = ({
           <div className="flex justify-center md:items-start items-start gap-4 ">
             <QuantitySelector
               initialValue={quantity}
-              onChange={onQuantityChange}
+              onChange={handleCounterChange}
             />
           </div>
         </div>

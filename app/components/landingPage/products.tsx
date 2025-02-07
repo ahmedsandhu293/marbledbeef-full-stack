@@ -48,6 +48,7 @@ const Products = ({ collections }: { collections: CollectionsResponse }) => {
       const newCartItem = {
         ...item,
         selectedVariant: firstVariant,
+        quantity: 1,
       };
 
       setCartItem((prevCart) => [...prevCart, newCartItem]);
