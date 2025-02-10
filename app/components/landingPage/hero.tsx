@@ -1,16 +1,56 @@
 "use client";
+
+import { searchProducts } from "@/services/productService";
 import { Button } from "@nextui-org/button";
-import React from "react";
-import { FaCheck } from "react-icons/fa6";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import { FaCheck, FaSpinner } from "react-icons/fa6";
 import { IoSearchOutline } from "react-icons/io5";
 
-// { onSearch }: { onSearch: (query: string) => void }
-
 const Hero = () => {
-  const onSearch = (query: string) => {
-    /* eslint-disable no-console */
-    console.log("🚀 ~ onSearch ~ query:", query);
-  };
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const [query, setQuery] = useState("");
+  const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  useEffect(() => {
+    if (query.trim() === "") {
+      setProducts([]);
+      setShowDropdown(false);
+      return;
+    }
+
+    const fetchProducts = async () => {
+      setLoading(true);
+      const results = await searchProducts(query);
+      setProducts(results);
+      setLoading(false);
+      setShowDropdown(true);
+    };
+
+    const delaySearch = setTimeout(fetchProducts, 500);
+
+    return () => clearTimeout(delaySearch);
+  }, [query]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        inputRef.current &&
+        !inputRef.current.contains(event.target as Node) &&
+        inputRef.current &&
+        !inputRef.current.contains(event.target as Node)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="mb-[580px] md:mb-[380px] lg:mb-[280px]">
@@ -19,7 +59,7 @@ const Hero = () => {
         style={{ backgroundImage: "url(/assets/images/hero-background.png)" }}
       >
         <div className="absolute inset-0 bg-black opacity-50" />
-        <div className="relative z-10 flex justify-center items-center w-full h-full text-center text-white">
+        <div className="relative z-30 flex justify-center items-center w-full h-full text-center text-white">
           <div className="flex flex-col justify-center items-center px-4">
             <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 font-urbanist">
               MarbledBeef
@@ -29,14 +69,51 @@ const Hero = () => {
             </p>
             <div className="relative w-full sm:w-80 md:w-96 mt-10 lg:mt-20">
               <input
-                className="p-3 w-full text-lg rounded-2xl pl-10 backdrop-blur-lg bg-opacity-60 transition- font-urbanist placeholder:text-black bg-white text-black"
+                className="p-3 w-full text-lg rounded-2xl pl-10 backdrop-blur-lg bg-opacity-60 transition font-urbanist placeholder:text-black bg-white text-black"
                 placeholder="Recherche"
                 type="text"
-                onChange={(e) => onSearch(e.target.value)}
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onFocus={() => setShowDropdown(products.length > 0)}
               />
               <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
                 <IoSearchOutline className="h-5 w-5 text-black" />
               </div>
+
+              {/* Search Results Dropdown */}
+              {showDropdown && (
+                <div
+                  className="absolute w-full bg-black text-white mt-2 rounded-lg shadow-lg overflow-hidden max-h-56 overflow-y-auto z-30"
+                  ref={inputRef}
+                >
+                  {loading ? (
+                    <div className="flex items-center justify-center p-4">
+                      <FaSpinner className="animate-spin h-6 w-6 text-white" />
+                    </div>
+                  ) : products.length > 0 ? (
+                    products?.map((product) => (
+                      <Link
+                        key={product.id}
+                        href={`/${product.handle}`}
+                        className="flex gap-2  p-2 border-b border-gray-700 hover:bg-zinc-900 transition"
+                      >
+                        {product?.images?.edges[0]?.node?.url && (
+                          <img
+                            src={product?.images?.edges[0]?.node?.url}
+                            alt={product?.images?.edges[0]?.node?.altText}
+                            className="w-12 h-12  rounded-md object-cover"
+                          />
+                        )}
+                        <span className="text-left">{product?.title}</span>
+                      </Link>
+                    ))
+                  ) : (
+                    <div className="p-4 text-center text-gray-400">
+                      Aucun résultat trouvé
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
